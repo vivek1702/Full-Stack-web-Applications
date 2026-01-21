@@ -1,0 +1,18 @@
+.meetup-img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.meetupdetails-img {
+  height: 500px;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.meetup-content {
+  max-width: 720px;
+}
