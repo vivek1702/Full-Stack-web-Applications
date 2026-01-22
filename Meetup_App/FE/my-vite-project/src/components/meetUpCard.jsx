@@ -3,7 +3,9 @@ import useFetch from "../useFetch";
 import { Link } from "react-router-dom";
 
 const MeetUpCard = ({ searchText }) => {
-  const { data = [] } = useFetch("http://localhost:3000/meetups");
+  const { data = [] } = useFetch(
+    `${import.meta.env.VITE_API_BASE_URL}/meetups`,
+  );
   const [selectEvent, SetSelectEvent] = useState("Both");
 
   console.log(data);
@@ -38,15 +40,13 @@ const MeetUpCard = ({ searchText }) => {
         <h1>Meetup Events</h1>
         <select
           className="form-select w-auto"
-          name="eventType"
+          value={selectEvent}
           onChange={(e) => SetSelectEvent(e.target.value)}
         >
           <option value="" disabled selected hidden>
             Select Event Type
           </option>
-          <option value="Both" selected>
-            Both
-          </option>
+          <option value="Both">Both</option>
           <option value="Online">Online</option>
           <option value="Offline">Offline</option>
         </select>

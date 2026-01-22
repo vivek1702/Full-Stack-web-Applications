@@ -4,7 +4,7 @@ import useFetch from "../useFetch";
 const MeetupDetails = () => {
   const { meetupId } = useParams();
   const { data, loading, error } = useFetch(
-    `http://localhost:3000/meetups/${meetupId}`,
+    `${import.meta.env.VITE_API_BASE_URL}/meetups/${meetupId}`,
   );
 
   console.log(data);
@@ -74,7 +74,7 @@ const MeetupDetails = () => {
                       {data.tags.map((item, index) => (
                         <span
                           key={index}
-                          className="badge rounded-pill bg-danger-subtle text-danger me-2 mb-2 px-3 py-2"
+                          className="badge rounded-pill bg-danger text-white me-2 mb-2 px-3 py-2"
                         >
                           {item}
                         </span>
@@ -87,74 +87,71 @@ const MeetupDetails = () => {
           </div>
           {/* right section */}
           <div className="col-md-4">
-            <div
-              className="card border-0 shadow-sm mb-4 sticky-top"
-              style={{ top: "90px" }}
-            >
-              <div className="card-body bg-light">
-                <div className="d-flex mb-3">
-                  <span className="me-2">🕒</span>
-                  <div>
-                    <p className="mb-0 fw-semibold">
-                      {formatDate(data.startTime)} to
-                    </p>
-                    <p className="mb-0 text-muted">
-                      {formatDate(data.endTime)}
-                    </p>
+            {/* Sticky wrapper */}
+            <div className="meetup-sticky-wrapper">
+              <div className="card border-0 shadow-sm mb-4">
+                <div className="card-body bg-light">
+                  <div className="d-flex align-items-start gap-2 mb-3">
+                    <span>🕒</span>
+                    <div>
+                      <p className="mb-0 fw-semibold">
+                        {formatDate(data.startTime)} to
+                      </p>
+                      <p className="mb-0 text-muted">
+                        {formatDate(data.endTime)}
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="d-flex mb-3">
-                  <span className="me-2">📍</span>
-                  <div>
-                    <p className="mb-0 fw-semibold">{data.location.venue}</p>
-                    <p className="mb-0 text-muted">
-                      {data.location.fullAddress}
-                    </p>
+                  <div className="d-flex align-items-start gap-2 mb-3">
+                    <span>📍</span>
+                    <div>
+                      <p className="mb-0 fw-semibold">{data.location.venue}</p>
+                      <p className="mb-0 text-muted">
+                        {data.location.fullAddress}
+                      </p>
+                    </div>
                   </div>
-                </div>
 
-                <div className="d-flex mb-3">
-                  <span className="me-2"> ₹ </span>
-                  <p>{data.isPaid ? data.price : "Free"}</p>
+                  <div className="d-flex align-items-start gap-2">
+                    <span>₹</span>
+                    <p className="mb-0">{data.isPaid ? data.price : "Free"}</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="mb-4">
+            {/* NORMAL FLOW CONTENT */}
+            <div className="mt-4">
               <h6 className="fw-bold mb-3">Speakers: {data.speakers.length}</h6>
 
-              <div className="d-flex gap-3">
-                <div className="row">
-                  {data.speakers.map((item) => (
-                    <div class="col-md-6 mb-4">
-                      <div
-                        className="card text-center border-0 shadow-sm p-3"
-                        style={{ width: "140px" }}
-                      >
-                        <img
-                          src={item.profilePicture}
-                          className="rounded-circle mx-auto mb-2"
-                          width="60"
-                          height="60"
-                          alt="Speaker"
-                        />
-                        <p className="fw-semibold mb-0">
-                          {item.firstName} {item.lastName}
-                        </p>
-                        <small className="text-muted">{item.designation}</small>
-                      </div>
+              <div className="row">
+                {data.speakers.map((item, index) => (
+                  <div key={index} className="col-6 mb-3">
+                    <div className="card text-center border-0 shadow-sm p-3 h-100">
+                      <img
+                        src={item.profilePicture}
+                        className="rounded-circle mx-auto mb-2"
+                        width="60"
+                        height="60"
+                        alt="Speaker"
+                      />
+                      <p className="fw-semibold mb-0">
+                        {item.firstName} {item.lastName}
+                      </p>
+                      <small className="text-muted">{item.designation}</small>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
+
+              <button
+                className="btn btn-danger w-100 fw-semibold mt-3"
+                onClick={() => alert("RSVP Successful")}
+              >
+                RSVP
+              </button>
             </div>
-            <button
-              className="btn btn-danger w-40 fw-semibold mt-3"
-              onClick={() => alert("RSVP Successful")}
-            >
-              RSVP
-            </button>
           </div>
         </div>
       </div>

@@ -7,12 +7,24 @@
 }
 
 .meetupdetails-img {
-  height: 500px;
-  max-height: 350px;
+  width: 100%;
+  max-height: 420px;
   object-fit: cover;
-  border-radius: 12px;
 }
 
 .meetup-content {
   max-width: 720px;
+}
+
+.meetup-sticky-wrapper {
+  position: sticky;
+  top: 80px;
+  z-index: 10;
+}
+
+/* Disable sticky on mobile */
+@media (max-width: 768px) {
+  .meetup-sticky-wrapper {
+    position: static;
+  }
 }

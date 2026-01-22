@@ -1,5 +1,6 @@
 # Environment variables
 Meetup_App/BE/.env
+Meetup_App/FE/my-vite-project/.env
 
 # Node modules
 node_modules/
