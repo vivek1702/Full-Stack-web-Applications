@@ -20,6 +20,11 @@ app.use(express.json());
 
 intializeDB();
 
+/* -------- HEALTH CHECK -------- */
+app.get("/api", (req, res) => {
+  res.status(200).send("Meetup Backend running on Vercel 🚀");
+});
+
 //api method to read all the data from mongoDb schema
 const allMeetupData = async () => {
   try {
@@ -30,15 +35,15 @@ const allMeetupData = async () => {
   }
 };
 
-app.get("/meetups", async (req, res) => {
+app.get("/api/meetups", async (req, res) => {
   try {
     const showData = await allMeetupData();
     if (!showData) {
-      res.send(400).json({ error: "unable to get data" });
+      res.status(400).json({ error: "unable to get data" });
     }
     res.json(showData);
   } catch (error) {
-    res.send(500).json({ error: "unable to get data through api call" });
+    res.status(500).json({ error: "unable to get data through api call" });
   }
 });
 
@@ -52,7 +57,7 @@ const MeetupByID = async (meetupID) => {
   }
 };
 
-app.get("/meetups/:meetupId", async (req, res) => {
+app.get("/api/meetups/:meetupId", async (req, res) => {
   try {
     const showMeetupData = await MeetupByID(req.params.meetupId);
     if (!showMeetupData) {
