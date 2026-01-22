@@ -64,7 +64,11 @@ app.get("/meetups/:meetupId", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT;
-app.listen(PORT, () => {
-  console.log("running on server port", PORT);
-});
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT;
+  app.listen(PORT, () => {
+    console.log("Server run locally on port", PORT);
+  });
+}
+
+module.exports = app;
