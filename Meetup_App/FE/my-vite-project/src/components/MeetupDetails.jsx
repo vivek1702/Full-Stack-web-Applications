@@ -34,95 +34,99 @@ const MeetupDetails = () => {
   }
 
   return (
-    <>
-      <div className="container py-4">
-        <div className="row g-4">
-          <div className="col-md-8">
-            <div className="mb-3">
-              <h2>{data.eventTitle}</h2>
-            </div>
-            <div className="meetup-content">
-              <div className="card border-0 shadow-sm bg-light">
-                <div className="card-body px-4">
-                  <p>
-                    HostedBy: <br />
-                    <strong>{data.hostedBy}</strong>
-                  </p>
-                  <img
-                    className="rounded img-fluid meetupdetails-img"
-                    src={data.eventImageUrl}
-                    alt={data.eventTitle}
-                  />
-                  <div className="mt-4">
-                    <h3>Details</h3>
-                    <p>{data.details}</p>
-                  </div>
-                  <div className="mt-4">
-                    <h3>Additional Information: </h3>
-                    <p>
-                      <strong>Dress Code: </strong>
-                      {data.additionalInformation.dressCode}
-                      <br />
-                      <strong>Age Restriction:</strong>
-                      {data.additionalInformation.ageRestriction}
-                    </p>
-                  </div>
-                  <div className="mt-4">
-                    <h5 className="mb-3">Event Tags</h5>
+    <div className="container py-4">
+      <div className="row g-4">
+        {/* LEFT SECTION */}
+        <div className="col-md-8">
+          <div className="mb-3">
+            <h2>{data.eventTitle}</h2>
+          </div>
 
-                    <div className="d-flex flex-wrap">
-                      {data.tags.map((item, index) => (
-                        <span
-                          key={index}
-                          className="badge rounded-pill bg-danger text-white me-2 mb-2 px-3 py-2"
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
+          <div className="meetup-content">
+            <div className="card border-0 shadow-sm bg-light">
+              <div className="card-body px-4">
+                <p>
+                  HostedBy: <br />
+                  <strong>{data.hostedBy}</strong>
+                </p>
+
+                <img
+                  className="rounded img-fluid meetupdetails-img"
+                  src={data.eventImageUrl}
+                  alt={data.eventTitle}
+                />
+
+                <div className="mt-4">
+                  <h3>Details</h3>
+                  <p>{data.details}</p>
+                </div>
+
+                <div className="mt-4">
+                  <h3>Additional Information</h3>
+                  <p>
+                    <strong>Dress Code:</strong>{" "}
+                    {data.additionalInformation.dressCode}
+                    <br />
+                    <strong>Age Restriction:</strong>{" "}
+                    {data.additionalInformation.ageRestriction}
+                  </p>
+                </div>
+
+                <div className="mt-4">
+                  <h5 className="mb-3">Event Tags</h5>
+                  <div className="d-flex flex-wrap">
+                    {data.tags.map((item, index) => (
+                      <span
+                        key={index}
+                        className="badge rounded-pill bg-danger text-white me-2 mb-2 px-3 py-2"
+                      >
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* right section */}
-          <div className="col-md-4">
-            {/* Sticky wrapper */}
-            <div className="meetup-sticky-wrapper">
-              <div className="card border-0 shadow-sm mb-4">
-                <div className="card-body bg-light">
-                  <div className="d-flex align-items-start gap-2 mb-3">
-                    <span>🕒</span>
-                    <div>
-                      <p className="mb-0 fw-semibold">
-                        {formatDate(data.startTime)} to
-                      </p>
-                      <p className="mb-0 text-muted">
-                        {formatDate(data.endTime)}
-                      </p>
-                    </div>
-                  </div>
+        </div>
 
-                  <div className="d-flex align-items-start gap-2 mb-3">
-                    <span>📍</span>
-                    <div>
-                      <p className="mb-0 fw-semibold">{data.location.venue}</p>
-                      <p className="mb-0 text-muted">
-                        {data.location.fullAddress}
-                      </p>
-                    </div>
+        {/* RIGHT SECTION (STICKY FIXED) */}
+        <div className="col-md-4">
+          <div className="meetup-sticky-wrapper">
+            {/* SUMMARY CARD */}
+            <div className="card border-0 shadow-sm mb-4 meetup-summary-card">
+              <div className="card-body bg-light">
+                <div className="d-flex align-items-start gap-2 mb-3">
+                  <span>🕒</span>
+                  <div>
+                    <p className="mb-0 fw-semibold">
+                      {formatDate(data.startTime)} to
+                    </p>
+                    <p className="mb-0 text-muted">
+                      {formatDate(data.endTime)}
+                    </p>
                   </div>
+                </div>
 
-                  <div className="d-flex align-items-start gap-2">
-                    <span>₹</span>
-                    <p className="mb-0">{data.isPaid ? data.price : "Free"}</p>
+                <div className="d-flex align-items-start gap-2 mb-3">
+                  <span>📍</span>
+                  <div>
+                    <p className="mb-0 fw-semibold">{data.location.venue}</p>
+                    <p className="mb-0 text-muted">
+                      {data.location.fullAddress}
+                    </p>
                   </div>
+                </div>
+
+                <div className="d-flex align-items-start gap-2">
+                  <span>₹</span>
+                  <p className="mb-0">{data.isPaid ? data.price : "Free"}</p>
                 </div>
               </div>
             </div>
 
-            {/* NORMAL FLOW CONTENT */}
-            <div className="mt-4">
+            {/* SPEAKERS + RSVP */}
+            <div>
               <h6 className="fw-bold mb-3">Speakers: {data.speakers.length}</h6>
 
               <div className="row">
@@ -144,18 +148,11 @@ const MeetupDetails = () => {
                   </div>
                 ))}
               </div>
-
-              <button
-                className="btn btn-danger w-100 fw-semibold mt-3"
-                onClick={() => alert("RSVP Successful")}
-              >
-                RSVP
-              </button>
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
