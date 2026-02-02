@@ -1,0 +1,168 @@
+[
+  {
+    "productName": "Men Solid Cotton T-Shirt",
+    "description": "Comfortable cotton t-shirt for everyday wear",
+    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+TShirt",
+    "price": 499,
+    "rating": 4.3,
+    "size": ["M", "L", "XL"],
+    "category": "697dc662c7f64a0077fc744a"
+  },
+  {
+    "productName": "Men Casual Shirt",
+    "description": "Slim fit casual shirt for men",
+    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+Shirt",
+    "price": 799,
+    "rating": 4.5,
+    "size": ["S", "M", "L"],
+    "category": "697dc662c7f64a0077fc744a"
+  },
+  {
+    "productName": "Men Denim Jeans",
+    "description": "Regular fit denim jeans",
+    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+Jeans",
+    "price": 999,
+    "rating": 4.2,
+    "size": ["M", "L"],
+    "category": "697dc662c7f64a0077fc744a"
+  },
+
+  {
+    "productName": "Women Floral Dress",
+    "description": "Elegant floral dress for women",
+    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Dress",
+    "price": 899,
+    "rating": 4.6,
+    "size": ["S", "M", "L"],
+    "category": "697dc662c7f64a0077fc744b"
+  },
+  {
+    "productName": "Women Kurti",
+    "description": "Stylish ethnic kurti",
+    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Kurti",
+    "price": 699,
+    "rating": 4.4,
+    "size": ["M", "L", "XL"],
+    "category": "697dc662c7f64a0077fc744b"
+  },
+  {
+    "productName": "Women Handbag",
+    "description": "Trendy handbag for daily use",
+    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Bag",
+    "price": 999,
+    "rating": 4.1,
+    "size": [],
+    "category": "697dc662c7f64a0077fc744b"
+  },
+
+  {
+    "productName": "Kids Graphic T-Shirt",
+    "description": "Soft cotton t-shirt for kids",
+    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+TShirt",
+    "price": 399,
+    "rating": 4.5,
+    "size": ["XS", "S"],
+    "category": "697dc662c7f64a0077fc744c"
+  },
+  {
+    "productName": "Kids Party Dress",
+    "description": "Beautiful party wear dress for kids",
+    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+Dress",
+    "price": 799,
+    "rating": 4.7,
+    "size": ["XS", "S", "M"],
+    "category": "697dc662c7f64a0077fc744c"
+  },
+  {
+    "productName": "Kids Shorts",
+    "description": "Comfortable shorts for kids",
+    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+Shorts",
+    "price": 349,
+    "rating": 4.2,
+    "size": ["XS", "S"],
+    "category": "697dc662c7f64a0077fc744c"
+  },
+  {
+    "productName": "Men Hoodie Sweatshirt",
+    "description": "Warm and comfortable hoodie for men",
+    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+Hoodie",
+    "price": 899,
+    "rating": 4.4,
+    "size": ["M", "L", "XL"],
+    "category": "697dc662c7f64a0077fc744a"
+  },
+  {
+    "productName": "Men Sports Shorts",
+    "description": "Breathable sports shorts for workouts",
+    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+Shorts",
+    "price": 449,
+    "rating": 4.1,
+    "size": ["S", "M", "L"],
+    "category": "697dc662c7f64a0077fc744a"
+  },
+  {
+    "productName": "Men Formal Trousers",
+    "description": "Slim fit formal trousers",
+    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+Trousers",
+    "price": 999,
+    "rating": 4.3,
+    "size": ["M", "L"],
+    "category": "697dc662c7f64a0077fc744a"
+  },
+
+  {
+    "productName": "Women Summer Top",
+    "description": "Lightweight summer top for women",
+    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Top",
+    "price": 499,
+    "rating": 4.2,
+    "size": ["S", "M", "L"],
+    "category": "697dc662c7f64a0077fc744b"
+  },
+  {
+    "productName": "Women Jeans",
+    "description": "High waist denim jeans",
+    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Jeans",
+    "price": 899,
+    "rating": 4.5,
+    "size": ["M", "L", "XL"],
+    "category": "697dc662c7f64a0077fc744b"
+  },
+  {
+    "productName": "Women Sandals",
+    "description": "Comfortable everyday sandals",
+    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Sandals",
+    "price": 599,
+    "rating": 4.0,
+    "size": [],
+    "category": "697dc662c7f64a0077fc744b"
+  },
+
+  {
+    "productName": "Kids Hooded Jacket",
+    "description": "Warm jacket for kids",
+    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+Jacket",
+    "price": 799,
+    "rating": 4.6,
+    "size": ["XS", "S"],
+    "category": "697dc662c7f64a0077fc744c"
+  },
+  {
+    "productName": "Kids Nightwear Set",
+    "description": "Soft cotton nightwear for kids",
+    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+Nightwear",
+    "price": 499,
+    "rating": 4.4,
+    "size": ["XS", "S", "M"],
+    "category": "697dc662c7f64a0077fc744c"
+  },
+  {
+    "productName": "Kids Sneakers",
+    "description": "Durable sneakers for kids",
+    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+Shoes",
+    "price": 699,
+    "rating": 4.3,
+    "size": [],
+    "category": "697dc662c7f64a0077fc744c"
+  }
+]
