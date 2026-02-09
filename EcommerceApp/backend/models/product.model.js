@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema(
       ref: "Category",
       required: true,
     },
+    discountedPrice: { type: Number, min: 10, max: 40 },
   },
   { timestamps: true },
 );
