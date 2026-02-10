@@ -1,27 +1,40 @@
 import { useParams } from "react-router-dom";
 import useFetch from "../useFetch";
 import { useState } from "react";
-import useCounter from "../components/QuantityCounter";
+import useCartContext from "../contexts/cartContext";
 
 export default function ProductDetails() {
+  const {
+    allCartItems,
+    updateCartItem,
+    DecreaseQty,
+    IncreaseQty,
+    deleteCartItem,
+  } = useCartContext();
+  const [initalQuantity, setInitalQty] = useState(1);
   const [selectedSize, setSelectedSize] = useState(null);
   const { productId } = useParams();
   const { data, loading } = useFetch(
     `http://localhost:3000/api/products/${productId}`,
+    null,
   );
-  // quantity counter
-  const { quantity, IncrementQty, DecrementQty } = useCounter();
+
+  if (loading || !data) {
+    return <p className="text-center mt-5">loading...</p>;
+  }
+
+  function IncreaseQuantity() {
+    setInitalQty(() => initalQuantity + 1);
+  }
+
+  function DecreaseQuantity() {
+    setInitalQty(() => initalQuantity - 1);
+  }
 
   //discounted price calculation
   const discountAmount = data.price - data.price * (data.discountedPrice / 100);
 
-  //sizes
-  const sizes = data.size;
-  console.log(sizes);
-
-  if (loading) {
-    return <p>loading...</p>;
-  }
+  console.log("PRODUCT DATA 👉", data);
 
   return (
     <div className="container py-3">
@@ -53,7 +66,10 @@ export default function ProductDetails() {
               <button className="btn btn-warning fw-semibold w-100">
                 Buy Now
               </button>
-              <button className="btn btn-outline-dark fw-semibold w-100">
+              <button
+                className="btn btn-outline-dark fw-semibold w-100"
+                onClick={() => updateCartItem(data, initalQuantity)}
+              >
                 Add to Cart
               </button>
             </div>
@@ -83,14 +99,14 @@ export default function ProductDetails() {
           {/* Quantity */}
           <div className="mb-3 d-flex align-items-center gap-2">
             <button
-              onClick={DecrementQty}
+              onClick={() => DecreaseQuantity()}
               className="btn btn-outline-secondary btn-sm"
             >
               −
             </button>
-            <span className="fw-semibold">Qty: {quantity}</span>
+            <span className="fw-semibold">Quantity: {initalQuantity}</span>
             <button
-              onClick={IncrementQty}
+              onClick={() => IncreaseQuantity()}
               className="btn btn-outline-secondary btn-sm"
             >
               +
@@ -99,18 +115,103 @@ export default function ProductDetails() {
           {/* size */}
           <div className="mb-3">
             <p className="fw-semibold mb-2">Select Size</p>
+
             <div className="d-flex gap-2 flex-wrap">
-              {sizes.map((size) => (
+              {data.size.map((sizes) => (
                 <button
-                  key={size}
-                  onClick={() => setSelectedSize(size)}
-                  className={`btn btm-sm fw-semibold ${selectedSize === size ? "btn-dark" : "btn-outline-dark"}`}
+                  key={sizes}
+                  onClick={() => setSelectedSize(sizes)}
+                  className={`btn btn-sm fw-semibold ${
+                    selectedSize === sizes ? "btn-dark" : "btn-outline-dark"
+                  }`}
                   style={{ minWidth: "50px" }}
                 >
-                  {size}
+                  {sizes}
                 </button>
               ))}
             </div>
+
+            {!selectedSize && (
+              <small className="text-danger d-block mt-1">
+                Please select a size
+              </small>
+            )}
+          </div>
+          {/* Divider */}
+          <hr className="my-4" />
+
+          {/* Delivery & Payment Info */}
+          <div className="d-flex justify-content-start gap-4 text-center mb-4">
+            <div>
+              <i className="bi bi-arrow-counterclockwise fs-4 d-block mb-1"></i>
+              <small className="fw-semibold">
+                10 Days
+                <br />
+                Return
+              </small>
+            </div>
+
+            <div>
+              <i className="bi bi-cash-coin fs-4 d-block mb-1"></i>
+              <small className="fw-semibold">
+                Pay on
+                <br />
+                Delivery
+              </small>
+            </div>
+
+            <div>
+              <i className="bi bi-truck fs-4 d-block mb-1"></i>
+              <small className="fw-semibold">
+                Free
+                <br />
+                Delivery
+              </small>
+            </div>
+
+            <div>
+              <i className="bi bi-shield-check fs-4 d-block mb-1"></i>
+              <small className="fw-semibold">
+                Secure
+                <br />
+                Payment
+              </small>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <hr className="my-4" />
+
+          {/* Description */}
+          <div>
+            <h6 className="fw-bold mb-2">Description</h6>
+
+            <ul className="text-muted small">
+              <p>
+                {" "}
+                <strong>{data.description}</strong>
+              </p>
+              <li>
+                <strong>Stylish Design:</strong> Premium quality material with a
+                modern fit for everyday wear.
+              </li>
+              <li>
+                <strong>Comfort First:</strong> Soft, breathable fabric for
+                all-day comfort.
+              </li>
+              <li>
+                <strong>Durable:</strong> Designed to withstand regular use and
+                washing.
+              </li>
+              <li>
+                <strong>Versatile:</strong> Perfect for casual outings and daily
+                wear.
+              </li>
+              <li>
+                <strong>Easy Care:</strong> Machine washable, retains shape and
+                color.
+              </li>
+            </ul>
           </div>
         </div>
       </div>

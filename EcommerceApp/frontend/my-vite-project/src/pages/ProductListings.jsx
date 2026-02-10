@@ -2,17 +2,21 @@ import { useState } from "react";
 import useFetch from "../useFetch";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import useCartContext from "../contexts/cartContext";
+import useWishListContext from "../contexts/wishlistContext";
 
 export default function Productlistings({ searchText }) {
+  const [wishlistedItems, setWishlistedItems] = useState({});
+  const { updateCartItem } = useCartContext();
+  const { allWishListItem, updateWishList, deleteWishListItem } =
+    useWishListContext();
   const [selectedRating, setselectedRating] = useState(null);
   const [selectSortBy, setSelectSortBy] = useState(null);
   const [givenPrice, setPrice] = useState(100);
   const { categoryId } = useParams();
   const navigate = useNavigate();
-  //   console.log(CategoryId);
 
   const { data: categories } = useFetch(`http://localhost:3000/api/categories`);
-
   const { data: products, loading } = useFetch(
     categoryId
       ? `http://localhost:3000/api/products/categories/${categoryId}`
@@ -195,23 +199,68 @@ export default function Productlistings({ searchText }) {
             <div className="row row-cols-1 row-cols-md-4 g-4">
               {result.map((item) => (
                 <div className="col" key={item._id}>
-                  <Link
-                    to={`/productDetails/${item._id}`}
-                    className="text-decoration-none text-dark"
-                  >
-                    <div className="card h-100 border-0 shadow-sm">
-                      <img
-                        src={item.productImage}
-                        className="card-img-top"
-                        style={{ height: "300px", objectFit: "cover" }}
-                        alt={item.productName}
-                      />
+                  <div className="card h-100 border-0 shadow-sm">
+                    {/* Clickable product area */}
+                    <Link
+                      to={`/productDetails/${item._id}`}
+                      className="text-decoration-none text-dark"
+                    >
+                      <div className="position-relative">
+                        <img
+                          src={item.productImage}
+                          className="card-img-top"
+                          style={{ height: "300px", objectFit: "cover" }}
+                          alt={item.productName}
+                        />
+                        <span
+                          role="button"
+                          className="position-absolute top-0 end-0 m-2"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+
+                            setWishlistedItems((prev) => {
+                              const isWishlisted = prev[item._id];
+
+                              if (!isWishlisted) {
+                                updateWishList(item);
+                              } else {
+                                deleteWishListItem(item._id);
+                              }
+
+                              return {
+                                ...prev,
+                                [item._id]: !isWishlisted,
+                              };
+                            });
+                          }}
+                          style={{
+                            cursor: "pointer",
+                            fontSize: "22px",
+                            color: wishlistedItems[item._id] ? "red" : "#333",
+                            userSelect: "none",
+                          }}
+                        >
+                          ♥
+                        </span>
+                      </div>
+
                       <div className="card-body text-center">
                         <h6 className="fw-semibold">{item.productName}</h6>
-                        <p className="text-muted mb-0">₹{item.price}</p>
+                        <p className="text-muted mb-2">₹{item.price}</p>
                       </div>
+                    </Link>
+
+                    {/* Add to Cart button */}
+                    <div className="px-3 pb-3">
+                      <button
+                        className="btn btn-outline-dark fw-semibold w-100"
+                        onClick={() => updateCartItem(item, 1)}
+                      >
+                        Add to Cart
+                      </button>
                     </div>
-                  </Link>
+                  </div>
                 </div>
               ))}
             </div>

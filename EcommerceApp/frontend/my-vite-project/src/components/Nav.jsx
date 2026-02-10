@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
+import { CartCounter } from "./CartCounter";
+import useWishListContext from "../contexts/wishlistContext";
 
 export default function Nav({ setSearchText }) {
+  const { allWishListItem } = useWishListContext();
   return (
     <>
       <nav className="navbar bg-light border-bottom px-4 py-3">
@@ -36,10 +39,10 @@ export default function Nav({ setSearchText }) {
             <div className="col-4 d-flex justify-content-end align-items-center gap-3">
               <button className="btn btn-outline-secondary">Login</button>
               <Link to="/wishlist" className="text-decoration-none text-dark">
-                <FaRegHeart /> wishlist
+                <FaRegHeart /> {allWishListItem.length}
               </Link>
               <Link to="/cart" className="text-decoration-none text-dark">
-                <FaShoppingCart /> Cart
+                <CartCounter />
               </Link>
             </div>
           </div>

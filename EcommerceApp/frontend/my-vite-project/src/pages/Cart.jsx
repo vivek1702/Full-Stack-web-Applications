@@ -1,1 +1,149 @@
-export default function Cart() {}
+import useCartContext from "../contexts/cartContext";
+import useWishListContext from "../contexts/wishlistContext";
+
+export default function Cart() {
+  const {
+    allCartItems,
+    updateCartItem,
+    DecreaseQty,
+    IncreaseQty,
+    deleteCartItem,
+  } = useCartContext();
+
+  const { allWishListItem, updateWishList } = useWishListContext();
+
+  const totalDiscount = allCartItems.reduce((acc, curr) => {
+    const itemCost = Math.floor(
+      curr.quantity * curr.price - curr.price * (curr.discountedPrice / 100),
+    );
+    return acc + itemCost;
+  }, 0);
+
+  const totalPrice = allCartItems.reduce((acc, curr) => {
+    const itemCost = curr.price * curr.quantity;
+    return acc + itemCost;
+  }, 0);
+
+  const deliveryCharge = 100;
+
+  return (
+    <div className="container py-4">
+      <div className="row">
+        {/* LEFT : CART ITEMS */}
+        <div className="col-md-8">
+          <h5 className="fw-semibold mb-3">MY CART ({allCartItems.length})</h5>
+          {allCartItems.map((item) => (
+            <div className="card mb-3 p-3 shadow-sm" key={item._id}>
+              <div className="row g-3">
+                {/* Image */}
+                <div className="col-md-3 text-center">
+                  <img
+                    src={item.productImage}
+                    alt="product"
+                    className="img-fluid"
+                    style={{ maxHeight: "180px", objectFit: "contain" }}
+                  />
+                </div>
+
+                {/* Product Info */}
+                <div className="col-md-9">
+                  <h6 className="fw-semibold mb-1">{item.productName}</h6>
+
+                  {/* Price */}
+                  <div className="mb-2">
+                    <span className="fw-bold fs-6 me-2">
+                      ₹
+                      {Math.floor(
+                        item.quantity * item.price -
+                          item.price * (item.discountedPrice / 100),
+                      )}
+                    </span>
+                    <span className="text-muted text-decoration-line-through me-2">
+                      ₹{item.quantity * item.price}
+                    </span>
+                    <span className="text-success fw-semibold">
+                      {item.discountedPrice}% OFF
+                    </span>
+                  </div>
+
+                  {/* Quantity */}
+                  <div className="d-flex align-items-center gap-2 mb-3">
+                    <span className="fw-semibold">Quantity:</span>
+                    <button
+                      className="btn btn-outline-secondary btn-sm"
+                      onClick={() => DecreaseQty(item._id)}
+                    >
+                      −
+                    </button>
+                    <span className="px-2 fw-semibold">{item.quantity}</span>
+                    <button
+                      className="btn btn-outline-secondary btn-sm"
+                      onClick={() => IncreaseQty(item._id)}
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="d-flex gap-3">
+                    <button
+                      className="btn btn-outline-danger btn-sm fw-semibold"
+                      onClick={() => deleteCartItem(item._id)}
+                    >
+                      Remove From Cart
+                    </button>
+                    <button
+                      className="btn btn-outline-secondary btn-sm fw-semibold"
+                      onClick={() => {
+                        (updateWishList(item), deleteCartItem(item._id));
+                      }}
+                    >
+                      Move to Wishlist
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* RIGHT : PRICE DETAILS */}
+        <div className="col-md-4">
+          <div className="card p-3 shadow-sm">
+            <h6 className="fw-semibold border-bottom pb-2">PRICE DETAILS</h6>
+
+            <div className="d-flex justify-content-between mb-2">
+              <span>Price ({allCartItems.length} item)</span>
+              <span>₹{totalPrice}</span>
+            </div>
+
+            <div className="d-flex justify-content-between mb-2 text-success">
+              <span>Discount</span>
+              <span>- ₹{totalDiscount}</span>
+            </div>
+
+            <div className="d-flex justify-content-between mb-2">
+              <span>Delivery Charges</span>
+              <span>₹{deliveryCharge}</span>
+            </div>
+
+            <hr />
+
+            <div className="d-flex justify-content-between fw-bold fs-6 mb-2">
+              <span>Total Amount</span>
+              <span>₹{totalPrice - totalDiscount + deliveryCharge}</span>
+            </div>
+
+            <p className="text-success small mb-3">
+              You will save ₹{totalDiscount} on this order
+            </p>
+
+            <button className="btn btn-primary fw-semibold w-100">
+              PLACE ORDER
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
