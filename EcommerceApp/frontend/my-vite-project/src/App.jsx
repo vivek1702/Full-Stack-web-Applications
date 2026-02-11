@@ -6,7 +6,7 @@ import Nav from "./components/Nav";
 import Productlistings from "./pages/ProductListings";
 import { useState } from "react";
 import WishList from "./pages/WishList";
-import ProductDetails from "./pages/productDetails";
+import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import { CartProvider } from "./contexts/cartContext";
 import { WishListProvider } from "./contexts/wishlistContext";
