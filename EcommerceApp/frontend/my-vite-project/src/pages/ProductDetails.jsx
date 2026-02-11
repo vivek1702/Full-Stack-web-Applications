@@ -4,15 +4,9 @@ import { useState } from "react";
 import useCartContext from "../contexts/cartContext";
 
 export default function ProductDetails() {
-  const {
-    allCartItems,
-    updateCartItem,
-    DecreaseQty,
-    IncreaseQty,
-    deleteCartItem,
-  } = useCartContext();
+  const { updateCartItem } = useCartContext();
   const [initalQuantity, setInitalQty] = useState(1);
-  const [selectedSize, setSelectedSize] = useState(null);
+  const [selectedSize, setSelectedSize] = useState("Not Selected");
   const { productId } = useParams();
   const { data, loading } = useFetch(
     `http://localhost:3000/api/products/${productId}`,
@@ -68,7 +62,9 @@ export default function ProductDetails() {
               </button>
               <button
                 className="btn btn-outline-dark fw-semibold w-100"
-                onClick={() => updateCartItem(data, initalQuantity)}
+                onClick={() =>
+                  updateCartItem(data, initalQuantity, selectedSize)
+                }
               >
                 Add to Cart
               </button>

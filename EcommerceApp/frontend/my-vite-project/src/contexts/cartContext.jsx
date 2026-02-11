@@ -14,18 +14,27 @@ export function CartProvider({ children }) {
     localStorage.setItem("cartItem", JSON.stringify(allCartItems));
   }, [allCartItems]);
 
-  function updateCartItem(selectedItem, initalQty) {
+  console.log(allCartItems);
+
+  function updateCartItem(selectedItem, initalQty, selectedSize) {
     setCartItems((prevItem) => {
       const existing = prevItem.find((item) => item._id === selectedItem._id);
 
       if (existing) {
         return prevItem.map((item) =>
           item._id === selectedItem._id
-            ? { ...item, quantity: item.quantity + 1 }
+            ? {
+                ...item,
+                quantity: item.quantity + 1,
+                selectedSize: (item.selectedSize = selectedSize),
+              }
             : item,
         );
       }
-      return [...prevItem, { ...selectedItem, quantity: initalQty }];
+      return [
+        ...prevItem,
+        { ...selectedItem, quantity: initalQty, selectedSize: selectedSize },
+      ];
     });
   }
 

@@ -24,7 +24,7 @@ export default function Cart() {
     return acc + itemCost;
   }, 0);
 
-  const deliveryCharge = 100;
+  let deliveryCharge = allCartItems.length > 0 ? 100 : 0;
 
   return (
     <div className="container py-4">
@@ -48,6 +48,12 @@ export default function Cart() {
                 {/* Product Info */}
                 <div className="col-md-9">
                   <h6 className="fw-semibold mb-1">{item.productName}</h6>
+
+                  <div>
+                    <span>
+                      Selected Size: <strong>{item.selectedSize}</strong>
+                    </span>
+                  </div>
 
                   {/* Price */}
                   <div className="mb-2">
@@ -118,7 +124,7 @@ export default function Cart() {
             </div>
 
             <div className="d-flex justify-content-between mb-2 text-success">
-              <span>Discount</span>
+              <span>After Discount</span>
               <span>- ₹{totalDiscount}</span>
             </div>
 
@@ -131,7 +137,7 @@ export default function Cart() {
 
             <div className="d-flex justify-content-between fw-bold fs-6 mb-2">
               <span>Total Amount</span>
-              <span>₹{totalPrice - totalDiscount + deliveryCharge}</span>
+              <span>₹{totalDiscount + deliveryCharge}</span>
             </div>
 
             <p className="text-success small mb-3">

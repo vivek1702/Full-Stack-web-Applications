@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useCartContext from "../contexts/cartContext";
 import useWishListContext from "../contexts/wishlistContext";
+import toast from "react-hot-toast";
 
 export default function Productlistings({ searchText }) {
   const [wishlistedItems, setWishlistedItems] = useState({});
@@ -224,8 +225,12 @@ export default function Productlistings({ searchText }) {
 
                               if (!isWishlisted) {
                                 updateWishList(item);
+                                toast.success("Added to wishlist ❤️");
                               } else {
                                 deleteWishListItem(item._id);
+                                toast("Removed from wishlist 💔", {
+                                  icon: "🗑️",
+                                });
                               }
 
                               return {

@@ -10,6 +10,7 @@ import ProductDetails from "./pages/productDetails";
 import Cart from "./pages/Cart";
 import { CartProvider } from "./contexts/cartContext";
 import { WishListProvider } from "./contexts/wishlistContext";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [searchText, setSearchText] = useState("");
@@ -18,6 +19,7 @@ function App() {
       <WishListProvider>
         <BrowserRouter>
           <Nav setSearchText={setSearchText} />
+          <Toaster position="top-right" />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route
