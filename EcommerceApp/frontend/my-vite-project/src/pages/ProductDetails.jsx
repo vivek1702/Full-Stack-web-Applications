@@ -9,7 +9,7 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState("Not Selected");
   const { productId } = useParams();
   const { data, loading } = useFetch(
-    `http://localhost:3000/api/products/${productId}`,
+    `${import.meta.env.VITE_API_URL}/api/products/${productId}`,
     null,
   );
 

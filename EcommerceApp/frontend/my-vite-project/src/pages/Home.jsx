@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   const { data, loading, error } = useFetch(
-    `http://localhost:3000/api/categories`,
+    `${import.meta.env.VITE_API_URL}/api/categories`,
   );
 
   if (loading) return <p>Loading...</p>;
