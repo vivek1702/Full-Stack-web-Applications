@@ -9,7 +9,7 @@ const app = express();
 app.use(
   cors({
     origin: "*",
-    Credential: true,
+    credentials: true,
   }),
 );
 app.use(express.json());
@@ -52,8 +52,7 @@ app.get("/api/products/:productId", async (req, res) => {
     const getId = req.params.productId;
     const showData = await productById(getId);
     if (showData) {
-      res.json(showData);
-      res.status(200).json({ message: "fetched result" });
+      res.status(200).json(showData);
     } else {
       res.status(400).json({ error: "id is not in DB" });
     }
