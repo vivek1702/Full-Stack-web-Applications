@@ -17,11 +17,13 @@ export default function Productlistings({ searchText }) {
   const { categoryId } = useParams();
   const navigate = useNavigate();
 
-  const { data: categories } = useFetch(`http://localhost:3000/api/categories`);
+  const { data: categories } = useFetch(
+    `${import.meta.env.VITE_API_URL}/api/categories`,
+  );
   const { data: products, loading } = useFetch(
     categoryId
-      ? `http://localhost:3000/api/products/categories/${categoryId}`
-      : `http://localhost:3000/api/products`,
+      ? `${import.meta.env.VITE_API_URL}/api/products/categories/${categoryId}`
+      : `${import.meta.env.VITE_API_URL}/api/products`,
   );
 
   const handleRating = (event) => {
