@@ -2,52 +2,83 @@ import { Link } from "react-router-dom";
 import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
 import { CartCounter } from "./CartCounter";
 import useWishListContext from "../contexts/wishlistContext";
+import useCartContext from "../contexts/cartContext";
 
 export default function Nav({ setSearchText }) {
   const { allWishListItem } = useWishListContext();
+  const { allCartItems } = useCartContext();
+
   return (
-    <>
-      <nav className="navbar bg-light border-bottom px-4 py-3">
-        <div className="container-fluid">
-          <div className="row w-100 align-items-center">
-            {/* left side */}
-            <div className="col-4 d-flex align-items-center gap-4">
-              <h3 className="mb-0">ShoppingSite</h3>
-              <Link to="/" className="text-decoration-none text-dark">
+    <nav className="navbar navbar-expand-lg bg-white shadow-sm px-4 py-3">
+      <div className="container-fluid">
+        {/* Brand */}
+        <Link className="navbar-brand fw-bold fs-4" to="/">
+          UrbanWear
+        </Link>
+
+        {/* Mobile Toggle Button */}
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarContent"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        {/* Navbar Content */}
+        <div className="collapse navbar-collapse" id="navbarContent">
+          {/* Left Links */}
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">
                 Home
               </Link>
-
-              <Link
-                to="/productlistings"
-                className="text-decoration-none text-dark"
-              >
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/productlistings">
                 Products
               </Link>
-            </div>
-            {/* center */}
-            <div className="col-4 d-flex justify-content-center">
-              <input
-                className="form-control"
-                style={{ maxWidth: "300px" }}
-                type="search"
-                placeholder="Search..."
-                aria-label="Search"
-                onChange={(e) => setSearchText(e.target.value)}
-              />
-            </div>
-            {/* right */}
-            <div className="col-4 d-flex justify-content-end align-items-center gap-3">
-              <button className="btn btn-outline-secondary">Login</button>
-              <Link to="/wishlist" className="text-decoration-none text-dark">
-                <FaRegHeart /> {allWishListItem.length}
-              </Link>
-              <Link to="/cart" className="text-decoration-none text-dark">
-                <CartCounter />
-              </Link>
-            </div>
+            </li>
+          </ul>
+
+          {/* Search */}
+          <form
+            className="d-flex mx-auto my-3 my-lg-0"
+            style={{ maxWidth: "350px", width: "100%" }}
+          >
+            <input
+              className="form-control"
+              type="search"
+              placeholder="Search products..."
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+          </form>
+
+          {/* Right Side */}
+          <div className="d-flex align-items-center gap-4 ms-lg-4">
+            <button className="btn btn-outline-dark btn-sm">Login</button>
+
+            <Link
+              to="/wishlist"
+              className="text-decoration-none text-dark d-flex align-items-center gap-1"
+            >
+              <FaRegHeart />
+              <span>Wishlist</span>
+              <span className="badge bg-dark">{allWishListItem.length}</span>
+            </Link>
+
+            <Link
+              to="/cart"
+              className="text-decoration-none text-dark d-flex align-items-center gap-1"
+            >
+              <FaShoppingCart />
+              <span>Cart</span>
+              <span className="badge bg-dark">{allCartItems.length}</span>
+            </Link>
           </div>
         </div>
-      </nav>
-    </>
+      </div>
+    </nav>
   );
 }

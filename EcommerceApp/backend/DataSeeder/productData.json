@@ -1,168 +1,495 @@
 [
   {
-    "productName": "Men Solid Cotton T-Shirt",
-    "description": "Comfortable cotton t-shirt for everyday wear",
-    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+TShirt",
+    "productName": "Men Denim Jeans",
+    "description": "Regular fit stretchable denim jeans for everyday comfort.",
+    "productImage": "https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&auto=format&fit=crop",
     "price": 499,
+    "rating": 4.2,
+    "size": ["S", "M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 15
+  },
+  {
+    "productName": "Men Slim Fit Jeans",
+    "description": "Slim fit blue denim with tapered ankle design.",
+    "productImage": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1000&auto=format&fit=crop",
+    "price": 699,
+    "rating": 4.4,
+    "size": ["S", "M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 20
+  },
+  {
+    "productName": "Kids Casual Shirt",
+    "description": "Smart casual shirt with soft cotton fabric suitable for outings.",
+    "productImage": "https://images.pexels.com/photos/1416736/pexels-photo-1416736.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "price": 279,
+    "rating": 4.2,
+    "size": ["XS", "S", "M"],
+    "category": "698c90379cc3bc35dd0ab58e",
+    "discountedPrice": 10
+  },
+  {
+    "productName": "Kids Winter Jacket",
+    "description": "Warm insulated jacket with zipper closure and soft lining.",
+    "productImage": "https://images.unsplash.com/photo-1544441893-675973e31985?w=400&auto=format&fit=crop",
+    "price": 599,
+    "rating": 4.6,
+    "size": ["XS", "S", "M"],
+    "category": "698c90379cc3bc35dd0ab58e",
+    "discountedPrice": 20
+  },
+  {
+    "productName": "Kids Pajama Set",
+    "description": "Comfortable two-piece pajama set made with soft cotton blend.",
+    "productImage": "/images/kids-pajama-with-birthday-party-pattern.jpg",
+    "price": 229,
+    "rating": 4.3,
+    "size": ["XS", "S", "M"],
+    "category": "698c90379cc3bc35dd0ab58e",
+    "discountedPrice": 11
+  },
+  {
+    "productName": "Women Denim Jacket",
+    "description": "Classic denim jacket with structured fit and durable stitching.",
+    "productImage": "/images/women-denim-jacket.jpg",
+    "price": 899,
+    "rating": 4.5,
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 20
+  },
+  {
+    "productName": "Women Evening Gown",
+    "description": "Elegant evening gown with flowing silhouette for special occasions.",
+    "productImage": "/images/women-gown.jpg",
+    "price": 1199,
+    "rating": 4.8,
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 30
+  },
+  {
+    "productName": "Men Black Jeans",
+    "description": "Classic black denim jeans with modern cut.",
+    "productImage": "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&auto=format&fit=crop",
+    "price": 649,
     "rating": 4.3,
     "size": ["M", "L", "XL"],
-    "category": "697dc662c7f64a0077fc744a"
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 18
   },
   {
     "productName": "Men Casual Shirt",
-    "description": "Slim fit casual shirt for men",
-    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+Shirt",
-    "price": 799,
+    "description": "Breathable cotton casual shirt for daily wear.",
+    "productImage": "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?w=400&auto=format&fit=crop",
+    "price": 649,
     "rating": 4.5,
-    "size": ["S", "M", "L"],
-    "category": "697dc662c7f64a0077fc744a"
+    "size": ["M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 18
   },
   {
-    "productName": "Men Denim Jeans",
-    "description": "Regular fit denim jeans",
-    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+Jeans",
-    "price": 999,
-    "rating": 4.2,
-    "size": ["M", "L"],
-    "category": "697dc662c7f64a0077fc744a"
-  },
-
-  {
-    "productName": "Women Floral Dress",
-    "description": "Elegant floral dress for women",
-    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Dress",
-    "price": 899,
+    "productName": "Men Formal Shirt",
+    "description": "Elegant formal shirt suitable for office wear.",
+    "productImage": "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400&auto=format&fit=crop",
+    "price": 749,
     "rating": 4.6,
-    "size": ["S", "M", "L"],
-    "category": "697dc662c7f64a0077fc744b"
+    "size": ["M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 22
   },
   {
-    "productName": "Women Kurti",
-    "description": "Stylish ethnic kurti",
-    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Kurti",
+    "productName": "Men Printed Shirt",
+    "description": "Trendy printed shirt for casual outings.",
+    "productImage": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=400&auto=format&fit=crop",
+    "price": 599,
+    "rating": 4.3,
+    "size": ["M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 17
+  },
+  {
+    "productName": "Men Linen Shirt",
+    "description": "Lightweight linen shirt for summer comfort.",
+    "productImage": "https://images.pexels.com/photos/1043148/pexels-photo-1043148.jpeg?auto=compress&cs=tinysrgb&w=800",
     "price": 699,
     "rating": 4.4,
     "size": ["M", "L", "XL"],
-    "category": "697dc662c7f64a0077fc744b"
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 19
   },
   {
-    "productName": "Women Handbag",
-    "description": "Trendy handbag for daily use",
-    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Bag",
-    "price": 999,
-    "rating": 4.1,
-    "size": [],
-    "category": "697dc662c7f64a0077fc744b"
+    "productName": "Men Polo T Shirt",
+    "description": "Classic polo t-shirt with soft fabric.",
+    "productImage": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=400&auto=format&fit=crop",
+    "price": 449,
+    "rating": 4.2,
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 14
   },
-
   {
-    "productName": "Kids Graphic T-Shirt",
-    "description": "Soft cotton t-shirt for kids",
-    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+TShirt",
+    "productName": "Men Sports Tee",
+    "description": "Lightweight sports t-shirt for workouts.",
+    "productImage": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&auto=format&fit=crop",
     "price": 399,
-    "rating": 4.5,
-    "size": ["XS", "S"],
-    "category": "697dc662c7f64a0077fc744c"
+    "rating": 4.1,
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 12
   },
   {
-    "productName": "Kids Party Dress",
-    "description": "Beautiful party wear dress for kids",
-    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+Dress",
+    "productName": "Men Graphic Tee",
+    "description": "Stylish graphic t-shirt with bold print.",
+    "productImage": "https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=400&auto=format&fit=crop",
+    "price": 429,
+    "rating": 4.0,
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 10
+  },
+  {
+    "productName": "Men Hoodie",
+    "description": "Comfortable hoodie with fleece lining.",
+    "productImage": "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&auto=format&fit=crop",
+    "price": 799,
+    "rating": 4.6,
+    "size": ["M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 19
+  },
+  {
+    "productName": "Women Floral Summer Dress",
+    "description": "Lightweight floral summer dress with breathable fabric and a flattering A-line silhouette.",
+    "productImage": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&auto=format&fit=crop",
     "price": 799,
     "rating": 4.7,
-    "size": ["XS", "S", "M"],
-    "category": "697dc662c7f64a0077fc744c"
+    "size": ["XS", "S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 20
   },
   {
-    "productName": "Kids Shorts",
-    "description": "Comfortable shorts for kids",
-    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+Shorts",
+    "productName": "Women Casual Cotton Top",
+    "description": "Soft cotton casual top with relaxed fit, perfect for everyday comfort.",
+    "productImage": "https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg",
     "price": 349,
     "rating": 4.2,
-    "size": ["XS", "S"],
-    "category": "697dc662c7f64a0077fc744c"
+    "size": ["XS", "S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 12
   },
   {
-    "productName": "Men Hoodie Sweatshirt",
-    "description": "Warm and comfortable hoodie for men",
-    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+Hoodie",
-    "price": 899,
-    "rating": 4.4,
-    "size": ["M", "L", "XL"],
-    "category": "697dc662c7f64a0077fc744a"
-  },
-  {
-    "productName": "Men Sports Shorts",
-    "description": "Breathable sports shorts for workouts",
-    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+Shorts",
-    "price": 449,
-    "rating": 4.1,
-    "size": ["S", "M", "L"],
-    "category": "697dc662c7f64a0077fc744a"
-  },
-  {
-    "productName": "Men Formal Trousers",
-    "description": "Slim fit formal trousers",
-    "productImage": "https://dummyimage.com/400x400/cccccc/000000&text=Men+Trousers",
-    "price": 999,
-    "rating": 4.3,
-    "size": ["M", "L"],
-    "category": "697dc662c7f64a0077fc744a"
-  },
-
-  {
-    "productName": "Women Summer Top",
-    "description": "Lightweight summer top for women",
-    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Top",
-    "price": 499,
-    "rating": 4.2,
-    "size": ["S", "M", "L"],
-    "category": "697dc662c7f64a0077fc744b"
-  },
-  {
-    "productName": "Women Jeans",
-    "description": "High waist denim jeans",
-    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Jeans",
-    "price": 899,
+    "productName": "Women High Waist Jeans",
+    "description": "Stretchable high-waist denim jeans with a modern slim fit design.",
+    "productImage": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&auto=format&fit=crop",
+    "price": 699,
     "rating": 4.5,
-    "size": ["M", "L", "XL"],
-    "category": "697dc662c7f64a0077fc744b"
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 18
   },
   {
-    "productName": "Women Sandals",
-    "description": "Comfortable everyday sandals",
-    "productImage": "https://dummyimage.com/400x400/ffcccc/000000&text=Women+Sandals",
-    "price": 599,
-    "rating": 4.0,
-    "size": [],
-    "category": "697dc662c7f64a0077fc744b"
-  },
-
-  {
-    "productName": "Kids Hooded Jacket",
-    "description": "Warm jacket for kids",
-    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+Jacket",
-    "price": 799,
+    "productName": "Women Blazer Jacket",
+    "description": "Tailored blazer jacket suitable for office and formal occasions.",
+    "productImage": "https://images.pexels.com/photos/7679656/pexels-photo-7679656.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "price": 999,
     "rating": 4.6,
-    "size": ["XS", "S"],
-    "category": "697dc662c7f64a0077fc744c"
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 25
   },
   {
-    "productName": "Kids Nightwear Set",
-    "description": "Soft cotton nightwear for kids",
-    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+Nightwear",
-    "price": 499,
+    "productName": "Kids Cotton T Shirt",
+    "description": "Soft breathable cotton t-shirt designed for all-day comfort and active play.",
+    "productImage": "https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?w=400&auto=format&fit=crop",
+    "price": 199,
+    "rating": 4.3,
+    "size": ["XS", "S", "M"],
+    "category": "698c90379cc3bc35dd0ab58e",
+    "discountedPrice": 10
+  },
+  {
+    "productName": "Kids Denim Shorts",
+    "description": "Comfortable denim shorts with elastic waistband for easy movement.",
+    "productImage": "https://images.unsplash.com/photo-1503919545889-aef636e10ad4?w=400&auto=format&fit=crop",
+    "price": 249,
+    "rating": 4.2,
+    "size": ["XS", "S", "M"],
+    "category": "698c90379cc3bc35dd0ab58e",
+    "discountedPrice": 12
+  },
+  {
+    "productName": "Kids Printed Hoodie",
+    "description": "Warm fleece-lined hoodie with fun prints and soft inner lining.",
+    "productImage": "https://images.unsplash.com/photo-1602810319428-019690571b5b?w=400&auto=format&fit=crop",
+    "price": 399,
+    "rating": 4.5,
+    "size": ["XS", "S", "M"],
+    "category": "698c90379cc3bc35dd0ab58e",
+    "discountedPrice": 15
+  },
+  {
+    "productName": "Kids Summer Dress",
+    "description": "Lightweight summer dress with playful patterns and soft fabric.",
+    "productImage": "https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&auto=format&fit=crop",
+    "price": 349,
     "rating": 4.4,
     "size": ["XS", "S", "M"],
-    "category": "697dc662c7f64a0077fc744c"
+    "category": "698c90379cc3bc35dd0ab58e",
+    "discountedPrice": 14
   },
   {
+    "productName": "Kids Jogger Pants",
+    "description": "Comfortable jogger pants with stretch fabric for active kids.",
+    "productImage": "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=400&auto=format&fit=crop",
+    "price": 299,
+    "rating": 4.1,
+    "size": ["XS", "S", "M"],
+    "category": "698c90379cc3bc35dd0ab58e",
+    "discountedPrice": 12
+  },
+
+  {
     "productName": "Kids Sneakers",
-    "description": "Durable sneakers for kids",
-    "productImage": "https://dummyimage.com/400x400/ccffcc/000000&text=Kids+Shoes",
+    "description": "Lightweight sneakers with cushioned sole for everyday comfort.",
+    "productImage": "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400&auto=format&fit=crop",
+    "price": 499,
+    "rating": 4.5,
+    "size": ["XS", "S", "M"],
+    "category": "698c90379cc3bc35dd0ab58e",
+    "discountedPrice": 18
+  },
+  {
+    "productName": "Kids Cap",
+    "description": "Adjustable cotton cap with playful design for sunny days.",
+    "productImage": "/images/kids-cap.jpg",
+    "price": 149,
+    "rating": 4.0,
+    "size": ["XS", "S", "M"],
+    "category": "698c90379cc3bc35dd0ab58e",
+    "discountedPrice": 9
+  },
+  {
+    "productName": "Women Knit Sweater",
+    "description": "Cozy knit sweater made from soft wool blend for winter comfort.",
+    "productImage": "https://images.unsplash.com/photo-1544441893-675973e31985?w=400&auto=format&fit=crop",
+    "price": 599,
+    "rating": 4.4,
+    "size": ["S", "M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 15
+  },
+  {
+    "productName": "Women Palazzo Pants",
+    "description": "Flowy palazzo pants with elastic waistband and elegant drape.",
+    "productImage": "/images/women-plazzo-pants.jpg",
+    "price": 459,
+    "rating": 4.3,
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 14
+  },
+  {
+    "productName": "Women Active Leggings",
+    "description": "High-stretch leggings designed for yoga, gym, and casual wear.",
+    "productImage": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400&auto=format&fit=crop",
+    "price": 399,
+    "rating": 4.2,
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 12
+  },
+  {
+    "productName": "Women Wrap Dress",
+    "description": "Elegant wrap dress with adjustable waist tie for a flattering fit.",
+    "productImage": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&auto=format&fit=crop",
+    "price": 699,
+    "rating": 4.6,
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 18
+  },
+  {
+    "productName": "Classic Leather Strap Watch",
+    "description": "Elegant analog watch with genuine leather strap and stainless steel case.",
+    "productImage": "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&auto=format&fit=crop",
+    "price": 2499,
+    "rating": 4.4,
+    "size": ["One Size"],
+    "category": "698c90379cc3bc35dd0ab58f",
+    "discountedPrice": 21
+  },
+  {
+    "productName": "Luxury Gold Dial Watch",
+    "description": "Premium gold-tone dial watch with metal chain strap for formal occasions.",
+    "productImage": "https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=400&auto=format&fit=crop",
+    "price": 3299,
+    "rating": 4.5,
+    "size": ["One Size"],
+    "category": "698c90379cc3bc35dd0ab58f",
+    "discountedPrice": 28
+  },
+  {
+    "productName": "Men's Black Leather Wallet",
+    "description": "Slim bifold wallet made from high-quality genuine leather.",
+    "productImage": "/images/men-leather-wallet.jpg",
+    "price": 899,
+    "rating": 4.2,
+    "size": ["One Size"],
+    "category": "698c90379cc3bc35dd0ab58f",
+    "discountedPrice": 45
+  },
+  {
+    "productName": "Brown Formal Belt",
+    "description": "Classic brown leather belt suitable for office and formal wear.",
+    "productImage": "/images/leather-belt.jpg",
+    "price": 699,
+    "rating": 4.1,
+    "size": ["S", "M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58f",
+    "discountedPrice": 49
+  },
+  {
+    "productName": "Premium Leather Office Bag",
+    "description": "Spacious leather office bag with multiple compartments for daily use.",
+    "productImage": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&auto=format&fit=crop",
+    "price": 3499,
+    "rating": 4.6,
+    "size": ["One Size"],
+    "category": "698c90379cc3bc35dd0ab58f",
+    "discountedPrice": 30
+  },
+  {
+    "productName": "Women's Designer Handbag",
+    "description": "Stylish handbag crafted with premium material for casual outings.",
+    "productImage": "/images/women-desginer-handbag.jpg",
+    "price": 2799,
+    "rating": 4.3,
+    "size": ["One Size"],
+    "category": "698c90379cc3bc35dd0ab58f",
+    "discountedPrice": 23
+  },
+  {
+    "productName": "Classic Brown Leather Wallet",
+    "description": "Durable wallet with multiple card slots and cash compartments.",
+    "productImage": "/images/Brown-formal-belt.jpg",
+    "price": 999,
+    "rating": 4.2,
+    "size": ["One Size"],
+    "category": "698c90379cc3bc35dd0ab58f",
+    "discountedPrice": 10
+  },
+  {
+    "productName": "Sporty Digital Watch",
+    "description": "Water-resistant digital watch perfect for sports and outdoor activities.",
+    "productImage": "/images/digital-watch.jpg",
+    "price": 1999,
+    "rating": 4.4,
+    "size": ["One Size"],
+    "category": "698c90379cc3bc35dd0ab58f",
+    "discountedPrice": 16
+  },
+  {
+    "productName": "Premium Leather Belt",
+    "description": "High-quality leather belt with adjustable buckle for a perfect fit.",
+    "productImage": "/images/premimum-leather-belt.jpg",
+    "price": 799,
+    "rating": 4.0,
+    "size": ["S", "M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58f",
+    "discountedPrice": 16
+  },
+  {
+    "productName": "Luxury Perfume for Men",
+    "description": "Long-lasting fragrance with woody and fresh notes.",
+    "productImage": "/images/luxury-men-perfume.jpg",
+    "price": 2199,
+    "rating": 4.5,
+    "size": ["50ml", "100ml"],
+    "category": "698c90379cc3bc35dd0ab58f",
+    "discountedPrice": 18
+  },
+
+  {
+    "productName": "Men Zip Hoodie",
+    "description": "Zip-up hoodie perfect for layering.",
+    "productImage": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=400&auto=format&fit=crop",
+    "price": 849,
+    "rating": 4.5,
+    "size": ["M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 21
+  },
+  {
+    "productName": "Men Leather Jacket",
+    "description": "Premium leather jacket with modern fit.",
+    "productImage": "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&auto=format&fit=crop",
+    "price": 1199,
+    "rating": 4.8,
+    "size": ["M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 25
+  },
+  {
+    "productName": "Men Bomber Jacket",
+    "description": "Stylish bomber jacket for winter season.",
+    "productImage": "https://images.unsplash.com/photo-1520975916090-3105956dac38?w=400&auto=format&fit=crop",
+    "price": 1099,
+    "rating": 4.5,
+    "size": ["M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 23
+  },
+  {
+    "productName": "Men Denim Jacket",
+    "description": "Classic denim jacket with rugged style.",
+    "productImage": "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?w=400&auto=format&fit=crop",
+    "price": 999,
+    "rating": 4.6,
+    "size": ["M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 22
+  },
+  {
+    "productName": "Men Winter Coat",
+    "description": "Warm winter coat with insulated lining.",
+    "productImage": "/images/men-coat.jpg",
+    "price": 1499,
+    "rating": 4.6,
+    "size": ["M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 30
+  },
+
+  {
+    "productName": "Men Joggers",
+    "description": "Slim fit joggers for casual style.",
+    "productImage": "/images/jogger-pants.jpg",
+    "price": 549,
+    "rating": 4.3,
+    "size": ["M", "L"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 15
+  },
+  {
+    "productName": "Men Chinos",
+    "description": "Cotton chinos suitable for office and casual wear.",
+    "productImage": "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=400&auto=format&fit=crop",
+    "price": 599,
+    "rating": 4.2,
+    "size": ["S", "M", "L"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 18
+  },
+  {
+    "productName": "Men Kurta",
+    "description": "Traditional cotton kurta for festive wear.",
+    "productImage": "https://images.unsplash.com/photo-1603252109303-2751441dd157?w=400&auto=format&fit=crop",
     "price": 699,
     "rating": 4.3,
-    "size": [],
-    "category": "697dc662c7f64a0077fc744c"
+    "size": ["M", "L", "XL"],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 17
   }
 ]

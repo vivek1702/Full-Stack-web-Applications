@@ -2,63 +2,48 @@ const Category = require("../models/category.model");
 const { initializeDB } = require("../db/db.connect");
 initializeDB();
 
-const categoryData = [
+const categoryUpdates = [
   {
     name: "Men",
     slug: "men",
+    categoryURL:
+      "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop",
   },
   {
     name: "Women",
     slug: "women",
+    categoryURL:
+      "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop",
   },
   {
     name: "Kids",
     slug: "kids",
+    categoryURL:
+      "https://images.pexels.com/photos/1620760/pexels-photo-1620760.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop",
+  },
+  {
+    name: "Accessories",
+    slug: "accessories",
+    categoryURL:
+      "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop",
   },
 ];
 
-async function insertCategories(categoryData) {
+async function seedCategories() {
   try {
-    await Category.insertMany(categoryData);
-    console.log("categories seeded successfully");
+    // 🔥 Delete all existing categories
+    await Category.deleteMany({});
+    console.log("Old categories deleted");
+
+    // 🌱 Insert fresh categories
+    await Category.insertMany(categoryUpdates);
+    console.log("Categories seeded successfully");
+
     process.exit(0);
   } catch (error) {
-    console.log("error seeding categories");
+    console.error("Error seeding categories:", error);
     process.exit(1);
   }
 }
 
-// insertCategories(categoryData);
-
-//update category database with  adding imageUrl field and seeding data
-const categoryUpdates = [
-  {
-    slug: "men",
-    categoryURL: "https://placehold.co/600x900/eeeeee/111111?text=Men",
-  },
-  {
-    slug: "women",
-    categoryURL: "https://placehold.co/600x900/f5f5f5/111111?text=Women",
-  },
-  {
-    slug: "kids",
-    categoryURL: "https://placehold.co/600x900/ffffff/111111?text=Kids",
-  },
-];
-
-async function updateCategories(categoryUpdates) {
-  try {
-    for (const category of categoryUpdates) {
-      await Category.updateOne(
-        { slug: category.slug },
-        { $set: { categoryURL: category.categoryURL } },
-      );
-    }
-    console.log("data updated successfully");
-    process.exit(0);
-  } catch (error) {
-    console.log("error updating categories");
-    process.exit(0);
-  }
-}
-updateCategories(categoryUpdates);
+seedCategories();
