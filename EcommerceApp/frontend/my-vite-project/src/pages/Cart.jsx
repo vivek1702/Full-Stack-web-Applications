@@ -1,5 +1,6 @@
 import useCartContext from "../contexts/cartContext";
 import useWishListContext from "../contexts/wishlistContext";
+import toast from "react-hot-toast";
 
 export default function Cart() {
   const {
@@ -94,7 +95,10 @@ export default function Cart() {
                   <div className="d-flex gap-3">
                     <button
                       className="btn btn-outline-danger btn-sm fw-semibold"
-                      onClick={() => deleteCartItem(item._id)}
+                      onClick={() => {
+                        (deleteCartItem(item._id),
+                          toast.success("Item removed from cart 🗑️"));
+                      }}
                     >
                       Remove From Cart
                     </button>
@@ -102,6 +106,7 @@ export default function Cart() {
                       className="btn btn-outline-secondary btn-sm fw-semibold"
                       onClick={() => {
                         (updateWishList(item), deleteCartItem(item._id));
+                        toast.success("Moved to wishlist ❤️");
                       }}
                     >
                       Move to Wishlist

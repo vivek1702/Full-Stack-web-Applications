@@ -9,7 +9,17 @@ export default function Home() {
 
   const navigate = useNavigate();
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ height: "60vh" }}
+      >
+        <div className="spinner-border text-dark" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
   if (error) return <p>Error: {error}</p>;
 
   console.log(data);

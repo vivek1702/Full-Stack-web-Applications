@@ -1,12 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
-import { CartCounter } from "./CartCounter";
 import useWishListContext from "../contexts/wishlistContext";
 import useCartContext from "../contexts/cartContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Nav({ setSearchText }) {
+  const navigate = useNavigate();
   const { allWishListItem } = useWishListContext();
   const { allCartItems } = useCartContext();
+
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearchText(value);
+
+    navigate(`/productlistings?search=${value}`);
+  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm px-4 py-3">
@@ -51,7 +59,7 @@ export default function Nav({ setSearchText }) {
               className="form-control"
               type="search"
               placeholder="Search products..."
-              onChange={(e) => setSearchText(e.target.value)}
+              onChange={handleSearch}
             />
           </form>
 

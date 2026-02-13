@@ -1,6 +1,7 @@
 require("dotenv").config();
 const Products = require("./models/product.model");
 const Category = require("./models/category.model");
+const Address = require("./models/address.model");
 const { initializeDB } = require("./db/db.connect");
 const express = require("express");
 const cors = require("cors");
@@ -117,6 +118,90 @@ app.get("/api/products/categories/:categoryId", async (req, res) => {
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ message: "error fetching products" });
+  }
+});
+
+//read all the data of address
+async function alladdress() {
+  try {
+    const showItems = await Address.find();
+    return showItems;
+  } catch (error) {
+    throw error;
+  }
+}
+app.get("/api/address", async (req, res) => {
+  try {
+    const showAddress = await alladdress();
+    if (!showAddress) {
+      res.status(400).json({ error: "address not found in DB" });
+    }
+    res.json(showAddress);
+  } catch (error) {
+    res.status(400).json({ error: "unable to fetch address" });
+  }
+});
+
+//read data by addressId
+async function showAddressById(itemId) {
+  try {
+    const showItems = await Address.findOne({ _id: itemId });
+    return showItems;
+  } catch (error) {
+    throw error;
+  }
+}
+app.get("/api/address/:addressId", async (req, res) => {
+  try {
+    const addressId = req.params.addressId;
+    const showAddress = await showAddressById(addressId);
+    if (!showAddress) {
+      return res.status(400).json({ error: "address not found in DB" });
+    }
+    res.json(showAddress);
+  } catch (error) {
+    res.status(400).json({ error: "unable to fetch address" });
+  }
+});
+
+// add new address to the address table
+async function addNewAddress(addNewData) {
+  try {
+    const newData = new Address(addNewData);
+    const saveData = await newData.save();
+    return saveData;
+  } catch (error) {
+    throw error;
+  }
+}
+
+app.post("/api/address", async (req, res) => {
+  try {
+    const newData = req.body;
+    await addNewAddress(newData);
+    res.status(201).json({ message: "address added successfully" });
+  } catch (error) {
+    res.status(400).json({ error: "unable to add address" });
+  }
+});
+
+//delete address from address table
+async function removeMovies(itemId) {
+  try {
+    const deletedAddress = await Address.findByIdAndDelete(itemId);
+    return deletedAddress;
+  } catch (error) {
+    console.log("unable to delete address", error);
+  }
+}
+app.delete("/api/address/:addressId", async (req, res) => {
+  try {
+    const todelete = await removeMovies(req.params.addressId);
+    if (todelete) {
+      res.status(200).json({ message: "address deleted successfully" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "unale to fetch data to delete" });
   }
 });
 

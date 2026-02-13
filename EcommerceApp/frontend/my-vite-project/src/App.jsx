@@ -11,6 +11,7 @@ import Cart from "./pages/Cart";
 import { CartProvider } from "./contexts/cartContext";
 import { WishListProvider } from "./contexts/wishlistContext";
 import { Toaster } from "react-hot-toast";
+import AddressPage from "./pages/Address";
 
 function App() {
   const [searchText, setSearchText] = useState("");
@@ -22,10 +23,7 @@ function App() {
           <Toaster position="top-right" />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route
-              path="/productlistings"
-              element={<Productlistings searchText={searchText} />}
-            />
+            <Route path="/productlistings" element={<Productlistings />} />
             <Route
               path="/productlistings/:categoryId"
               element={<Productlistings />}
@@ -36,6 +34,7 @@ function App() {
             />
             <Route path="/wishlist" element={<WishList />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/addressDetails" element={<AddressPage />} />
           </Routes>
         </BrowserRouter>
       </WishListProvider>

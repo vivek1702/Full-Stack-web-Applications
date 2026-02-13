@@ -5,17 +5,18 @@ import { Link } from "react-router-dom";
 import useCartContext from "../contexts/cartContext";
 import useWishListContext from "../contexts/wishlistContext";
 import toast from "react-hot-toast";
+import { useLocation } from "react-router-dom";
 
-export default function Productlistings({ searchText }) {
+export default function Productlistings() {
   const [wishlistedItems, setWishlistedItems] = useState({});
   const { updateCartItem } = useCartContext();
-  const { allWishListItem, updateWishList, deleteWishListItem } =
-    useWishListContext();
+  const { updateWishList, deleteWishListItem } = useWishListContext();
   const [selectedRating, setselectedRating] = useState(null);
   const [selectSortBy, setSelectSortBy] = useState(null);
   const [givenPrice, setPrice] = useState(100);
   const { categoryId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { data: categories } = useFetch(
     `${import.meta.env.VITE_API_URL}/api/categories`,
@@ -38,17 +39,22 @@ export default function Productlistings({ searchText }) {
     setPrice(Number(event.target.value));
   };
 
+  function handleAddToCart(item) {
+    updateCartItem(item, 1, "Not Selected");
+
+    toast.success("Added to cart 🛒");
+  }
+
   let result = products;
 
-  if (searchText) {
-    result = result.filter((item) => {
-      const search = searchText.toLowerCase();
-      const matchSearch =
-        item.productName.toLowerCase().includes(search) ||
-        item.description.toLowerCase().includes(search);
-      return matchSearch;
-    });
-  }
+  //get search value from nav
+  const queryParams = new URLSearchParams(location.search);
+  const searchText = queryParams.get("search") || "";
+
+  // Now filter products
+  result = products.filter((product) =>
+    product.productName.toLowerCase().includes(searchText.toLowerCase()),
+  );
 
   if (selectedRating !== null) {
     result = result.filter((item) => item.rating > selectedRating);
@@ -197,7 +203,31 @@ export default function Productlistings({ searchText }) {
         {/* RIGHT: Products */}
         <div className="col-md-10">
           {loading ? (
-            <p>loading..</p>
+            <div className="row row-cols-1 row-cols-md-4 g-4">
+              {[...Array(8)].map((_, index) => (
+                <div key={index} className="col">
+                  <div className="card h-100 p-3 placeholder-glow">
+                    {/* Image skeleton */}
+                    <div
+                      className="placeholder w-100 mb-3"
+                      style={{ height: "200px", borderRadius: "8px" }}
+                    ></div>
+
+                    {/* Title skeleton */}
+                    <span className="placeholder col-8 mb-2"></span>
+
+                    {/* Price skeleton */}
+                    <span className="placeholder col-6 mb-3"></span>
+
+                    {/* Button skeleton */}
+                    <span
+                      className="placeholder col-12"
+                      style={{ height: "35px", borderRadius: "6px" }}
+                    ></span>
+                  </div>
+                </div>
+              ))}
+            </div>
           ) : (
             <div className="row row-cols-1 row-cols-md-4 g-4">
               {result.map((item) => (
@@ -262,7 +292,7 @@ export default function Productlistings({ searchText }) {
                     <div className="px-3 pb-3">
                       <button
                         className="btn btn-outline-dark fw-semibold w-100"
-                        onClick={() => updateCartItem(item, 1)}
+                        onClick={() => handleAddToCart(item)}
                       >
                         Add to Cart
                       </button>
