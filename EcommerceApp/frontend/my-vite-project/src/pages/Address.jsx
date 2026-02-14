@@ -41,8 +41,10 @@ export default function AddressPage() {
       body: JSON.stringify(formData),
     });
 
+    //After saving, fetch updated list
     fetchAddresses();
 
+    //clear form data
     setFormData({
       name: "",
       email: "",
@@ -84,6 +86,13 @@ export default function AddressPage() {
           name="address"
           placeholder="address"
           value={formData.address}
+          onChange={handleChange}
+          className="form-control mb-2"
+        />
+        <input
+          name="phone"
+          placeholder="Phone"
+          value={formData.phone}
           onChange={handleChange}
           className="form-control mb-2"
         />
