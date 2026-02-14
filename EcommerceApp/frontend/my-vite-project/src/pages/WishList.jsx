@@ -11,14 +11,15 @@ export default function WishList() {
       <div className="row g-4 justify-content-start">
         {/* Wishlist Card */}
         {allWishListItem.map((item) => (
-          <div className="col-6 col-md-3">
+          <div className="col-6 col-md-3" key={item._id}>
             <div className="card border-0 shadow-sm position-relative h-100">
               {/* Heart icon */}
               <button
                 className="btn position-absolute top-0 end-0 m-2 p-0"
                 style={{ background: "transparent" }}
+                onClick={() => deleteWishListItem(item._id)}
               >
-                <span style={{ fontSize: "18px" }}>❤️</span>
+                <span style={{ fontSize: "18px" }}>❌</span>
               </button>
 
               {/* Product Image */}
@@ -37,7 +38,8 @@ export default function WishList() {
                 <button
                   className="btn btn-secondary w-100 fw-semibold"
                   onClick={() => {
-                    (updateCartItem(item, 1), deleteWishListItem(item._id));
+                    (updateCartItem(item, 1, item.selectedSize || null),
+                      deleteWishListItem(item._id));
                   }}
                 >
                   Move to Cart

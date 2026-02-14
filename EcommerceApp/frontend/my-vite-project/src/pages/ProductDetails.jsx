@@ -168,7 +168,6 @@ export default function ProductDetails() {
           </div>
 
           <div className="d-grid gap-2 mt-3">
-            <button className="btn btn-warning fw-semibold">Buy Now</button>
             <button
               className="btn btn-dark fw-semibold"
               onClick={handleAddToCart}

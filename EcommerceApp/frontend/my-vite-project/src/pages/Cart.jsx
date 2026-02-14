@@ -1,6 +1,8 @@
 import useCartContext from "../contexts/cartContext";
 import useWishListContext from "../contexts/wishlistContext";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Cart() {
   const {
@@ -11,21 +13,28 @@ export default function Cart() {
     deleteCartItem,
   } = useCartContext();
 
-  const { allWishListItem, updateWishList } = useWishListContext();
+  const { updateWishList } = useWishListContext();
 
-  const totalDiscount = allCartItems.reduce((acc, curr) => {
-    const itemCost = Math.floor(
-      curr.quantity * curr.price - curr.price * (curr.discountedPrice / 100),
-    );
-    return acc + itemCost;
+  //calculation of discounted price, total price, delivery fee
+  const totalAfterDiscount = allCartItems.reduce((acc, curr) => {
+    const discountAmount = curr.price * (curr.discountedPrice / 100);
+    const discountedPricePerItem = curr.price - discountAmount;
+    return acc + discountedPricePerItem * curr.quantity;
   }, 0);
-
   const totalPrice = allCartItems.reduce((acc, curr) => {
-    const itemCost = curr.price * curr.quantity;
-    return acc + itemCost;
+    return acc + curr.price * curr.quantity;
   }, 0);
+  const deliveryCharge = allCartItems.length > 0 ? 100 : 0;
+  const finalAmount = totalAfterDiscount + deliveryCharge;
 
-  let deliveryCharge = allCartItems.length > 0 ? 100 : 0;
+  const navigate = useNavigate();
+  function handleCheckout() {
+    if (allCartItems.length === 0) {
+      toast.error("Cart is empty");
+      return;
+    }
+    navigate("/checkout");
+  }
 
   return (
     <div className="container py-4">
@@ -48,8 +57,12 @@ export default function Cart() {
 
                 {/* Product Info */}
                 <div className="col-md-9">
-                  <h6 className="fw-semibold mb-1">{item.productName}</h6>
-
+                  <Link
+                    to={`/productDetails/${item._id}`}
+                    className="text-decoration-none text-dark"
+                  >
+                    <h6 className="fw-semibold mb-1">{item.productName}</h6>
+                  </Link>
                   <div>
                     <span>
                       Selected Size: <strong>{item.selectedSize}</strong>
@@ -130,7 +143,7 @@ export default function Cart() {
 
             <div className="d-flex justify-content-between mb-2 text-success">
               <span>After Discount</span>
-              <span>- ₹{totalDiscount}</span>
+              <span>- ₹{totalAfterDiscount}</span>
             </div>
 
             <div className="d-flex justify-content-between mb-2">
@@ -141,15 +154,25 @@ export default function Cart() {
             <hr />
 
             <div className="d-flex justify-content-between fw-bold fs-6 mb-2">
-              <span>Total Amount</span>
-              <span>₹{totalDiscount + deliveryCharge}</span>
+              <span>Final Amount</span>
+              <span>₹{finalAmount}</span>
             </div>
 
             <p className="text-success small mb-3">
-              You will save ₹{totalDiscount} on this order
+              You will save ₹{totalAfterDiscount} on this order
             </p>
 
-            <button className="btn btn-primary fw-semibold w-100">
+            <button
+              className="btn btn-outline-dark fw-semibold w-100 mb-3"
+              onClick={() => navigate("/addressDetails")}
+            >
+              + Add New Address
+            </button>
+
+            <button
+              className="btn btn-primary fw-semibold w-100"
+              onClick={handleCheckout}
+            >
               PLACE ORDER
             </button>
           </div>

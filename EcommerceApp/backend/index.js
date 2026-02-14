@@ -2,6 +2,7 @@ require("dotenv").config();
 const Products = require("./models/product.model");
 const Category = require("./models/category.model");
 const Address = require("./models/address.model");
+const Orders = require("./models/orders.model");
 const { initializeDB } = require("./db/db.connect");
 const express = require("express");
 const cors = require("cors");
@@ -202,6 +203,36 @@ app.delete("/api/address/:addressId", async (req, res) => {
     }
   } catch (error) {
     res.status(500).json({ error: "unale to fetch data to delete" });
+  }
+});
+
+//read all order data
+app.get("/api/orders", async (req, res) => {
+  try {
+    const orders = await Orders.find().sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ error: "unable to fetch from db" });
+  }
+});
+
+//insert data into order table
+async function addOrdersData(newData) {
+  try {
+    const addedData = new Orders(newData);
+    await addedData.save();
+  } catch (error) {
+    throw error;
+  }
+}
+
+app.post("/api/orders", async (req, res) => {
+  try {
+    const newData = req.body;
+    await addOrdersData(newData);
+    res.status(201).json({ message: "order added successfully" });
+  } catch (error) {
+    res.status(400).json({ error: "unable to add order" });
   }
 });
 

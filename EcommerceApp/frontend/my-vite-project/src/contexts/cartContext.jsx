@@ -62,6 +62,11 @@ export function CartProvider({ children }) {
     );
   }
 
+  // this will clear cart when order
+  function clearCart() {
+    setCartItems([]);
+  }
+
   return (
     <cartContext.Provider
       value={{
@@ -70,6 +75,7 @@ export function CartProvider({ children }) {
         DecreaseQty,
         IncreaseQty,
         deleteCartItem,
+        clearCart,
       }}
     >
       {children}
