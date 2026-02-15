@@ -1,179 +1,130 @@
-🛒 Full-Stack E-Commerce Application
+# 🛒 Full-Stack E-Commerce Application
 
-A fully functional E-Commerce web application built using the MERN stack.
+A fully functional **E-Commerce web application** built using the MERN stack.  
 This project focuses on real-world ecommerce architecture, clean state management, and complete frontend-backend integration.
 
-🌐 Live Demo
-🔗 Frontend (Deployed on Vercel)
+---
 
+## 🌐 Live Demo
+
+### 🔗 Frontend (Deployed on Vercel)
 👉 https://full-stack-web-applications-dsgh.vercel.app/
 
-🔗 Backend APIs (Deployed on Vercel)
+### 🔗 Backend APIs (Deployed on Vercel)
 
-Products API
-👉 https://full-stack-web-applications-6mlh.vercel.app/api/products
+- 🛍️ Products API  
+  👉 https://full-stack-web-applications-6mlh.vercel.app/api/products  
 
-Orders API
-👉 https://full-stack-web-applications-6mlh.vercel.app/api/orders
+- 📦 Orders API  
+  👉 https://full-stack-web-applications-6mlh.vercel.app/api/orders  
 
-🚀 Tech Stack
+---
 
-Frontend
+## 🚀 Tech Stack
 
-React.js
+### 🔹 Frontend
+- React.js
+- Context API (State Management)
+- React Router
+- Bootstrap
+- LocalStorage (Cart persistence)
 
-Context API (State Management)
+### 🔹 Backend
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
 
-React Router
+---
 
-Bootstrap
+## 🔥 Features
 
-LocalStorage (Cart persistence)
+### 🏠 Home Page
+- Responsive Navbar
+- Product Search Functionality
+- Category Filter
+- Price Filter
+- Dynamic Product Listing from Backend
 
-Backend
+### 📄 Product Details Page
+- Product data fetched via API
+- Size selection logic
+- Add to Cart
+- Add to Wishlist
 
-Node.js
+### 🛒 Smart Cart
+- Increase / Decrease Quantity
+- Real-time price recalculation
+- Percentage-based discount logic
+- Delivery charge handling
+- Move to Wishlist
+- Remove from Cart
+- Persistent cart using LocalStorage
+- Cart auto-clears after successful order
 
-Express.js
+### ❤️ Wishlist
+- Add / Remove Products
+- Move to Cart without duplication
 
-MongoDB
+### 🏠 Address Management
+- Add new address
+- Fetch saved addresses
+- Select address during checkout
+- Address snapshot stored in order (immutable order design)
 
-Mongoose
-
-🔥 Features
-🏠 Home Page
-
-Responsive Navbar
-
-Product Search Functionality
-
-Category Filter
-
-Price Filter
-
-Dynamic Product Listing from Backend
-
-📄 Product Details Page
-
-Product data fetched via API
-
-Size selection logic
-
-Add to Cart
-
-Add to Wishlist
-
-🛒 Smart Cart
-
-Increase / Decrease Quantity
-
-Real-time price recalculation
-
-Percentage-based discount logic
-
-Delivery charge handling
-
-Move to Wishlist
-
-Remove from Cart
-
-Persistent cart using LocalStorage
-
-Cart auto-clears after successful order
-
-❤️ Wishlist
-
-Add / Remove Products
-
-Move to Cart without duplication
-
-🏠 Address Management
-
-Add new address
-
-Fetch saved addresses
-
-Select address during checkout
-
-Address snapshot stored in order (immutable order design)
-
-📦 Checkout System
+### 📦 Checkout System
 
 Cart → Address Selection → Order Summary → Place Order
 
-Dynamic total calculation
+- Dynamic total calculation
+- Discount + delivery charge logic
+- Backend validation before order creation
+- Cart clears only after successful API response
 
-Discount + delivery charge logic
+---
 
-Backend validation before order creation
+## 🔐 Backend
 
-Cart clears only after successful API response
+### Models
+- Product Model
+- Address Model
+- Order Model
 
-🔐 Backend APIs
+### REST APIs
+- Fetch products
+- Add product
+- Delete product
+- Fetch addresses
+- Add address
+- Create order
+- Fetch orders
 
-Product Model
+Includes:
+- Proper async/await handling
+- Error management
+- MongoDB integration
 
-Address Model
+---
 
-Order Model
+## 🧠 Architecture Decisions
 
-REST APIs:
+- Used Context API for global cart & wishlist state
+- Avoided direct state mutation
+- Implemented correct discount calculation logic
+- Stored order address snapshot instead of reference
+- Cleared cart only after successful backend response
+- Persistent cart using LocalStorage
 
-Fetch products
+---
 
-Add product
+## ⚙️ Installation & Setup
 
-Delete product
+### 1️⃣ Clone Repository
 
-Fetch addresses
-
-Add address
-
-Create order
-
-Fetch orders
-
-Proper async/await handling and error management implemented.
-
-🧠 Architecture Decisions
-
-Used Context API for global cart & wishlist state
-
-Avoided direct state mutation
-
-Implemented correct discount calculation logic
-
-Stored order address snapshot instead of reference
-
-Cleared cart only after successful backend response
-
-Persistent cart using LocalStorage
-
-1️⃣ Clone Repository
+```bash
 git clone https://github.com/vivek1702/Full-Stack-web-Applications
 cd EcommerceApp
 
-2️⃣ Backend Setup
-cd backend
-npm install
-npm start
-
-
-Make sure to create a .env file with:
-
-MONGO_URI=your_mongodb_connection_string
-PORT=3000
-
-3️⃣ Frontend Setup
-cd frontend/my-vite-project
-npm install
-npm run dev
-
-
-👨‍💻 Author
-
-Vivek Singh
-Full Stack Developer
 
 
 
