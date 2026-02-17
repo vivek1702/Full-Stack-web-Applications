@@ -186,6 +186,25 @@ app.post("/api/address", async (req, res) => {
   }
 });
 
+//update address by address id
+app.put("/api/address/:addressId", async (req, res) => {
+  try {
+    const updatedAddress = await Address.findByIdAndUpdate(
+      req.params.addressId,
+      req.body,
+      { new: true },
+    );
+
+    if (!updatedAddress) {
+      return res.status(404).json({ error: "Address not found" });
+    }
+
+    res.status(200).json(updatedAddress);
+  } catch (error) {
+    res.status(500).json({ error: "Update failed" });
+  }
+});
+
 //delete address from address table
 async function removeMovies(itemId) {
   try {

@@ -2,6 +2,7 @@ import { useState } from "react";
 import useCartContext from "../contexts/cartContext";
 import useFetch from "../useFetch";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
   const [selectedAddress, setSelectedAddress] = useState(null);
@@ -11,6 +12,8 @@ export default function Checkout() {
   const { data: savedAddress, loading } = useFetch(
     `${import.meta.env.VITE_API_URL}/api/address`,
   );
+
+  const navigate = useNavigate();
 
   //price calculation and show into frontend
   const totalPrice = allCartItems.reduce(
@@ -165,7 +168,9 @@ export default function Checkout() {
 
             <button
               className="btn btn-dark w-100 mt-4"
-              onClick={handleOrderPlaced}
+              onClick={() => {
+                (handleOrderPlaced, navigate("/orderSummary"));
+              }}
               disabled={allCartItems.length === 0}
             >
               Place Order
