@@ -99,7 +99,7 @@ export default function AddressPage() {
   }
 
   return (
-    <div className="card shadow-sm p-4 mb-5 border-0">
+    <div className="card shadow-sm p-4 mb-5 border-0 bg-light">
       <h4 className="mb-3">{editId ? "Edit Address" : "Add New Address"}</h4>
 
       <form onSubmit={handleSubmit}>
@@ -160,7 +160,7 @@ export default function AddressPage() {
         </button>
       </form>
 
-      <h2 className="mb-4">Saved Addresses</h2>
+      <h2 className="mb-4 mt-5">Saved Addresses</h2>
 
       <div className="row">
         {addresses.map((item) => (

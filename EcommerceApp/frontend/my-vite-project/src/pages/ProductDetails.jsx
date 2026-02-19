@@ -140,8 +140,20 @@ export default function ProductDetails() {
                 role="button"
                 className="position-absolute top-0 end-0 m-3 fs-4"
                 style={{
+                  top: "18px",
+                  right: "18px",
+                  width: "40px",
+                  height: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "50%",
+                  backdropFilter: "blur(8px)",
+                  background: "rgba(255,255,255,0.6)",
+                  border: "1px solid rgba(255,255,255,0.4)",
                   cursor: "pointer",
-                  color: wishlistedItems[data._id] ? "red" : "#333",
+                  transition: "all 0.3s ease",
+                  color: wishlistedItems[data._id] ? "#e63946" : "#222",
                 }}
                 onClick={(e) => {
                   e.preventDefault();
@@ -167,7 +179,7 @@ export default function ProductDetails() {
             </div>
           </div>
 
-          <div className="d-grid gap-2 mt-3">
+          <div className="d-grid gap-2 mt-4">
             <button
               className="btn btn-dark fw-semibold"
               onClick={handleAddToCart}

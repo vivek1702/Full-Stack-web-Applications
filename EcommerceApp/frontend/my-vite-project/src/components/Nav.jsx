@@ -1,5 +1,5 @@
 import { Link, Navigate } from "react-router-dom";
-import { FaShoppingCart, FaRegHeart } from "react-icons/fa";
+import { FaShoppingCart, FaRegHeart, FaUserCircle } from "react-icons/fa";
 import useWishListContext from "../contexts/wishlistContext";
 import useCartContext from "../contexts/cartContext";
 import { useNavigate } from "react-router-dom";
@@ -17,14 +17,14 @@ export default function Nav({ setSearchText }) {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-white shadow-sm px-4 py-3">
-      <div className="container-fluid">
+    <nav className="navbar navbar-expand-lg bg-white shadow-sm">
+      <div className="container">
         {/* Brand */}
         <Link className="navbar-brand fw-bold fs-4" to="/">
           UrbanWear
         </Link>
 
-        {/* Mobile Toggle Button */}
+        {/* Mobile Toggle */}
         <button
           className="navbar-toggler"
           type="button"
@@ -34,10 +34,9 @@ export default function Nav({ setSearchText }) {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Navbar Content */}
         <div className="collapse navbar-collapse" id="navbarContent">
           {/* Left Links */}
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-4">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link className="nav-link" to="/">
                 Home
@@ -51,10 +50,7 @@ export default function Nav({ setSearchText }) {
           </ul>
 
           {/* Search */}
-          <form
-            className="d-flex mx-auto my-3 my-lg-0"
-            style={{ maxWidth: "350px", width: "100%" }}
-          >
+          <form className="d-flex my-3 my-lg-0 w-100 w-lg-auto mx-lg-3">
             <input
               className="form-control"
               type="search"
@@ -64,15 +60,20 @@ export default function Nav({ setSearchText }) {
           </form>
 
           {/* Right Side */}
-          <div className="d-flex align-items-center gap-4 ms-lg-4">
-            <button className="btn btn-outline-dark btn-sm">Login</button>
+          <div className="d-flex align-items-center gap-3">
+            <Link
+              to="/profile"
+              className="text-decoration-none text-dark d-flex align-items-center gap-1"
+            >
+              <FaUserCircle size={20} />
+              <span className="d-lg-inline d-none">Profile</span>
+            </Link>
 
             <Link
               to="/wishlist"
               className="text-decoration-none text-dark d-flex align-items-center gap-1"
             >
               <FaRegHeart />
-              <span>Wishlist</span>
               <span className="badge bg-dark">{allWishListItem.length}</span>
             </Link>
 
@@ -81,7 +82,6 @@ export default function Nav({ setSearchText }) {
               className="text-decoration-none text-dark d-flex align-items-center gap-1"
             >
               <FaShoppingCart />
-              <span>Cart</span>
               <span className="badge bg-dark">{allCartItems.length}</span>
             </Link>
           </div>
