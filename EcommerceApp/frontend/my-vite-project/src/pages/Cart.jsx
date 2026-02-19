@@ -143,7 +143,7 @@ export default function Cart() {
 
             <div className="d-flex justify-content-between mb-2 text-success">
               <span>After Discount</span>
-              <span>- ₹{totalAfterDiscount}</span>
+              <span>- ₹{Math.round(totalAfterDiscount)}</span>
             </div>
 
             <div className="d-flex justify-content-between mb-2">
@@ -155,7 +155,7 @@ export default function Cart() {
 
             <div className="d-flex justify-content-between fw-bold fs-6 mb-2">
               <span>Final Amount</span>
-              <span>₹{finalAmount}</span>
+              <span>₹{Math.round(finalAmount)}</span>
             </div>
 
             <p className="text-success small mb-3">
