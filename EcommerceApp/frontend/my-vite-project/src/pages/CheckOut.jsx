@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
   const [selectedAddress, setSelectedAddress] = useState(null);
-  const [orderPlaces, setOrderPlaced] = useState(null);
   const [orderStatus] = useState("Confirmed");
   const { allCartItems, clearCart } = useCartContext();
   const { data: savedAddress, loading } = useFetch(
@@ -65,9 +64,11 @@ export default function Checkout() {
       if (!response.ok) {
         throw new Error("Order failed");
       }
-      setOrderPlaced(true);
-      clearCart();
+
+      clearCart(); // ✅ this will empty cart
       toast.success("Order Placed Successfully 🎉");
+
+      navigate("/orderSummary"); // ✅ navigate AFTER success
     } catch (error) {
       toast.error("Something went wrong");
     }
@@ -168,9 +169,7 @@ export default function Checkout() {
 
             <button
               className="btn btn-dark w-100 mt-4"
-              onClick={() => {
-                (handleOrderPlaced, navigate("/orderSummary"));
-              }}
+              onClick={handleOrderPlaced}
               disabled={allCartItems.length === 0}
             >
               Place Order
