@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function AddressPage() {
   const [editId, setEditId] = useState(null);
@@ -50,6 +51,7 @@ export default function AddressPage() {
       }
 
       setEditId(null);
+      toast.success("Address has been updated!");
     } else {
       await fetch(`${import.meta.env.VITE_API_URL}/api/address`, {
         method: "POST",
@@ -58,6 +60,8 @@ export default function AddressPage() {
         },
         body: JSON.stringify(formData),
       });
+      //alert message
+      toast.success("New Address Added");
     }
 
     //After saving, fetch updated list
@@ -187,7 +191,10 @@ export default function AddressPage() {
 
                   <button
                     className="btn btn-outline-danger btn-sm"
-                    onClick={() => handleDelete(item._id)}
+                    onClick={() => {
+                      (handleDelete(item._id),
+                        toast.success("Address Deleted 🗑️"));
+                    }}
                   >
                     Delete
                   </button>

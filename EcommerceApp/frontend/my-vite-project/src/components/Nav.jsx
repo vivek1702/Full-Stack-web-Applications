@@ -18,7 +18,7 @@ export default function Nav({ setSearchText }) {
 
   return (
     <nav className="navbar navbar-expand-lg bg-white shadow-sm">
-      <div className="container">
+      <div className="container-fluid py-2">
         {/* Brand */}
         <Link className="navbar-brand fw-bold fs-4" to="/">
           UrbanWear
@@ -50,7 +50,10 @@ export default function Nav({ setSearchText }) {
           </ul>
 
           {/* Search */}
-          <form className="d-flex my-3 my-lg-0 w-100 w-lg-auto mx-lg-3">
+          <form
+            className="d-flex my-2 my-lg-0 mx-lg-3"
+            style={{ maxWidth: "300px" }}
+          >
             <input
               className="form-control"
               type="search"

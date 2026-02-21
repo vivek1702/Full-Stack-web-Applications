@@ -245,6 +245,19 @@ export default function Productlistings() {
                           style={{ height: "300px", objectFit: "cover" }}
                           alt={item.productName}
                         />
+                        {/* rating */}
+                        <span
+                          className="position-absolute top-0 start-0 m-2 px-2 py-1 rounded"
+                          style={{
+                            backgroundColor: "rgba(0,0,0,0.7)",
+                            color: "white",
+                            fontSize: "12px",
+                          }}
+                        >
+                          ⭐ {item.rating}
+                        </span>
+
+                        {/* wishlist */}
                         <span
                           role="button"
                           className="position-absolute top-0 end-0 m-2"
