@@ -2,6 +2,7 @@
 Meetup_App/BE/.env
 Meetup_App/FE/my-vite-project/.env
 EcommerceApp/backend/.env
+crm-app/backend/.env
 
 # Node modules
 node_modules/
