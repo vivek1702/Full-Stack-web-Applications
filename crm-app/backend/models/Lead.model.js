@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
-const { type } = require("node:os");
 
 const leadSchema = new mongoose.Schema({
   name: { type: String, required: [true, "Lead name is required"] },
   source: {
     type: String,
     required: [true, "Lead source is required"],
-    enums: [
+    enum: [
       "Website",
       "Referral",
       "Cold Call",
@@ -23,7 +22,7 @@ const leadSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    enums: ["New", "Contacted", "Qualified", "Proposal Sent", "Closed"],
+    enum: ["New", "Contacted", "Qualified", "Proposal Sent", "Closed"],
     required: true,
     default: "New",
   },
@@ -54,9 +53,9 @@ const leadSchema = new mongoose.Schema({
   },
 });
 
-leadSchema.pre("save", function (next) {
+// Middleware to update the `updatedAt` field on each save
+leadSchema.pre("save", async function () {
   this.updatedAt = Date.now();
-  next();
 });
 
 module.exports = mongoose.model("Lead", leadSchema);
