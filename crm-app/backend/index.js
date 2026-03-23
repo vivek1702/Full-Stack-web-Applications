@@ -2,6 +2,7 @@ require("dotenv").config();
 const { initalizeDb } = require("./DB/db.connect");
 const Lead = require("./models/Lead.model");
 const SalesAgent = require("./models/SalesAgent.model");
+const Comment = require("./models/Comment.model");
 const express = require("express");
 const cors = require("cors");
 const { default: mongoose } = require("mongoose");
@@ -159,6 +160,117 @@ app.delete("/api/leads/:id", async (req, res) => {
     res.status(200).json({ message: "Lead deleted successfully" });
   } catch (error) {
     res.status(400).json({ error: "invalid request" });
+  }
+});
+
+//desing api for sales agents add and read
+app.post("/api/agents", async (req, res) => {
+  try {
+    const { name, email } = req.body;
+    const emailRegx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const existingEmail = await SalesAgent.findOne({ email });
+
+    if (existingEmail) {
+      return res.status(400).json({
+        error: "email already exists",
+      });
+    }
+
+    if (!emailRegx.test(email)) {
+      return res.status(400).json({
+        error:
+          'Invalid email address. Must contain "@" and a dot in the domain part.',
+      });
+    }
+
+    const savedSalesAgent = await new SalesAgent({ name, email }).save();
+    return res
+      .status(201)
+      .json({ message: "success-201 created", data: savedSalesAgent });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.get("/api/agents", async (req, res) => {
+  try {
+    const salesAgentData = await SalesAgent.find();
+    res.status(200).json(salesAgentData);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//write crud operations for comments model
+app.post("/api/leads/:id/comments", async (req, res) => {
+  try {
+    const leadId = req.params.id;
+    const existinglead = await Lead.findById(leadId);
+    if (!existinglead) {
+      return res.status(404).json({ error: `leads with ${leadId} not found` });
+    }
+
+    //first we will create new comment based on lead id then populate author name in new comment
+    const newComment = await Comment.create({
+      lead: leadId,
+      author: existinglead.salesAgent,
+      commentText: req.body.commentText,
+    });
+
+    const populateComment = await Comment.findById(newComment._id).populate(
+      "author",
+      "name email",
+    );
+
+    res.status(201).json(populateComment);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/leads/:id/comments", async (req, res) => {
+  try {
+    const leadId = req.params.id;
+    const existinglead = await Lead.findById(leadId);
+    if (!existinglead) {
+      return res.status(404).json({ error: `leads with ${leadId} not found` });
+    }
+
+    const comments = await Comment.find({ lead: leadId }).populate(
+      "author",
+      "name email",
+    );
+    res.status(200).json(comments);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/report/last-week", async (req, res) => {
+  try {
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    //filter leads that where closed in last seven days
+    const recentleads = await Lead.find({
+      closedAt: { $gte: sevenDaysAgo },
+    }).sort({ closedAt: -1 });
+
+    res.status(200).json(recentleads);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/report/pipeline", async (req, res) => {
+  try {
+    const leadsInPipeline = await Lead.find({
+      status: { $ne: "Closed" },
+    });
+    res.status(200).json({ totalLeadsInPipeline: leadsInPipeline.length });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
