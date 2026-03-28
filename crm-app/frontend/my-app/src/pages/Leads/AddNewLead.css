@@ -1,0 +1,99 @@
+/* FORM CONTAINER */
+.success-alert {
+  background-color: #dcfce7;
+  color: #166534;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* CARD */
+.form-card {
+  width: 100%;
+  height: 100%;
+  max-width: 600px;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* FORM */
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* FORM GROUP */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* LABEL */
+.form-group label {
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+/* INPUT & SELECT */
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+/* FOCUS */
+.form-group input:focus,
+.form-group select:focus {
+  border-color: #2563eb;
+}
+
+/* BUTTON */
+.submit-btn {
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: #16a34a;
+  transform: translateY(-1px);
+}
+
+/* REACT SELECT FIX */
+.react-select {
+  font-size: 14px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .form-card {
+    padding: 15px;
+  }
+
+  .submit-btn {
+    width: 100%;
+  }
+}

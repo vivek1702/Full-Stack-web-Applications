@@ -1,0 +1,191 @@
+import useFetch from "../../useFetch";
+import "./LeadManagement.css";
+import { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+
+export default function LeadManagement() {
+  const [commentText, setCommentText] = useState("");
+  const [selectedAgent, setSelectedAgent] = useState("");
+  const { id } = useParams();
+  const {
+    data: leads,
+    loading: leadsLoading,
+    error: leadsError,
+  } = useFetch(`http://localhost:3000/api/leads`);
+
+  const {
+    data: agents,
+    loading: agentLoading,
+    error: agentError,
+  } = useFetch(`http://localhost:3000/api/agents`);
+
+  const {
+    data: comments,
+    loading: commentLoading,
+    error: commentError,
+  } = useFetch(`http://localhost:3000/api/leads/${id}/comments`);
+
+  const leadData = leads.find((item) => item._id === id);
+  const salesAgentData = agents.find(
+    (item) => item._id === leadData?.salesAgent,
+  );
+
+  const commentData = comments.filter((item) => item.lead === id);
+
+  function handleDateTime(givenDate) {
+    const isoData = givenDate;
+    const date = new Date(isoData);
+    const formattedDate = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+
+    return formattedDate;
+  }
+
+  if (!leadData) {
+    return <div>No Lead Found</div>;
+  }
+
+  if (leadsLoading || agentLoading || commentLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (leadsError || agentError || commentError) {
+    return <div>Error loading data</div>;
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const newCommentData = {
+      lead: id,
+      author: selectedAgent,
+      commentText: commentText,
+    };
+
+    console.log("Payload:", newCommentData);
+
+    try {
+      const responseData = await fetch(
+        `http://localhost:3000/api/leads/${id}/comments`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newCommentData),
+        },
+      );
+
+      const result = await responseData.json();
+      console.log("Success:", result);
+
+      //clear text
+      setCommentText("");
+      setSelectedAgent("");
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  return (
+    <div className="app-layout">
+      {/* Sidebar */}
+      <aside className="sidebar">
+        <ul className="sidebar-list">
+          <li className="sidebar-item">
+            <Link to="/">← Dashboard</Link>
+          </li>
+        </ul>
+      </aside>
+
+      {/* Main */}
+      <main className="main-content">
+        <header className="header">
+          <h1>{leadData.name}</h1>
+        </header>
+
+        <div className="lead-grid">
+          {/* left side */}
+          <div className="left-section">
+            {/* Lead details */}
+            <div className="detail-card">
+              <h2>Lead Details</h2>
+
+              <p>
+                <strong>Name:</strong> {leadData.name}
+              </p>
+              <p>
+                <strong>Agent:</strong> {salesAgentData?.name}
+              </p>
+              <p>
+                <strong>Source:</strong> {leadData.source}
+              </p>
+              <p>
+                <strong>Status:</strong> {leadData.status}
+              </p>
+              <p>
+                <strong>Priority:</strong> {leadData.priority}
+              </p>
+              <p>
+                <strong>Time to Close:</strong> {leadData.timeToClose}
+              </p>
+            </div>
+
+            {/* lead edit button */}
+            <Link to={`/editleads/${id}`}>
+              <button className="add-btn edit-btn">Edit Lead</button>
+            </Link>
+          </div>
+
+          {/* right side */}
+          <div className="right-section">
+            <div className="form-card">
+              <h3>Add Comment</h3>
+
+              <form onSubmit={handleSubmit} className="comment-form">
+                <select
+                  value={selectedAgent}
+                  onChange={(e) => setSelectedAgent(e.target.value)}
+                >
+                  <option value="">Select Agent</option>
+                  {agents.map((item) => (
+                    <option key={item._id} value={item._id}>
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+
+                <textarea
+                  rows="4"
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  placeholder="Write a comment..."
+                />
+
+                <button type="submit" className="add-btn">
+                  Add Comment
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {/* comment lists view */}
+        <div className="comments-card">
+          <h2>Comments</h2>
+
+          {commentData.map((item) => (
+            <div className="comment-box" key={item._id}>
+              <h4>{item.author.name}</h4>
+              <p>{handleDateTime(item.createdAt)}</p>
+              <p>{item.commentText}</p>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
+  );
+}

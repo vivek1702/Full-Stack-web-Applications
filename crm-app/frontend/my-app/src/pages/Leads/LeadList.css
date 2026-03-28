@@ -1,0 +1,97 @@
+/* FILTERS */
+.filters-section {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  margin-top: 10px;
+}
+
+.filter-group label {
+  margin-right: 10px;
+}
+
+/* TABLE */
+.table-container {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.leads-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.leads-table th,
+.leads-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.leads-table th {
+  background-color: #f9fafb;
+  font-size: 14px;
+}
+
+.leads-table tr:hover {
+  background-color: #f3f4f6;
+}
+
+/* CLICKABLE NAME */
+.table-link {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.table-link:hover {
+  text-decoration: underline;
+}
+
+/* ADD BUTTON SECTION */
+
+.add-section {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+/* BUTTON */
+.add-btn {
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  padding: 12px 24px; /* wider */
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* HOVER */
+.add-btn:hover {
+  background-color: #16a34a;
+  transform: translateY(-1px);
+}
+
+/* CLICK */
+.add-btn:active {
+  transform: scale(0.96);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .leads-table {
+    font-size: 12px;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+}

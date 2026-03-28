@@ -3,6 +3,7 @@ const { initalizeDb } = require("./DB/db.connect");
 const Lead = require("./models/Lead.model");
 const SalesAgent = require("./models/SalesAgent.model");
 const Comment = require("./models/Comment.model");
+const Tag = require("./models/Tags.model");
 const express = require("express");
 const cors = require("cors");
 const { default: mongoose } = require("mongoose");
@@ -206,15 +207,23 @@ app.get("/api/agents", async (req, res) => {
 app.post("/api/leads/:id/comments", async (req, res) => {
   try {
     const leadId = req.params.id;
+    const newData = req.body;
     const existinglead = await Lead.findById(leadId);
+    const existingAuthorId = await SalesAgent.findById(newData.author);
     if (!existinglead) {
       return res.status(404).json({ error: `leads with ${leadId} not found` });
+    }
+
+    if (!existingAuthorId) {
+      return res
+        .status(404)
+        .json({ error: `author with ${newData.author} not found` });
     }
 
     //first we will create new comment based on lead id then populate author name in new comment
     const newComment = await Comment.create({
       lead: leadId,
-      author: existinglead.salesAgent,
+      author: existingAuthorId._id,
       commentText: req.body.commentText,
     });
 
@@ -247,6 +256,7 @@ app.get("/api/leads/:id/comments", async (req, res) => {
   }
 });
 
+//reports api calls
 app.get("/api/report/last-week", async (req, res) => {
   try {
     const sevenDaysAgo = new Date();
@@ -271,6 +281,46 @@ app.get("/api/report/pipeline", async (req, res) => {
     res.status(200).json({ totalLeadsInPipeline: leadsInPipeline.length });
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+//tag api calls
+app.post("/api/tags", async (req, res) => {
+  try {
+    const newTag = req.body;
+
+    const savedTag = await new Tag(newTag).save();
+
+    res.status(201).json({
+      message: "Tag created successfully",
+      data: savedTag,
+    });
+  } catch (error) {
+    // Handle duplicate tag (unique constraint)
+    if (error.code === 11000) {
+      return res.status(400).json({
+        error: "Tag already exists",
+      });
+    }
+
+    res.status(500).json({
+      error: error.message,
+    });
+  }
+});
+
+app.get("/api/tags", async (req, res) => {
+  try {
+    const tags = await Tag.find().sort({ createdAt: -1 });
+
+    res.status(200).json({
+      count: tags.length,
+      data: tags,
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: error.message,
+    });
   }
 });
 

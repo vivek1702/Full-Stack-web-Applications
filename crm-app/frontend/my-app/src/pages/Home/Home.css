@@ -1,0 +1,273 @@
+/* RESET */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9fafb;
+}
+
+/* LAYOUT */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 20%;
+  min-width: 220px;
+  background-color: #1f2937; /* softer dark (better than pure black) */
+  color: white;
+  padding: 20px 0; /* remove side padding for better centering */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center horizontally */
+}
+
+/* LIST */
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+/* ITEM */
+.sidebar-item {
+  margin: 10px 0; /* reduced gap */
+  text-align: center;
+}
+
+/* LINK */
+.sidebar-item a {
+  display: block;
+  padding: 10px 0;
+  color: #d1d5db; /* softer white */
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+/* HOVER */
+.sidebar-item a:hover {
+  color: #22c55e;
+  background-color: #374151;
+  border-radius: 6px;
+}
+
+/* MAIN */
+.main-content {
+  width: 80%;
+  padding: 20px;
+}
+
+/* HEADER */
+.header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* CARD */
+.dashboard-card {
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-section {
+  width: 70%;
+}
+
+/* LEADS */
+.lead-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.lead-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f3f4f6;
+  border-radius: 6px;
+  text-decoration: none;
+  color: black;
+  transition: all 0.2s ease;
+  cursor: pointer; /* IMPORTANT */
+}
+
+.lead-item:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+.arrow {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* STATUS GRID */
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px; /* reduced gap */
+  margin-top: 10px;
+}
+
+/* STATUS CARD */
+.status-card {
+  background: #f9fafb;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  border: 1px solid #e5e7eb;
+  transition: 0.2s;
+}
+
+/* TEXT INSIDE CARD */
+.status-card p {
+  margin: 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.status-card h3 {
+  margin: 5px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* HOVER (subtle) */
+.status-card:hover {
+  transform: translateY(-2px);
+}
+
+/* HIDE RADIO BUTTON */
+.hidden-radio {
+  display: none;
+}
+
+/* FILTER LIST */
+.filter-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* FILTER BUTTON */
+.filter-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* HOVER EFFECT */
+.filter-btn:hover {
+  background-color: #d1d5db;
+}
+
+/* ACTIVE STATE */
+.filter-btn.active {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 500;
+}
+
+/* OPTIONAL: slight click effect */
+.filter-btn:active {
+  transform: scale(0.95);
+}
+
+/* BUTTON */
+.add-btn {
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  padding: 12px 24px; /* wider */
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+/* HOVER */
+.add-btn:hover {
+  background-color: #16a34a;
+  transform: translateY(-1px);
+}
+
+/* CLICK */
+.add-btn:active {
+  transform: scale(0.96);
+}
+
+/* SECTION SPACING */
+.section {
+  margin-bottom: 30px;
+}
+
+/* HEADER ROW (Leads + Button) */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* ========================= */
+/* 📱 RESPONSIVE DESIGN */
+/* ========================= */
+
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .dashboard-card {
+    flex-direction: column;
+  }
+
+  .left-section {
+    width: 100%;
+  }
+
+  .right-section {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+
+  .lead-list {
+    grid-template-columns: 1fr;
+  }
+
+  .status-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
