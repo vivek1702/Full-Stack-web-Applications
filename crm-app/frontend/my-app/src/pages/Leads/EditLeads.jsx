@@ -22,14 +22,11 @@ export function EditLeads() {
     error: leadsError,
   } = useFetch(`http://localhost:3000/api/leads`);
 
-  console.log(leads);
   const {
     data: agents,
     loading: agentLoading,
     error: agentError,
   } = useFetch(`http://localhost:3000/api/agents`);
-
-  console.log(agents);
 
   const {
     data: tags,
@@ -38,7 +35,7 @@ export function EditLeads() {
   } = useFetch(`http://localhost:3000/api/tags`);
 
   //check if leads id in leads data
-  const leadsData = leads.find((item) => item._id === id);
+  const leadsData = leads?.find((item) => item._id === id);
 
   useEffect(() => {
     if (leadsData) {
@@ -83,15 +80,15 @@ export function EditLeads() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     const newLeadData = {
       name: leadName,
       source: leadSource,
       salesAgent: salesAgents,
       status: leadStatus,
-      tags: selectedTags,
-      timeToClose: selectTimetoClose,
+      tags: selectedTags.map((item) => item.value),
+      timeToClose: Number(selectTimetoClose),
       priority: leadPriority,
+      ...(leadStatus === "Closed" && { closedAt: new Date() }),
     };
 
     try {

@@ -7,9 +7,9 @@ import { Link, useParams } from "react-router-dom";
 export default function AddNewLead() {
   const [leadName, setLeadName] = useState("");
   const [leadSource, setLeadSource] = useState("");
-  const [salesAgents, setsalesAgents] = useState("");
+  const [selectedSalesAgents, setsalesAgents] = useState(null);
   const [leadStatus, setleadStatus] = useState("");
-  const [leadPriority, setLeadPriority] = useState("");
+  const [selectedLeadPriority, setLeadPriority] = useState("Medium");
   const [selectTimetoClose, setselectTimetoClose] = useState(1);
   const [selectedTags, setselectedTags] = useState([]);
   const [successMsg, setSuccessMsg] = useState("");
@@ -56,11 +56,12 @@ export default function AddNewLead() {
     const newLeadData = {
       name: leadName,
       source: leadSource,
-      salesAgent: salesAgents,
+      salesAgent: selectedSalesAgents,
       status: leadStatus,
-      tags: selectedTags,
-      timeToClose: selectTimetoClose,
-      priority: leadPriority,
+      tags: selectedTags.map((item) => item.value),
+      timeToClose: Number(selectTimetoClose),
+      priority: selectedLeadPriority,
+      ...(leadStatus === "Closed" && { closedAt: new Date() }),
     };
 
     console.log(newLeadData);
@@ -73,6 +74,10 @@ export default function AddNewLead() {
       });
 
       const result = await response.json();
+      if (!response.ok) {
+        console.error(result);
+        return;
+      }
       console.log("Success:", result);
       setSuccessMsg("Lead added successfully!");
 
@@ -81,7 +86,6 @@ export default function AddNewLead() {
       }, 3000);
 
       //clear form data
-      window.location.reload();
       setLeadName("");
       setLeadSource("");
       setsalesAgents("");
@@ -138,10 +142,10 @@ export default function AddNewLead() {
               <div className="form-group">
                 <label>Sales Agent</label>
                 <select
-                  value={salesAgents}
+                  value={selectedSalesAgents}
                   onChange={(e) => setsalesAgents(e.target.value)}
                 >
-                  {agents.map((item) => (
+                  {agents?.map((item) => (
                     <option key={item._id} value={item._id}>
                       {item.name}
                     </option>
@@ -166,7 +170,7 @@ export default function AddNewLead() {
               <div className="form-group">
                 <label>Priority</label>
                 <select
-                  value={leadPriority}
+                  value={selectedLeadPriority}
                   onChange={(e) => setLeadPriority(e.target.value)}
                 >
                   {Givenpriority.map((item) => (
@@ -193,9 +197,7 @@ export default function AddNewLead() {
                   options={tagsOptions}
                   className="react-select"
                   classNamePrefix="select"
-                  onChange={(selected) =>
-                    setselectedTags(selected.map((item) => item.label))
-                  }
+                  onChange={(selected) => setselectedTags(selected)}
                 />
               </div>
 

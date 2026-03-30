@@ -114,28 +114,28 @@ app.put("/api/leads/:id", async (req, res) => {
 
     //check if given data is correct for status and source
     const allowedStatus = Lead.schema.path("status").enumValues;
-    if (!allowedStatus.includes(updateData.status)) {
+    if (updateData.status && !allowedStatus.includes(updateData.status)) {
       return res.status(400).json({
         error: `invalid input: 'status' must be one of ${JSON.stringify(allowedStatus.join(", "))}`,
       });
     }
 
     const allowedSource = Lead.schema.path("source").enumValues;
-    if (!allowedSource.includes(updateData.source)) {
+    if (updateData.source && !allowedSource.includes(updateData.source)) {
       return res.status(400).json({
-        error: `invalid input: 'source' must be one of ${JSON.stringify(allowedSource.join("", ""))}`,
+        error: `invalid input: 'source' must be one of ${JSON.stringify(allowedSource.join(", "))}`,
       });
     }
 
     const updateLead = await Lead.findByIdAndUpdate(id, updateData, {
-      new: true,
+      returnDocument: "after",
       runValidators: true,
     });
 
     //show updated data
     res.status(200).json(updateLead);
   } catch (error) {
-    res.status(400).json({ error: "invalid request" });
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -263,8 +263,9 @@ app.get("/api/report/last-week", async (req, res) => {
     sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
     //filter leads that where closed in last seven days
+    // closedAt: { $gte: sevenDaysAgo },
     const recentleads = await Lead.find({
-      closedAt: { $gte: sevenDaysAgo },
+      closedAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) },
     }).sort({ closedAt: -1 });
 
     res.status(200).json(recentleads);
@@ -279,6 +280,60 @@ app.get("/api/report/pipeline", async (req, res) => {
       status: { $ne: "Closed" },
     });
     res.status(200).json({ totalLeadsInPipeline: leadsInPipeline.length });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/report/closed", async (req, res) => {
+  try {
+    const leadsClosed = await Lead.find({
+      status: { $nin: ["New", "Contacted", "Qualified", "Proposal Sent"] },
+    });
+    res
+      .status(200)
+      .json({ totalLeadsClosed: leadsClosed.length, totalLeads: leadsClosed });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/report/agent-closed-leads", async (req, res) => {
+  try {
+    const result = await Lead.aggregate([
+      { $match: { status: "Closed" } },
+      { $group: { _id: "$salesAgent", closedLeads: { $sum: 1 } } },
+      {
+        $lookup: {
+          from: "sales agents",
+          localField: "_id",
+          foreignField: "_id",
+          as: "agent",
+        },
+      },
+      { $unwind: "$agent" },
+      {
+        $project: {
+          _id: 0,
+          agentName: "$agent.name",
+          closedLeads: 1,
+        },
+      },
+    ]);
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get("/api/report/leadsStatus-distrubition", async (req, res) => {
+  try {
+    const result = await Lead.aggregate([
+      { $group: { _id: "$status", count: { $sum: 1 } } },
+      { $project: { _id: 0, status: "$_id", count: 1 } },
+    ]);
+    res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

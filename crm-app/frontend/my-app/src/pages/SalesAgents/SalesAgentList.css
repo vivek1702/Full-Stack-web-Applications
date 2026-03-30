@@ -1,0 +1,103 @@
+/* Layout */
+.app-layout {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #1f2937;
+  color: white;
+  padding: 20px;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-item a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f9fafb;
+}
+
+/* Header */
+.header h1 {
+  margin-bottom: 20px;
+}
+
+/* Section */
+.agent-section {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Top header row */
+.agent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.add-agent-btn {
+  background-color: #22c55e;
+  color: white;
+  border: none;
+  padding: 12px 24px; /* wider */
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.add-agent-btn:hover {
+  background-color: #16a34a;
+  transform: translateY(-1px);
+}
+
+/* Agent List */
+.agent-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+/* Card */
+.agent-card {
+  background-color: #f3f4f6;
+  padding: 15px;
+  border-radius: 8px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.agent-card:hover {
+  background-color: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+/* Text */
+.agent-name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.agent-email {
+  font-size: 14px;
+  color: #6b7280;
+}

@@ -41,10 +41,10 @@ export default function Home() {
             <Link to="/leadLists">Leads</Link>
           </li>
           <li className="sidebar-item">
-            <Link to="/">Sales Agent</Link>
+            <Link to="/salesAgentList">Sales Agent</Link>
           </li>
           <li className="sidebar-item">
-            <Link to="/">Reports</Link>
+            <Link to="/reports">Reports</Link>
           </li>
           <li className="sidebar-item">
             <Link to="/">Settings</Link>
