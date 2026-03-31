@@ -20,19 +20,19 @@ export function EditLeads() {
     data: leads,
     loading: leadsLoading,
     error: leadsError,
-  } = useFetch(`http://localhost:3000/api/leads`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/leads`);
 
   const {
     data: agents,
     loading: agentLoading,
     error: agentError,
-  } = useFetch(`http://localhost:3000/api/agents`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/agents`);
 
   const {
     data: tags,
     loading: tagLoading,
     error: tagError,
-  } = useFetch(`http://localhost:3000/api/tags`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/tags`);
 
   //check if leads id in leads data
   const leadsData = leads?.find((item) => item._id === id);
@@ -92,11 +92,14 @@ export function EditLeads() {
     };
 
     try {
-      const response = await fetch(`http://localhost:3000/api/leads/${id}`, {
-        method: "PUT",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(newLeadData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/leads/${id}`,
+        {
+          method: "PUT",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(newLeadData),
+        },
+      );
 
       const result = await response.json();
       console.log("Success:", result);

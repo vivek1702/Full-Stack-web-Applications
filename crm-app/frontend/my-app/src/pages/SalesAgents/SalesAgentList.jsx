@@ -7,7 +7,7 @@ export default function SalesAgentList() {
     data: salesAgent,
     loading,
     error,
-  } = useFetch(`http://localhost:3000/api/agents`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/agents`);
 
   return (
     <div className="app-layout">

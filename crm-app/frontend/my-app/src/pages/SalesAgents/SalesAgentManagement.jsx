@@ -15,11 +15,14 @@ export default function SalesAgentManagement() {
         email: salesAgentEmail,
       };
 
-      const response = await fetch(`http://localhost:3000/api/agents`, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(newSalesAgent),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/agents`,
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(newSalesAgent),
+        },
+      );
 
       const result = await response.json();
       console.log("Success:", result);

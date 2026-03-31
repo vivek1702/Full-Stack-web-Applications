@@ -13,13 +13,13 @@ export default function LeadList() {
     data: leads,
     loading: leadsLoading,
     error: leadsError,
-  } = useFetch(`http://localhost:3000/api/leads`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/leads`);
 
   const {
     data: agents,
     loading: agentLoading,
     error: agentError,
-  } = useFetch(`http://localhost:3000/api/agents`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/agents`);
 
   const leadStatus = [
     "New",

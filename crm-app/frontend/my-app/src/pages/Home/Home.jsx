@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 export default function Home() {
   const [selectedLead, setSelectedLead] = useState("All");
 
-  const { data, loading, error } = useFetch(`http://localhost:3000/api/leads`);
+  const { data, loading, error } = useFetch(
+    `${import.meta.env.VITE_API_BASE_URL}/api/leads`,
+  );
   console.log(data);
 
   const leadStatus = [

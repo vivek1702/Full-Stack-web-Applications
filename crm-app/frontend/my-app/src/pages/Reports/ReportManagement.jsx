@@ -23,22 +23,22 @@ ChartJS.register(
 
 export default function ReportManagement() {
   const { data: pipelineLeads } = useFetch(
-    `http://localhost:3000/api/report/pipeline`,
+    `${import.meta.env.VITE_API_BASE_URL}/api/report/pipeline`,
   );
   const { data: closedLeads } = useFetch(
-    `http://localhost:3000/api/report/closed`,
+    `${import.meta.env.VITE_API_BASE_URL}/api/report/closed`,
   );
 
   const { data: closedByAgents } = useFetch(
-    `http://localhost:3000/api/report/agent-closed-leads`,
+    `${import.meta.env.VITE_API_BASE_URL}/api/report/agent-closed-leads`,
   );
 
   const { data: statusDistribution } = useFetch(
-    `http://localhost:3000/api/report/leadsStatus-distrubition`,
+    `${import.meta.env.VITE_API_BASE_URL}/api/report/leadsStatus-distrubition`,
   );
 
   const { data: lastWeekClosed } = useFetch(
-    `http://localhost:3000/api/report/last-week`,
+    `${import.meta.env.VITE_API_BASE_URL}/api/report/last-week`,
   );
 
   const leadsData = {

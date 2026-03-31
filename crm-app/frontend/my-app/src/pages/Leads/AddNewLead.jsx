@@ -18,13 +18,13 @@ export default function AddNewLead() {
     data: agents,
     loading: agentLoading,
     error: agentError,
-  } = useFetch(`http://localhost:3000/api/agents`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/agents`);
 
   const {
     data: tags,
     loading: tagLoading,
     error: tagError,
-  } = useFetch(`http://localhost:3000/api/tags`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/tags`);
 
   const tagsOptions = tags?.data?.map((item) => ({
     value: item._id,
@@ -67,11 +67,14 @@ export default function AddNewLead() {
     console.log(newLeadData);
 
     try {
-      const response = await fetch(`http://localhost:3000/api/leads`, {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(newLeadData),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/leads`,
+        {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(newLeadData),
+        },
+      );
 
       const result = await response.json();
       if (!response.ok) {

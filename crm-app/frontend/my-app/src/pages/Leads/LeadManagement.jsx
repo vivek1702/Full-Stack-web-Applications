@@ -11,19 +11,19 @@ export default function LeadManagement() {
     data: leads,
     loading: leadsLoading,
     error: leadsError,
-  } = useFetch(`http://localhost:3000/api/leads`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/leads`);
 
   const {
     data: agents,
     loading: agentLoading,
     error: agentError,
-  } = useFetch(`http://localhost:3000/api/agents`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/agents`);
 
   const {
     data: comments,
     loading: commentLoading,
     error: commentError,
-  } = useFetch(`http://localhost:3000/api/leads/${id}/comments`);
+  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/leads/${id}/comments`);
 
   const leadData = leads.find((item) => item._id === id);
   const salesAgentData = agents.find(
@@ -70,7 +70,7 @@ export default function LeadManagement() {
 
     try {
       const responseData = await fetch(
-        `http://localhost:3000/api/leads/${id}/comments`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/leads/${id}/comments`,
         {
           method: "POST",
           headers: {
