@@ -12,18 +12,30 @@ body {
   position: relative;
 }
 
-/* SIDEBAR */
+/* ========================= */
+/* SIDEBAR                   */
+/* ========================= */
+
+/* Mobile first: fixed, hidden off-screen */
 .sidebar {
-  width: 20%;
-  min-width: 220px;
+  width: 250px;
   background-color: #1f2937;
   color: white;
   padding: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 9999;
-  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 10000;
+}
+
+.sidebar.open {
+  transform: translateX(0) !important;
 }
 
 /* LIST */
@@ -36,7 +48,6 @@ body {
 /* ITEM */
 .sidebar-item {
   margin: 10px 0;
-  /* reduced gap */
   text-align: center;
 }
 
@@ -45,7 +56,6 @@ body {
   display: block;
   padding: 10px 0;
   color: #d1d5db;
-  /* softer white */
   text-decoration: none;
   font-weight: 500;
   transition: 0.2s;
@@ -58,16 +68,30 @@ body {
   border-radius: 6px;
 }
 
-/* MAIN */
+/* ========================= */
+/* OVERLAY                   */
+/* ========================= */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+}
+
+/* ========================= */
+/* MAIN CONTENT              */
+/* ========================= */
 .main-content {
-  width: 80%;
+  width: 100%;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 /* HEADER */
 .header {
   margin-bottom: 20px;
   text-align: center;
+  position: relative;
 }
 
 /* CARD */
@@ -81,7 +105,7 @@ body {
 }
 
 .left-section {
-  width: 70%;
+  width: 100%;
 }
 
 /* LEADS */
@@ -104,7 +128,6 @@ body {
   color: black;
   transition: all 0.2s ease;
   cursor: pointer;
-  /* IMPORTANT */
 }
 
 .lead-item:hover {
@@ -122,7 +145,6 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  /* reduced gap */
   margin-top: 10px;
 }
 
@@ -136,7 +158,6 @@ body {
   transition: 0.2s;
 }
 
-/* TEXT INSIDE CARD */
 .status-card p {
   margin: 0;
   font-size: 12px;
@@ -149,7 +170,6 @@ body {
   font-weight: 600;
 }
 
-/* HOVER (subtle) */
 .status-card:hover {
   transform: translateY(-2px);
 }
@@ -179,30 +199,26 @@ body {
   transition: all 0.2s ease;
 }
 
-/* HOVER EFFECT */
 .filter-btn:hover {
   background-color: #d1d5db;
 }
 
-/* ACTIVE STATE */
 .filter-btn.active {
   background-color: #2563eb;
   color: white;
   font-weight: 500;
 }
 
-/* OPTIONAL: slight click effect */
 .filter-btn:active {
   transform: scale(0.95);
 }
 
-/* BUTTON */
+/* ADD BUTTON */
 .add-btn {
   background-color: #22c55e;
   color: white;
   border: none;
   padding: 12px 24px;
-  /* wider */
   border-radius: 8px;
   cursor: pointer;
   font-size: 15px;
@@ -210,23 +226,20 @@ body {
   transition: all 0.2s ease;
 }
 
-/* HOVER */
 .add-btn:hover {
   background-color: #16a34a;
   transform: translateY(-1px);
 }
 
-/* CLICK */
 .add-btn:active {
   transform: scale(0.96);
 }
 
-/* SECTION SPACING */
+/* SECTION */
 .section {
   margin-bottom: 30px;
 }
 
-/* HEADER ROW (Leads + Button) */
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -234,7 +247,7 @@ body {
   margin-bottom: 15px;
 }
 
-/* MENU BUTTON */
+/* MENU BUTTON - hidden on desktop */
 .menu-btn {
   display: none;
   font-size: 22px;
@@ -244,50 +257,44 @@ body {
   margin-bottom: 10px;
 }
 
-/* OVERLAY */
-.overlay {
-  display: none;
-  z-index: 999;
-}
-
 /* ========================= */
-/* 📱 RESPONSIVE DESIGN */
+/* DESKTOP (min-width: 769px)*/
 /* ========================= */
-
-@media (max-width: 768px) {
-  .menu-btn {
-    display: block;
-  }
-
+@media (min-width: 769px) {
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100vh;
-
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-
-    background-color: #1f2937;
-    z-index: 9999;
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none !important;
+    width: 220px;
+    min-width: 220px;
+    height: auto;
+    min-height: 100vh;
+    transition: none;
+    z-index: auto;
+    flex-shrink: 0;
   }
 
-  .sidebar.open {
-    transform: translateX(0);
+  .main-content {
+    flex: 1;
+    width: auto;
+  }
+
+  .menu-btn {
+    display: none;
   }
 
   .overlay {
-    display: block;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 999;
+    display: none !important;
   }
+}
 
-
-  .main-content {
-    width: 100%;
+/* ========================= */
+/* MOBILE (max-width: 768px) */
+/* ========================= */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
   }
 
   .section-header {
@@ -302,12 +309,6 @@ body {
 
   .left-section {
     width: 100%;
-  }
-
-  .right-section {
-    width: 100%;
-    justify-content: center;
-    margin-bottom: 20px;
   }
 
   .add-btn {

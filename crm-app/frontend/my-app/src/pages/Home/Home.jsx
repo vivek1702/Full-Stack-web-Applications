@@ -1,6 +1,6 @@
 import useFetch from "../../useFetch";
 import "./Home.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -10,7 +10,6 @@ export default function Home() {
   const { data, loading, error } = useFetch(
     `${import.meta.env.VITE_API_BASE_URL}/api/leads`,
   );
-  console.log(data);
 
   const leadStatus = [
     "New",
@@ -25,43 +24,38 @@ export default function Home() {
       ? data
       : data.filter((item) => item.status === selectedLead);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  //console.log(selectedLead);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="app-layout">
-      {/* sidebar */}
+      {/* SIDEBAR — always first in DOM */}
       <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <ul className="sidebar-list">
           <li className="sidebar-item">
-            <Link to="/leadLists">Leads</Link>
+            <Link to="/leadLists" onClick={() => setIsSidebarOpen(false)}>
+              Leads
+            </Link>
           </li>
           <li className="sidebar-item">
-            <Link to="/salesAgentList">Sales Agent</Link>
+            <Link to="/salesAgentList" onClick={() => setIsSidebarOpen(false)}>
+              Sales Agent
+            </Link>
           </li>
           <li className="sidebar-item">
-            <Link to="/reports">Reports</Link>
+            <Link to="/reports" onClick={() => setIsSidebarOpen(false)}>
+              Reports
+            </Link>
           </li>
           <li className="sidebar-item">
-            <Link to="/">Settings</Link>
+            <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+              Settings
+            </Link>
           </li>
         </ul>
       </aside>
 
-      {/* overlay OUTSIDE */}
-      {isSidebarOpen && (
-        <div className="overlay" onClick={() => setIsSidebarOpen(false)}></div>
-      )}
-
-      {/* main-content */}
-
+      {/* MAIN CONTENT */}
       <main className="main-content">
         <header className="header">
           <button
@@ -72,10 +66,10 @@ export default function Home() {
           </button>
           <h1>Anvaya CRM Dashboard</h1>
         </header>
+
         <div className="dashboard-card">
-          {/* card left section */}
           <div className="left-section">
-            {/* leads */}
+            {/* LEADS */}
             <div className="section">
               <div className="section-header">
                 <h2>Leads</h2>
@@ -94,7 +88,8 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-            {/* status */}
+
+            {/* STATUS */}
             <div className="section">
               <h2>Lead Status</h2>
               <div className="status-grid">
@@ -107,63 +102,64 @@ export default function Home() {
               </div>
             </div>
 
-            {/* filters */}
+            {/* FILTERS */}
             <div className="section">
               <h2>Quick Filter:</h2>
-              <div>
-                <ul className="filter-list">
-                  {/* for all leads data */}
-                  <li>
+              <ul className="filter-list">
+                <li>
+                  <input
+                    type="radio"
+                    id="All"
+                    name="leads"
+                    value="All"
+                    checked={selectedLead === "All"}
+                    onChange={(e) => setSelectedLead(e.target.value)}
+                    className="hidden-radio"
+                  />
+                  <label
+                    htmlFor="All"
+                    className={
+                      selectedLead === "All"
+                        ? "filter-btn active"
+                        : "filter-btn"
+                    }
+                  >
+                    All
+                  </label>
+                </li>
+                {leadStatus.map((item) => (
+                  <li key={item}>
                     <input
                       type="radio"
-                      id="All"
+                      id={item}
                       name="leads"
-                      value="All"
-                      checked={selectedLead === "All"}
+                      value={item}
+                      checked={selectedLead === item}
                       onChange={(e) => setSelectedLead(e.target.value)}
                       className="hidden-radio"
                     />
                     <label
-                      htmlFor="All"
+                      htmlFor={item}
                       className={
-                        selectedLead === "All"
+                        selectedLead === item
                           ? "filter-btn active"
                           : "filter-btn"
                       }
                     >
-                      All
+                      {item}
                     </label>
                   </li>
-                  {/* for rest of the available leads available in enums */}
-                  {leadStatus.map((item) => (
-                    <li key={item}>
-                      <input
-                        type="radio"
-                        id={item}
-                        name="leads"
-                        value={item}
-                        checked={selectedLead === item}
-                        onChange={(e) => setSelectedLead(e.target.value)}
-                        className="hidden-radio"
-                      />
-                      <label
-                        htmlFor={item}
-                        className={
-                          selectedLead === item
-                            ? "filter-btn active"
-                            : "filter-btn"
-                        }
-                      >
-                        {item}
-                      </label>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </main>
+
+      {/* OVERLAY — MUST BE LAST so sidebar renders on top of it */}
+      {isSidebarOpen && (
+        <div className="overlay" onClick={() => setIsSidebarOpen(false)} />
+      )}
     </div>
   );
 }

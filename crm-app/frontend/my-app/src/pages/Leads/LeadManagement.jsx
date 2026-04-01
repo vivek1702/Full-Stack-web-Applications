@@ -1,11 +1,13 @@
 import useFetch from "../../useFetch";
 import "./LeadManagement.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function LeadManagement() {
   const [commentText, setCommentText] = useState("");
   const [selectedAgent, setSelectedAgent] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { id } = useParams();
   const {
     data: leads,
@@ -31,6 +33,7 @@ export default function LeadManagement() {
   );
 
   const commentData = comments.filter((item) => item.lead === id);
+  const navigate = useNavigate();
 
   function handleDateTime(givenDate) {
     const isoData = givenDate;
@@ -60,13 +63,18 @@ export default function LeadManagement() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (isSubmitting) return; //prevent from double click
+
+    setIsSubmitting(true);
+
     const newCommentData = {
       lead: id,
       author: selectedAgent,
       commentText: commentText,
     };
 
-    console.log("Payload:", newCommentData);
+    //console.log("Payload:", newCommentData);
 
     try {
       const responseData = await fetch(
@@ -81,13 +89,24 @@ export default function LeadManagement() {
       );
 
       const result = await responseData.json();
+
+      if (!responseData.ok) {
+        console.error(result.error || "something went wrong");
+        setIsSubmitting(false);
+        return;
+      }
       console.log("Success:", result);
 
       //clear text
       setCommentText("");
       setSelectedAgent("");
+
+      window.location.reload();
+      // navigate(`/leadManage/${id}`, { state: { newComment: result.data } });
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 

@@ -2,35 +2,18 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  overflow-x: hidden; /* 🔥 fixes scroll */
-}
-
-.app-layout {
-  display: flex;
-  width: 100%;
-}
-
-/* SIDEBAR */
-.sidebar {
-  width: 220px; /* fixed instead of % */
-  flex-shrink: 0;
-}
-
-/* MAIN */
-.main-content {
-  flex: 1;
-  padding: 20px;
-  overflow-x: hidden;
-  max-width: 100%;
-}
+/* 
+  body { overflow-x: hidden } was HERE before — REMOVED.
+  It was a global style that bled into ALL pages and broke
+  position: fixed on the Home page sidebar on mobile.
+*/
 
 .lead-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   width: 100%;
+  align-items: start;
 }
 
 .left-section,
@@ -46,6 +29,7 @@ body {
 
 .right-section {
   align-self: start;
+  width: 100%;
 }
 
 /* CARDS */
@@ -63,12 +47,9 @@ body {
   height: fit-content;
 }
 
-/* make first cards equal height */
 .detail-card,
 .form-card {
-  height: 300px;
   min-height: 220px;
-  width: 100%;
 }
 
 /* DETAILS */
@@ -83,8 +64,12 @@ body {
 }
 
 .comments-card {
-  width: 98%;
+  width: 100%;
   margin-top: 20px;
+  max-height: 350px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+
 }
 
 /* COMMENTS */
