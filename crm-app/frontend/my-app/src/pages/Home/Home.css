@@ -9,18 +9,21 @@ body {
 .app-layout {
   display: flex;
   min-height: 100vh;
+  position: relative;
 }
 
 /* SIDEBAR */
 .sidebar {
   width: 20%;
   min-width: 220px;
-  background-color: #1f2937; /* softer dark (better than pure black) */
+  background-color: #1f2937;
   color: white;
-  padding: 20px 0; /* remove side padding for better centering */
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
-  align-items: center; /* center horizontally */
+  align-items: center;
+  z-index: 9999;
+  flex-shrink: 0;
 }
 
 /* LIST */
@@ -32,7 +35,8 @@ body {
 
 /* ITEM */
 .sidebar-item {
-  margin: 10px 0; /* reduced gap */
+  margin: 10px 0;
+  /* reduced gap */
   text-align: center;
 }
 
@@ -40,7 +44,8 @@ body {
 .sidebar-item a {
   display: block;
   padding: 10px 0;
-  color: #d1d5db; /* softer white */
+  color: #d1d5db;
+  /* softer white */
   text-decoration: none;
   font-weight: 500;
   transition: 0.2s;
@@ -98,7 +103,8 @@ body {
   text-decoration: none;
   color: black;
   transition: all 0.2s ease;
-  cursor: pointer; /* IMPORTANT */
+  cursor: pointer;
+  /* IMPORTANT */
 }
 
 .lead-item:hover {
@@ -115,7 +121,8 @@ body {
 .status-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px; /* reduced gap */
+  gap: 10px;
+  /* reduced gap */
   margin-top: 10px;
 }
 
@@ -194,7 +201,8 @@ body {
   background-color: #22c55e;
   color: white;
   border: none;
-  padding: 12px 24px; /* wider */
+  padding: 12px 24px;
+  /* wider */
   border-radius: 8px;
   cursor: pointer;
   font-size: 15px;
@@ -226,23 +234,66 @@ body {
   margin-bottom: 15px;
 }
 
+/* MENU BUTTON */
+.menu-btn {
+  display: none;
+  font-size: 22px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+/* OVERLAY */
+.overlay {
+  display: none;
+  z-index: 999;
+}
+
 /* ========================= */
 /* 📱 RESPONSIVE DESIGN */
 /* ========================= */
 
 @media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+
+    background-color: #1f2937;
+    z-index: 9999;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+
+
+  .main-content {
+    width: 100%;
+  }
+
   .section-header {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
-  }
-
-  .sidebar {
-    display: none;
-  }
-
-  .main-content {
-    width: 100%;
   }
 
   .dashboard-card {

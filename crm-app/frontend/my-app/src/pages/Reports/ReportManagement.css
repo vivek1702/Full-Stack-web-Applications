@@ -1,12 +1,80 @@
-/* MAIN LAYOUT */
+/* ========================= */
+/* RESET */
+/* ========================= */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f9fafb;
+}
+
+/* ========================= */
+/* LAYOUT */
+/* ========================= */
+.app-layout {
+  display: flex;
+  height: 100vh; /* ✅ FIXED (not min-height) */
+  overflow: hidden; /* ✅ prevents double scroll */
+}
+
+/* ========================= */
+/* SIDEBAR */
+/* ========================= */
+.sidebar {
+  width: 20%;
+  min-width: 220px;
+  background-color: #1f2937;
+  color: white;
+  padding: 20px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* SIDEBAR LIST */
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+/* SIDEBAR ITEM */
+.sidebar-item {
+  margin: 10px 0;
+  text-align: center;
+}
+
+/* SIDEBAR LINK */
+.sidebar-item a {
+  display: block;
+  padding: 10px 0;
+  color: #d1d5db;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+/* HOVER */
+.sidebar-item a:hover {
+  color: #22c55e;
+  background-color: #374151;
+  border-radius: 6px;
+}
+
+/* ========================= */
+/* MAIN CONTENT */
+/* ========================= */
 .report-main {
   flex: 1;
   padding: 20px 30px;
   background-color: #f9fafb;
-  min-height: 100vh;
+
+  overflow-y: auto; /* ✅ scroll only here */
 }
 
+/* ========================= */
 /* HEADER */
+/* ========================= */
 .report-header {
   margin-bottom: 20px;
 }
@@ -17,7 +85,9 @@
   color: #111827;
 }
 
+/* ========================= */
 /* CONTAINER */
+/* ========================= */
 .report-container {
   background: #ffffff;
   padding: 20px;
@@ -33,35 +103,43 @@
   color: #374151;
 }
 
+/* ========================= */
 /* GRID */
+/* ========================= */
 .report-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
+/* ========================= */
 /* CARD */
+/* ========================= */
 .report-card {
   background: #ffffff;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* PIE CHART */
+/* ========================= */
+/* CHART SIZES */
+/* ========================= */
 .report-pie {
   height: 300px;
 }
 
-/* BAR CHART */
 .report-bar {
   height: 300px;
 }
 
+/* ========================= */
 /* SUMMARY CARD */
+/* ========================= */
 .report-summary {
   flex-direction: column;
   text-align: center;
@@ -79,9 +157,15 @@
   color: #6b7280;
 }
 
+/* ========================= */
 /* RESPONSIVE */
+/* ========================= */
 @media (max-width: 768px) {
   .report-grid {
     grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
   }
 }

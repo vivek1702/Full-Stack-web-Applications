@@ -13,6 +13,7 @@ export function EditLeads() {
   const [selectTimetoClose, setselectTimetoClose] = useState(1);
   const [selectedTags, setselectedTags] = useState([]);
   const [successMsg, setSuccessMsg] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   //all leads data
   const { id } = useParams();
@@ -80,6 +81,11 @@ export function EditLeads() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (isSubmitting) return; // revent double click
+
+    setIsSubmitting(true);
+
     const newLeadData = {
       name: leadName,
       source: leadSource,
@@ -90,6 +96,12 @@ export function EditLeads() {
       priority: leadPriority,
       ...(leadStatus === "Closed" && { closedAt: new Date() }),
     };
+
+    if (!leadName || !leadSource || !salesAgents || !leadStatus) {
+      alert("Please update required fields correctly");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -102,13 +114,13 @@ export function EditLeads() {
       );
 
       const result = await response.json();
-      console.log("Success:", result);
+      if (!response.ok) {
+        console.error(result.error || "Something went wrong");
+        setIsSubmitting(false);
+        return;
+      }
+
       setSuccessMsg("Lead updated successfully!");
-
-      setTimeout(() => {
-        setSuccessMsg("");
-      }, 3000);
-
       //clear form data
       setLeadName("");
       setLeadSource("");
@@ -119,6 +131,8 @@ export function EditLeads() {
       setselectedTags([]);
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -228,8 +242,12 @@ export function EditLeads() {
                 />
               </div>
 
-              <button type="submit" className="submit-btn">
-                update Lead
+              <button
+                type="submit"
+                className="submit-btn"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "updating..." : "update Lead"}
               </button>
             </form>
           </div>

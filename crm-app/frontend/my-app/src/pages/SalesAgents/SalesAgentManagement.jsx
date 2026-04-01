@@ -1,14 +1,27 @@
 import { useState } from "react";
-import useFetch from "../../useFetch";
+import { useNavigate } from "react-router-dom";
 import { Link, useParams } from "react-router-dom";
 
 export default function SalesAgentManagement() {
   const [salesAgentsName, setsalesAgentsName] = useState("");
   const [salesAgentEmail, setsalesAgentEmail] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    if (!salesAgentsName || !salesAgentEmail) {
+      alert("All fields required");
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       const newSalesAgent = {
         name: salesAgentsName,
@@ -25,18 +38,24 @@ export default function SalesAgentManagement() {
       );
 
       const result = await response.json();
-      console.log("Success:", result);
+      console.log(result);
+      if (!response.ok) {
+        console.error(result.error || "something went wrong");
+        setIsSubmitting(false);
+        return;
+      }
       setSuccessMsg("sales agent added successfully!");
-
-      setTimeout(() => {
-        setSuccessMsg("");
-      }, 3000);
 
       //clear data
       setsalesAgentsName("");
       setsalesAgentEmail("");
+
+      // navigate with new agent
+      navigate("/salesAgentList", { state: { newAgent: result } });
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -71,14 +90,18 @@ export default function SalesAgentManagement() {
               <div className="form-group">
                 <label>Email</label>
                 <input
-                  type="text"
+                  type="email"
                   value={salesAgentEmail}
                   onChange={(e) => setsalesAgentEmail(e.target.value)}
                 />
               </div>
 
-              <button type="submit" className="submit-btn">
-                Add Sales Agent
+              <button
+                type="submit"
+                className="submit-btn"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Creating.." : "Add Sales Agent"}
               </button>
             </form>
           </div>

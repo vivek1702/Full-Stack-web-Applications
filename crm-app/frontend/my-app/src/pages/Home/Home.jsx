@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   const [selectedLead, setSelectedLead] = useState("All");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const { data, loading, error } = useFetch(
     `${import.meta.env.VITE_API_BASE_URL}/api/leads`,
@@ -37,7 +38,7 @@ export default function Home() {
   return (
     <div className="app-layout">
       {/* sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <ul className="sidebar-list">
           <li className="sidebar-item">
             <Link to="/leadLists">Leads</Link>
@@ -54,10 +55,21 @@ export default function Home() {
         </ul>
       </aside>
 
+      {/* overlay OUTSIDE */}
+      {isSidebarOpen && (
+        <div className="overlay" onClick={() => setIsSidebarOpen(false)}></div>
+      )}
+
       {/* main-content */}
 
       <main className="main-content">
         <header className="header">
+          <button
+            className="menu-btn"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            ☰
+          </button>
           <h1>Anvaya CRM Dashboard</h1>
         </header>
         <div className="dashboard-card">

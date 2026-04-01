@@ -138,11 +138,25 @@ export default function LeadList() {
           <div className="filter-group">
             <label>Sales Agent:</label>
             <select
+              style={{
+                padding: "8px 10px",
+                border: "1px solid #d1d5db",
+                borderRadius: "8px",
+                backgroundColor: "#fffef5",
+                fontSize: "14px",
+                fontWeight: "500",
+                color: "#333",
+                outline: "none",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+              }}
               value={selectedAgent}
               onChange={(e) => setSelectedAgent(e.target.value)}
             >
-              <option value="">Select Agent</option>
-              <option value="All">All</option>
+              <option value="" disabled>
+                Select Agent
+              </option>
+              <option value="All">All Agents</option>
               {agents.map((item) => (
                 <option key={item._id} value={item._id}>
                   {item.name}
@@ -155,6 +169,18 @@ export default function LeadList() {
           <div className="filter-group">
             <label>Priority:</label>
             <select
+              style={{
+                padding: "8px 10px",
+                border: "1px solid #d1d5db",
+                borderRadius: "8px",
+                backgroundColor: "#fffef5",
+                fontSize: "14px",
+                fontWeight: "500",
+                color: "#333",
+                outline: "none",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+              }}
               value={sortPriority}
               onChange={(e) => setSortPriority(e.target.value)}
             >
@@ -164,6 +190,18 @@ export default function LeadList() {
 
             <label style={{ "margin-left": "20px" }}>Time:</label>
             <select
+              style={{
+                padding: "8px 10px",
+                border: "1px solid #d1d5db",
+                borderRadius: "8px",
+                backgroundColor: "#fffef5",
+                fontSize: "14px",
+                fontWeight: "500",
+                color: "#333",
+                outline: "none",
+                cursor: "pointer",
+                transition: "all 0.2s ease",
+              }}
               value={sortTimetoClose}
               onChange={(e) => setsortTimetoClose(e.target.value)}
             >

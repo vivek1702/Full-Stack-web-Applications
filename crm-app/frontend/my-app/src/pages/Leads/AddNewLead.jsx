@@ -3,6 +3,7 @@ import "./AddNewLead.css";
 import useFetch from "../../useFetch";
 import Select from "react-select";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function AddNewLead() {
   const [leadName, setLeadName] = useState("");
@@ -13,18 +14,22 @@ export default function AddNewLead() {
   const [selectTimetoClose, setselectTimetoClose] = useState(1);
   const [selectedTags, setselectedTags] = useState([]);
   const [successMsg, setSuccessMsg] = useState("");
+  const [isSubmitting, setisSubmitting] = useState(false);
 
+  const navigate = useNavigate();
+
+  //${import.meta.env.VITE_API_BASE_URL}
   const {
     data: agents,
     loading: agentLoading,
     error: agentError,
-  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/agents`);
+  } = useFetch(`http://localhost:3000/api/agents`);
 
   const {
     data: tags,
     loading: tagLoading,
     error: tagError,
-  } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/tags`);
+  } = useFetch(`http://localhost:3000/api/tags`);
 
   const tagsOptions = tags?.data?.map((item) => ({
     value: item._id,
@@ -53,6 +58,10 @@ export default function AddNewLead() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (isSubmitting) return; // prevent on double click
+
+    setisSubmitting(true);
+
     const newLeadData = {
       name: leadName,
       source: leadSource,
@@ -66,27 +75,27 @@ export default function AddNewLead() {
 
     console.log(newLeadData);
 
+    if (!leadName || !leadSource || !selectedSalesAgents || !leadStatus) {
+      alert("Please fill all required fields");
+      setisSubmitting(false);
+      return;
+    }
+
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/leads`,
-        {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify(newLeadData),
-        },
-      );
+      const response = await fetch(`http://localhost:3000/api/leads`, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(newLeadData),
+      });
 
       const result = await response.json();
       if (!response.ok) {
-        console.error(result);
+        console.error(result.error || "Something went wrong");
+        setisSubmitting(false);
         return;
       }
       console.log("Success:", result);
       setSuccessMsg("Lead added successfully!");
-
-      setTimeout(() => {
-        setSuccessMsg("");
-      }, 3000);
 
       //clear form data
       setLeadName("");
@@ -96,8 +105,13 @@ export default function AddNewLead() {
       setLeadPriority("");
       setselectTimetoClose(1);
       setselectedTags([]);
+
+      // navigate with new lead
+      navigate("/", { state: { newAgent: result.data } });
     } catch (error) {
       console.error("Error:", error);
+    } finally {
+      setisSubmitting(false);
     }
   }
 
@@ -123,6 +137,7 @@ export default function AddNewLead() {
                 <label>Lead Name</label>
                 <input
                   type="text"
+                  required
                   value={leadName}
                   onChange={(e) => setLeadName(e.target.value)}
                 />
@@ -131,9 +146,13 @@ export default function AddNewLead() {
               <div className="form-group">
                 <label>Lead Source</label>
                 <select
-                  value={leadSource}
+                  value={leadSource || ""}
                   onChange={(e) => setLeadSource(e.target.value)}
+                  required
                 >
+                  <option value="" disabled>
+                    Select Source
+                  </option>
                   {GivenLeadSource.map((item) => (
                     <option key={item} value={item}>
                       {item}
@@ -145,9 +164,13 @@ export default function AddNewLead() {
               <div className="form-group">
                 <label>Sales Agent</label>
                 <select
-                  value={selectedSalesAgents}
+                  value={selectedSalesAgents || ""}
                   onChange={(e) => setsalesAgents(e.target.value)}
+                  required
                 >
+                  <option value="" disabled>
+                    Select Sales Agent
+                  </option>
                   {agents?.map((item) => (
                     <option key={item._id} value={item._id}>
                       {item.name}
@@ -159,9 +182,13 @@ export default function AddNewLead() {
               <div className="form-group">
                 <label>Lead Status</label>
                 <select
-                  value={leadStatus}
+                  value={leadStatus || ""}
                   onChange={(e) => setleadStatus(e.target.value)}
+                  required
                 >
+                  <option value="" disabled>
+                    Select Status
+                  </option>
                   {GivenLeadStatus.map((item) => (
                     <option key={item} value={item}>
                       {item}
@@ -171,11 +198,14 @@ export default function AddNewLead() {
               </div>
 
               <div className="form-group">
-                <label>Priority</label>
+                <label>Priority Default: (Medium)</label>
                 <select
                   value={selectedLeadPriority}
                   onChange={(e) => setLeadPriority(e.target.value)}
                 >
+                  <option value="" disabled>
+                    Select Priority
+                  </option>
                   {Givenpriority.map((item) => (
                     <option key={item} value={item}>
                       {item}
@@ -190,6 +220,7 @@ export default function AddNewLead() {
                   type="number"
                   value={selectTimetoClose}
                   onChange={(e) => setselectTimetoClose(e.target.value)}
+                  required
                 />
               </div>
 
@@ -201,11 +232,16 @@ export default function AddNewLead() {
                   className="react-select"
                   classNamePrefix="select"
                   onChange={(selected) => setselectedTags(selected)}
+                  required
                 />
               </div>
 
-              <button type="submit" className="submit-btn">
-                + Create Lead
+              <button
+                type="submit"
+                className="submit-btn"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Creating..." : "+ Create Lead"}
               </button>
             </form>
           </div>
