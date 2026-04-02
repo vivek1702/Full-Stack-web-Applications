@@ -1,25 +1,19 @@
-/* ========================= */
-/* RESET */
-/* ========================= */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f9fafb;
 }
 
-/* ========================= */
-/* LAYOUT */
-/* ========================= */
-.app-layout {
+/* .app-layout {
   display: flex;
-  height: 100vh; /* ✅ FIXED (not min-height) */
-  overflow: hidden; /* ✅ prevents double scroll */
-}
+  height: 100vh;
+ 
+  overflow: hidden;
+  
+} */
 
-/* ========================= */
-/* SIDEBAR */
-/* ========================= */
-.sidebar {
+
+/* .sidebar {
   width: 20%;
   min-width: 220px;
   background-color: #1f2937;
@@ -29,65 +23,58 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
 /* SIDEBAR LIST */
-.sidebar-list {
+/* .sidebar-list {
   list-style: none;
   padding: 0;
   width: 100%;
-}
+} */
 
 /* SIDEBAR ITEM */
-.sidebar-item {
+/* .sidebar-item {
   margin: 10px 0;
   text-align: center;
-}
+} */
 
 /* SIDEBAR LINK */
-.sidebar-item a {
+/* .sidebar-item a {
   display: block;
   padding: 10px 0;
   color: #d1d5db;
   text-decoration: none;
   font-weight: 500;
   transition: 0.2s;
-}
+} */
 
 /* HOVER */
-.sidebar-item a:hover {
+/* .sidebar-item a:hover {
   color: #22c55e;
   background-color: #374151;
   border-radius: 6px;
-}
+} */
 
-/* ========================= */
-/* MAIN CONTENT */
-/* ========================= */
-.report-main {
+/* .report-main {
   flex: 1;
   padding: 20px 30px;
   background-color: #f9fafb;
 
-  overflow-y: auto; /* ✅ scroll only here */
-}
+  overflow-y: auto;
+} */
 
-/* ========================= */
-/* HEADER */
-/* ========================= */
-.report-header {
+
+/* .report-header {
   margin-bottom: 20px;
-}
+} */
 
-.report-header h1 {
+/* .report-header h1 {
   font-size: 24px;
   font-weight: 600;
   color: #111827;
-}
+} */
 
-/* ========================= */
-/* CONTAINER */
-/* ========================= */
+
 .report-container {
   background: #ffffff;
   padding: 20px;
@@ -103,18 +90,14 @@ body {
   color: #374151;
 }
 
-/* ========================= */
-/* GRID */
-/* ========================= */
+
 .report-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
-/* ========================= */
-/* CARD */
-/* ========================= */
+
 .report-card {
   background: #ffffff;
   padding: 15px;
@@ -124,22 +107,29 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  width: 100%;
+  min-height: 200px;
+  height: 300px;
+
 }
 
-/* ========================= */
-/* CHART SIZES */
-/* ========================= */
-.report-pie {
+
+/* .report-pie {
   height: 300px;
 }
 
 .report-bar {
   height: 300px;
+} */
+
+.report-pie,
+.report-bar {
+  width: 100%;
+  height: 100%;
 }
 
-/* ========================= */
-/* SUMMARY CARD */
-/* ========================= */
+
 .report-summary {
   flex-direction: column;
   text-align: center;
@@ -157,15 +147,15 @@ body {
   color: #6b7280;
 }
 
-/* ========================= */
-/* RESPONSIVE */
-/* ========================= */
+
 @media (max-width: 768px) {
   .report-grid {
     grid-template-columns: 1fr;
   }
 
-  .sidebar {
-    display: none;
+  .report-card {
+    height: 220px;
+    /* smaller on mobile */
   }
+
 }

@@ -8,6 +8,8 @@ export default function LeadManagement() {
   const [commentText, setCommentText] = useState("");
   const [selectedAgent, setSelectedAgent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const { id } = useParams();
   const {
     data: leads,
@@ -113,10 +115,12 @@ export default function LeadManagement() {
   return (
     <div className="app-layout">
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <ul className="sidebar-list">
           <li className="sidebar-item">
-            <Link to="/">← Dashboard</Link>
+            <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+              ← Dashboard
+            </Link>
           </li>
         </ul>
       </aside>
@@ -124,6 +128,12 @@ export default function LeadManagement() {
       {/* Main */}
       <main className="main-content">
         <header className="header">
+          <button
+            className="menu-btn"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            ☰
+          </button>
           <h1>{leadData.name}</h1>
         </header>
 
@@ -205,6 +215,9 @@ export default function LeadManagement() {
           ))}
         </div>
       </main>
+      {isSidebarOpen && (
+        <div className="overlay" onClick={() => setIsSidebarOpen(false)} />
+      )}
     </div>
   );
 }

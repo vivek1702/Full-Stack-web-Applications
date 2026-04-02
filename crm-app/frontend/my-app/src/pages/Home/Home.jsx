@@ -48,7 +48,10 @@ export default function Home() {
             </Link>
           </li>
           <li className="sidebar-item">
-            <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+            <Link
+              to="/deleteLeadsAgents"
+              onClick={() => setIsSidebarOpen(false)}
+            >
               Settings
             </Link>
           </li>

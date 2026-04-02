@@ -1,13 +1,14 @@
 import useFetch from "../../useFetch";
 import "./LeadList.css";
-import { Link, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function LeadList() {
   const [selectedLead, setSelectedLead] = useState("All");
   const [selectedAgent, setSelectedAgent] = useState("All");
   const [sortPriority, setSortPriority] = useState("lowToHigh");
   const [sortTimetoClose, setsortTimetoClose] = useState("desc");
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const {
     data: leads,
@@ -71,10 +72,12 @@ export default function LeadList() {
   return (
     <div className="app-layout">
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <ul className="sidebar-list">
           <li className="sidebar-item">
-            <Link to="/">← Dashboard</Link>
+            <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+              ← Dashboard
+            </Link>
           </li>
         </ul>
       </aside>
@@ -82,6 +85,12 @@ export default function LeadList() {
       {/* Main */}
       <main className="main-content">
         <header className="header">
+          <button
+            className="menu-btn"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            ☰
+          </button>
           <h1>Leads List</h1>
         </header>
 
@@ -255,6 +264,9 @@ export default function LeadList() {
           </Link>
         </div>
       </main>
+      {isSidebarOpen && (
+        <div className="overlay" onClick={() => setIsSidebarOpen(false)} />
+      )}
     </div>
   );
 }

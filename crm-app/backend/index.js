@@ -203,6 +203,16 @@ app.get("/api/agents", async (req, res) => {
   }
 });
 
+app.delete("/api/agents/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await SalesAgent.findByIdAndDelete(id);
+    res.status(200).json({ message: "Agent deleted successfully" });
+  } catch (error) {
+    res.status(400).json({ error: "invalid request" });
+  }
+});
+
 //write crud operations for comments model
 app.post("/api/leads/:id/comments", async (req, res) => {
   try {

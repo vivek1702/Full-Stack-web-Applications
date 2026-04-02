@@ -1,0 +1,103 @@
+/* GRID LAYOUT */
+.manage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* CARD */
+.manage-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* TITLE */
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #374151;
+}
+
+/* ROW */
+.list-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9fafb;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    transition: 0.2s;
+}
+
+/* HOVER EFFECT */
+.list-row:hover {
+    background: #f3f4f6;
+}
+
+/* NAME */
+.item-name {
+    font-size: 14px;
+    color: #111827;
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* HOVER */
+.delete-btn:hover {
+    background-color: #dc2626;
+    transform: scale(1.05);
+}
+
+/* CLICK */
+.delete-btn:active {
+    transform: scale(0.95);
+}
+
+.toast-message {
+    background: #22c55e;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease;
+}
+
+/* error case */
+.toast-message:has(:contains("❌")) {
+    background: #ef4444;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .manage-grid {
+        grid-template-columns: 1fr;
+    }
+}

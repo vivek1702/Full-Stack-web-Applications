@@ -7,6 +7,7 @@ export default function SalesAgentManagement() {
   const [salesAgentEmail, setsalesAgentEmail] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -62,15 +63,23 @@ export default function SalesAgentManagement() {
   return (
     <div className="app-layout">
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <ul className="sidebar-list">
           <li className="sidebar-item">
-            <Link to="/">← Dashboard</Link>
+            <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+              ← Dashboard
+            </Link>
           </li>
         </ul>
       </aside>
       <main className="main-content">
         <header className="header">
+          <button
+            className="menu-btn"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            ☰
+          </button>
           <h1>Sales Agent Managment</h1>
         </header>
         {successMsg && <div className="success-alert">{successMsg}</div>}
@@ -107,6 +116,9 @@ export default function SalesAgentManagement() {
           </div>
         </div>
       </main>
+      {isSidebarOpen && (
+        <div className="overlay" onClick={() => setIsSidebarOpen(false)} />
+      )}
     </div>
   );
 }

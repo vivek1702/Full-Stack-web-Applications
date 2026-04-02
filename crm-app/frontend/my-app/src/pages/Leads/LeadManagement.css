@@ -2,11 +2,6 @@
   box-sizing: border-box;
 }
 
-/* 
-  body { overflow-x: hidden } was HERE before — REMOVED.
-  It was a global style that bled into ALL pages and broke
-  position: fixed on the Home page sidebar on mobile.
-*/
 
 .lead-grid {
   display: grid;

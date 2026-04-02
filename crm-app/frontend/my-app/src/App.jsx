@@ -8,6 +8,7 @@ import SalesAgentManagement from "./pages/SalesAgents/SalesAgentManagement";
 import { EditLeads } from "./pages/Leads/EditLeads";
 import SalesAgentList from "./pages/SalesAgents/SalesAgentList";
 import ReportManagement from "./pages/Reports/ReportManagement";
+import ManageLeadsAgents from "./pages/DeleteLeadsAndAgents/ManageLeadsAndAgents";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/salesAgentManagment" element={<SalesAgentManagement />} />
         <Route path="/salesAgentList" element={<SalesAgentList />} />
         <Route path="/reports" element={<ReportManagement />} />
+        <Route path="/deleteLeadsAgents" element={<ManageLeadsAgents />} />
       </Routes>
     </BrowserRouter>
   );

@@ -9,7 +9,7 @@ body {
 .app-layout {
   display: flex;
   min-height: 100vh;
-  position: relative;
+  align-items: stretch;
 }
 
 /* ========================= */
@@ -83,8 +83,10 @@ body {
 /* ========================= */
 .main-content {
   width: 100%;
-  padding: 20px;
   box-sizing: border-box;
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
 }
 
 /* HEADER */

@@ -1,4 +1,5 @@
 import useFetch from "../../useFetch";
+import { useState } from "react";
 import { Pie, Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -22,6 +23,13 @@ ChartJS.register(
 );
 
 export default function ReportManagement() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+  };
+
   const { data: pipelineLeads } = useFetch(
     `${import.meta.env.VITE_API_BASE_URL}/api/report/pipeline`,
   );
@@ -79,16 +87,24 @@ export default function ReportManagement() {
   return (
     <div className="app-layout">
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <ul className="sidebar-list">
           <li className="sidebar-item">
-            <Link to="/">← Dashboard</Link>
+            <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+              ← Dashboard
+            </Link>
           </li>
         </ul>
       </aside>
 
-      <main className="report-main">
-        <header className="report-header">
+      <main className="main-content">
+        <header className="header">
+          <button
+            className="menu-btn"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            ☰
+          </button>
           <h1>Avanya CRM Reports</h1>
         </header>
 
@@ -97,15 +113,15 @@ export default function ReportManagement() {
 
           <div className="report-grid">
             <div className="report-card report-pie">
-              <Pie data={leadsData} />
+              <Pie data={leadsData} options={options} />
             </div>
 
             <div className="report-card report-bar">
-              <Bar data={closedLeadsByAgent} />
+              <Bar data={closedLeadsByAgent} options={options} />
             </div>
 
             <div className="report-card report-bar">
-              <Bar data={statusByDistribution} />
+              <Bar data={statusByDistribution} options={options} />
             </div>
 
             <div className="report-card report-summary">
@@ -115,6 +131,9 @@ export default function ReportManagement() {
           </div>
         </section>
       </main>
+      {isSidebarOpen && (
+        <div className="overlay" onClick={() => setIsSidebarOpen(false)} />
+      )}
     </div>
   );
 }

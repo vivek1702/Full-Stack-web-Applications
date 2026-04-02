@@ -1,8 +1,10 @@
 import useFetch from "../../useFetch";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SalesAgentList.css";
 
 export default function SalesAgentList() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const {
     data: salesAgent,
     loading,
@@ -12,16 +14,24 @@ export default function SalesAgentList() {
   return (
     <div className="app-layout">
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <ul className="sidebar-list">
           <li className="sidebar-item">
-            <Link to="/">← Dashboard</Link>
+            <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+              ← Dashboard
+            </Link>
           </li>
         </ul>
       </aside>
 
       <main className="main-content">
         <header className="header">
+          <button
+            className="menu-btn"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            ☰
+          </button>
           <h1>Sales Agent Management</h1>
         </header>
 
@@ -44,6 +54,9 @@ export default function SalesAgentList() {
           </div>
         </section>
       </main>
+      {isSidebarOpen && (
+        <div className="overlay" onClick={() => setIsSidebarOpen(false)} />
+      )}
     </div>
   );
 }

@@ -15,6 +15,7 @@ export default function AddNewLead() {
   const [selectedTags, setselectedTags] = useState([]);
   const [successMsg, setSuccessMsg] = useState("");
   const [isSubmitting, setisSubmitting] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -121,15 +122,23 @@ export default function AddNewLead() {
   return (
     <div className="app-layout">
       {/* Sidebar */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? "open" : ""}`}>
         <ul className="sidebar-list">
           <li className="sidebar-item">
-            <Link to="/">← Dashboard</Link>
+            <Link to="/" onClick={() => setIsSidebarOpen(false)}>
+              ← Dashboard
+            </Link>
           </li>
         </ul>
       </aside>
       <main className="main-content">
         <header className="header">
+          <button
+            className="menu-btn"
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+          >
+            ☰
+          </button>
           <h1>Add New Lead</h1>
         </header>
         {successMsg && <div className="success-alert">{successMsg}</div>}
@@ -250,6 +259,9 @@ export default function AddNewLead() {
           </div>
         </div>
       </main>
+      {isSidebarOpen && (
+        <div className="overlay" onClick={() => setIsSidebarOpen(false)} />
+      )}
     </div>
   );
 }
