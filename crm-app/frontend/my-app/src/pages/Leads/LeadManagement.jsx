@@ -5,6 +5,8 @@ import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function LeadManagement() {
+  //http://localhost:3000
+  //${import.meta.env.VITE_API_BASE_URL}
   const [commentText, setCommentText] = useState("");
   const [selectedAgent, setSelectedAgent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -29,13 +31,19 @@ export default function LeadManagement() {
     error: commentError,
   } = useFetch(`${import.meta.env.VITE_API_BASE_URL}/api/leads/${id}/comments`);
 
-  const leadData = leads.find((item) => item._id === id);
+  const leadData = leads?.find((item) => item._id === id);
   const salesAgentData = agents.find(
     (item) => item._id === leadData?.salesAgent,
   );
 
-  const commentData = comments.filter((item) => item.lead === id);
-  const navigate = useNavigate();
+  const filterCommentData = comments?.filter((item) => item.lead === id);
+  console.log("filterCommentData", filterCommentData);
+  const commentData = filterCommentData.map((item) => ({
+    ...item,
+    authorName: item.author?.name || "deleted user",
+  }));
+  console.log(commentData);
+  //const navigate = useNavigate();
 
   function handleDateTime(givenDate) {
     const isoData = givenDate;
@@ -208,7 +216,7 @@ export default function LeadManagement() {
 
           {commentData.map((item) => (
             <div className="comment-box" key={item._id}>
-              <h4>{item.author.name}</h4>
+              <h4>{item.authorName}</h4>
               <p>{handleDateTime(item.createdAt)}</p>
               <p>{item.commentText}</p>
             </div>

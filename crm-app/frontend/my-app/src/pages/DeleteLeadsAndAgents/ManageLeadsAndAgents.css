@@ -79,7 +79,7 @@
 }
 
 /* error case */
-.toast-message:has(:contains("❌")) {
+.toast-message:has(:contains("x")) {
     background: #ef4444;
 }
 
