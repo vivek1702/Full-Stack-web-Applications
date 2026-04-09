@@ -128,3 +128,16 @@ cd EcommerceApp
 
 
 
+I suggest adding user authentication (login/signup) to improve security and user experience.
+
+## 🚀 Benefits
+
+- Personalized user data
+- Secure order history
+- Better scalability
+
+## 📌 Additional Notes
+
+JWT-based authentication can be a good approach here.
+
+
