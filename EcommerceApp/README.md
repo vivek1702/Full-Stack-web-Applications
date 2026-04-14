@@ -28,6 +28,7 @@ A full-stack fashion e-commerce web application built with React (Vite) on the f
 ## Tech Stack
 
 **Frontend**
+
 - React 19 + Vite
 - React Router DOM v7
 - Bootstrap 5
@@ -35,11 +36,13 @@ A full-stack fashion e-commerce web application built with React (Vite) on the f
 - React Icons
 
 **Backend**
+
 - Node.js + Express 5
 - MongoDB + Mongoose 9
 - CORS, dotenv
 
 **Deployment**
+
 - Vercel (both frontend and backend)
 
 ---
@@ -116,29 +119,29 @@ ecommerce/
 
 ### Product
 
-| Field            | Type     | Notes                                              |
-|------------------|----------|----------------------------------------------------|
-| `productName`    | String   | Required                                           |
-| `description`    | String   | Required                                           |
-| `productImage`   | String   | URL, required                                      |
-| `price`          | Number   | Required, range ₹100–₹5000                         |
-| `rating`         | Number   | Range 0–5                                          |
-| `size`           | [String] | Enum: XS, S, M, L, XL, One Size, 50ml, 100ml      |
-| `category`       | ObjectId | Ref → Category, required                           |
-| `discountedPrice`| Number   | Discount percentage, range 0–50                    |
+| Field             | Type     | Notes                                        |
+| ----------------- | -------- | -------------------------------------------- |
+| `productName`     | String   | Required                                     |
+| `description`     | String   | Required                                     |
+| `productImage`    | String   | URL, required                                |
+| `price`           | Number   | Required, range ₹100–₹5000                   |
+| `rating`          | Number   | Range 0–5                                    |
+| `size`            | [String] | Enum: XS, S, M, L, XL, One Size, 50ml, 100ml |
+| `category`        | ObjectId | Ref → Category, required                     |
+| `discountedPrice` | Number   | Discount percentage, range 0–50              |
 
 ### Category
 
-| Field         | Type   | Notes                        |
-|---------------|--------|------------------------------|
-| `name`        | String | Unique, required             |
-| `slug`        | String | Unique, lowercase, required  |
-| `categoryURL` | String | Image URL for the category   |
+| Field         | Type   | Notes                       |
+| ------------- | ------ | --------------------------- |
+| `name`        | String | Unique, required            |
+| `slug`        | String | Unique, lowercase, required |
+| `categoryURL` | String | Image URL for the category  |
 
 ### Address
 
 | Field     | Type   | Notes    |
-|-----------|--------|----------|
+| --------- | ------ | -------- |
 | `name`    | String | Required |
 | `email`   | String | Required |
 | `address` | String | Required |
@@ -147,12 +150,12 @@ ecommerce/
 
 ### Order
 
-| Field         | Type     | Notes                                                               |
-|---------------|----------|---------------------------------------------------------------------|
-| `items`       | Array    | Each item: productId, productName, price, quantity, selectedSize    |
-| `address`     | Object   | Snapshot of delivery address at time of order                       |
-| `totalAmount` | Number   | Required                                                            |
-| `orderStatus` | String   | Enum: Confirmed, Processing, Shipped, Delivered, Cancelled. Default: Confirmed |
+| Field         | Type   | Notes                                                                          |
+| ------------- | ------ | ------------------------------------------------------------------------------ |
+| `items`       | Array  | Each item: productId, productName, price, quantity, selectedSize               |
+| `address`     | Object | Snapshot of delivery address at time of order                                  |
+| `totalAmount` | Number | Required                                                                       |
+| `orderStatus` | String | Enum: Confirmed, Processing, Shipped, Delivered, Cancelled. Default: Confirmed |
 
 ---
 
@@ -163,21 +166,27 @@ Base URL (production): `https://full-stack-web-applications-6mlh.vercel.app`
 ### Products
 
 #### Get all products
+
 ```
 GET /api/products
 ```
+
 Returns an array of all products with their category references.
 
 #### Get product by ID
+
 ```
 GET /api/products/:productId
 ```
+
 Returns a single product document matching the given `productId`.
 
 #### Get products by category
+
 ```
 GET /api/products/categories/:categoryId
 ```
+
 Returns all products that belong to the specified `categoryId`.
 
 ---
@@ -185,15 +194,19 @@ Returns all products that belong to the specified `categoryId`.
 ### Categories
 
 #### Get all categories
+
 ```
 GET /api/categories
 ```
+
 Returns an array of all available categories (Men, Women, Kids, Accessories).
 
 #### Get category by ID
+
 ```
 GET /api/categories/:categoryId
 ```
+
 Returns a single category document matching the given `categoryId`.
 
 ---
@@ -201,25 +214,32 @@ Returns a single category document matching the given `categoryId`.
 ### Address
 
 #### Get all addresses
+
 ```
 GET /api/address
 ```
+
 Returns an array of all saved delivery addresses.
 
 #### Get address by ID
+
 ```
 GET /api/address/:addressId
 ```
+
 Returns a single address document matching the given `addressId`.
 
 #### Create a new address
+
 ```
 POST /api/address
 Content-Type: application/json
 ```
+
 Saves a new delivery address to the database and returns a success message.
 
 **Request body:**
+
 ```json
 {
   "name": "John Doe",
@@ -231,16 +251,20 @@ Saves a new delivery address to the database and returns a success message.
 ```
 
 #### Update address by ID
+
 ```
 PUT /api/address/:addressId
 Content-Type: application/json
 ```
+
 Updates an existing address by its ID and returns the updated document.
 
 #### Delete address by ID
+
 ```
 DELETE /api/address/:addressId
 ```
+
 Removes an address from the database and confirms deletion.
 
 ---
@@ -248,19 +272,24 @@ Removes an address from the database and confirms deletion.
 ### Orders
 
 #### Get all orders
+
 ```
 GET /api/orders
 ```
+
 Returns all orders sorted by creation date descending (newest first).
 
 #### Place a new order
+
 ```
 POST /api/orders
 Content-Type: application/json
 ```
+
 Creates a new order record with the provided cart items, delivery address, and total amount.
 
 **Request body:**
+
 ```json
 {
   "items": [
@@ -288,66 +317,152 @@ Creates a new order record with the provided cart items, delivery address, and t
 
 ## Sample API Responses
 
-> ✏️ **Fill in this section** — paste real response examples from Postman or your browser DevTools for each endpoint below.
+### `GET /api/product`
 
-### `GET /api/products`
-
-```json
-// Add sample response here
 ```
-
-### `GET /api/products/:productId`
-
-```json
-// Add sample response here
+[{    "_id": "698debea952c551f7762287d",
+    "productName": "Women Palazzo Pants",
+    "description": "Flowy palazzo pants with elastic waistband and elegant drape.",
+    "productImage": "/images/women-plazzo-pants.jpg",
+    "price": 459,
+    "rating": 4.3,
+    "size": [
+      "S",
+      "M",
+      "L"
+    ],
+    "category": "698c90379cc3bc35dd0ab58d",
+    "discountedPrice": 14,
+    "__v": 0,
+    "createdAt": "2026-02-12T15:04:10.435Z",
+    "updatedAt": "2026-02-12T15:04:10.435Z"
+  },
+  {
+    "_id": "698debea952c551f7762288d",
+    "productName": "Men Denim Jacket",
+    "description": "Classic denim jacket with rugged style.",
+    "productImage": "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?w=400&auto=format&fit=crop",
+    "price": 999,
+    "rating": 4.6,
+    "size": [
+      "M",
+      "L",
+      "XL"
+    ],
+    "category": "698c90379cc3bc35dd0ab58c",
+    "discountedPrice": 22,
+    "__v": 0,
+    "createdAt": "2026-02-12T15:04:10.436Z",
+    "updatedAt": "2026-02-12T15:04:10.436Z"
+  },]
 ```
 
 ### `GET /api/categories`
 
-```json
-// Add sample response here
 ```
-
-### `GET /api/products/categories/:categoryId`
-
-```json
-// Add sample response here
+[
+  {
+    "_id": "698c90379cc3bc35dd0ab58d",
+    "name": "Women",
+    "slug": "women",
+    "categoryURL": "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop",
+    "__v": 0,
+    "createdAt": "2026-02-11T14:20:39.386Z",
+    "updatedAt": "2026-02-11T14:20:39.386Z"
+  },
+  {
+    "_id": "698c90379cc3bc35dd0ab58f",
+    "name": "Accessories",
+    "slug": "accessories",
+    "categoryURL": "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop",
+    "__v": 0,
+    "createdAt": "2026-02-11T14:20:39.386Z",
+    "updatedAt": "2026-02-11T14:20:39.386Z"
+  },
+  {
+    "_id": "698c90379cc3bc35dd0ab58c",
+    "name": "Men",
+    "slug": "men",
+    "categoryURL": "https://images.pexels.com/photos/1040945/pexels-photo-1040945.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop",
+    "__v": 0,
+    "createdAt": "2026-02-11T14:20:39.385Z",
+    "updatedAt": "2026-02-11T14:20:39.385Z"
+  },
+  {
+    "_id": "698c90379cc3bc35dd0ab58e",
+    "name": "Kids",
+    "slug": "kids",
+    "categoryURL": "https://images.pexels.com/photos/1620760/pexels-photo-1620760.jpeg?auto=compress&cs=tinysrgb&w=600&h=900&fit=crop",
+    "__v": 0,
+    "createdAt": "2026-02-11T14:20:39.386Z",
+    "updatedAt": "2026-02-11T14:20:39.386Z"
+  }
+]
 ```
 
 ### `GET /api/address`
 
 ```json
-// Add sample response here
-```
-
-### `POST /api/address` (201 Created)
-
-```json
-// Add sample response here
-```
-
-### `PUT /api/address/:addressId` (200 OK)
-
-```json
-// Add sample response here
-```
-
-### `DELETE /api/address/:addressId` (200 OK)
-
-```json
-// Add sample response here
+[
+  {
+    "_id": "69900ac6188d39dbde331484",
+    "name": "abhijeet shukla",
+    "email": "abhi17@gmail.com",
+    "address": "abc, xyz address, bhilai, CG0723454555",
+    "phone": "7999999870",
+    "pincode": "4900026",
+    "createdAt": "2026-02-14T05:40:22.191Z",
+    "updatedAt": "2026-02-21T05:26:05.851Z",
+    "__v": 0
+  },
+  {
+    "_id": "6992cb9ad551f2cb9b44e728",
+    "name": "Ashiya ",
+    "email": "ASHIYA1005@GMAIL.COM",
+    "address": "Kodichikkanahalli, abc",
+    "phone": "987654321",
+    "pincode": "560076",
+    "createdAt": "2026-02-16T07:47:38.771Z",
+    "updatedAt": "2026-02-22T03:16:42.143Z",
+    "__v": 0
+  }
+] // Add sample response here
 ```
 
 ### `GET /api/orders`
 
 ```json
-// Add sample response here
-```
-
-### `POST /api/orders` (201 Created)
-
-```json
-// Add sample response here
+[
+  {
+    "address": {
+      "name": "Ashiya ",
+      "email": "ASHIYA1005@GMAIL.COM",
+      "address": "Kodichikkanahalli, abc",
+      "phone": "987654321",
+      "pincode": "560076"
+    },
+    "_id": "69c10c1825a2abc7787d1292",
+    "items": [
+      {
+        "productName": "Kids Casual Shirt",
+        "price": "279",
+        "quantity": "1",
+        "_id": "698debea952c551f77622863"
+      },
+      {
+        "productName": "Men Polo T Shirt",
+        "price": "449",
+        "quantity": "1",
+        "_id": "698debea952c551f7762286d"
+      }
+    ],
+    "totalAmount": 828,
+    "orderStatus": "Confirmed",
+    "createdAt": "2026-03-23T09:47:04.068Z",
+    "updatedAt": "2026-03-23T09:47:04.068Z",
+    "__v": 0
+  }
+]
 ```
 
 ---
@@ -356,15 +471,15 @@ Creates a new order record with the provided cart items, delivery address, and t
 
 ### Backend (`backend/.env`)
 
-| Variable      | Description                        |
-|---------------|------------------------------------|
-| `MONGODB_URI` | MongoDB Atlas connection string    |
-| `PORT`        | Port for local development (3000)  |
+| Variable      | Description                       |
+| ------------- | --------------------------------- |
+| `MONGODB_URI` | MongoDB Atlas connection string   |
+| `PORT`        | Port for local development (3000) |
 
 ### Frontend (`frontend/my-vite-project/.env`)
 
-| Variable       | Description                         |
-|----------------|-------------------------------------|
+| Variable       | Description                          |
+| -------------- | ------------------------------------ |
 | `VITE_API_URL` | Base URL of the deployed backend API |
 
 ---
@@ -379,12 +494,14 @@ npm install
 ```
 
 Create a `.env` file:
+
 ```
 MONGODB_URI=your_mongodb_atlas_connection_string
 PORT=3000
 ```
 
 Start the server:
+
 ```bash
 npm run dev
 ```
@@ -401,11 +518,13 @@ npm install
 ```
 
 Create a `.env` file:
+
 ```
 VITE_API_URL=http://localhost:3000
 ```
 
 Start the dev server:
+
 ```bash
 npm run dev
 ```
@@ -419,12 +538,14 @@ The app will be available at `http://localhost:5173`.
 Seeds are located in `backend/DataSeeder/`. Run them once after the backend is connected to MongoDB to populate the database.
 
 **Seed categories** (Men, Women, Kids, Accessories):
+
 ```bash
 cd backend
 node DataSeeder/SeedCategories.js
 ```
 
 **Seed products** (reads from `productData.json`):
+
 ```bash
 cd backend
 node DataSeeder/SeedProducts.js
@@ -443,3 +564,16 @@ Both the frontend and backend are deployed on **Vercel**.
 **Frontend** — `frontend/my-vite-project/vercel.json` rewrites all routes to `/` so that React Router handles client-side navigation correctly.
 
 Live backend URL: `https://full-stack-web-applications-6mlh.vercel.app`
+
+---
+
+## App Screenshots
+
+![](./images/image1.png)
+![](./images/image2.png)
+![](./images/image3.png)
+![](./images/image4.png)
+![](./images/image5.png)
+![](./images/image6.png)
+![](./images/image7.png)
+![](./images/image8.png)
