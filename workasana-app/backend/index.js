@@ -307,20 +307,68 @@ app.get("/api/task", verifyJWT, async (req, res) => {
   }
 });
 
+//get task by id
+app.get("/api/task/:id", verifyJWT, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const task = await Task.findById(id)
+      .populate("projectId", "name")
+      .populate("team", "name members")
+      .populate("owners", "name")
+      .populate("tags", "name");
+
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    // normal user access check
+    if (req.user.role !== "admin") {
+      const isOwner = task.owners.some(
+        (owner) => owner._id.toString() === req.user.userId,
+      );
+
+      if (!isOwner) {
+        return res.status(403).json({
+          message: "Not authorized",
+        });
+      }
+    }
+
+    res.json({
+      success: true,
+      data: task,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Server error",
+    });
+  }
+});
+
 //update task by id
 app.put("/api/task/:id", verifyJWT, async (req, res) => {
   try {
     const id = req.params.id;
-    const { name, project, team, owners, tags, timeToComplete, status } =
+    const { name, projectId, team, owners, tags, timeToComplete, status } =
       req.body;
 
-    const task = await Task.findbyId(id);
+    const task = await Task.findById(id);
     if (!task) {
       return res.status(400).json({ error: "task not found" });
     }
 
-    if (req.user.role !== "admin" || !task.owners.include(req.user.userId)) {
-      return res.status(403).json({ message: "Not authorized" });
+    if (req.user.role !== "admin") {
+      const isOwner = task.owners.some(
+        (owner) => owner._id.toString() === req.user.userId,
+      );
+
+      if (!isOwner) {
+        return res.status(403).json({
+          message: "Not authorized",
+        });
+      }
     }
 
     const updateData = {};
@@ -333,7 +381,7 @@ app.put("/api/task/:id", verifyJWT, async (req, res) => {
     if (req.user.role === "admin") {
       if (owners) updateData.owners = owners;
       if (team) updateData.team = team;
-      if (project) updateData.project = project;
+      if (projectId) updateData.projectId = projectId;
     }
 
     const updatedDetails = await Task.findByIdAndUpdate(id, updateData, {

@@ -6,6 +6,8 @@ A full-stack Meetup application built using React, Node.js, Express, and MongoDB
 
 ## 🌐 Deployment Links
 
+**\*#######This links has been removed from the deployment** #################
+
 - Frontend: https://full-stack-web-applications-78sh.vercel.app/
 - Backend API: https://full-stack-web-applications-lemon.vercel.app/api/meetups
 
@@ -13,9 +15,9 @@ A full-stack Meetup application built using React, Node.js, Express, and MongoDB
 
 The Meetup App is a learning-focused full-stack project where:
 
-* The **backend** exposes REST APIs to manage meetup data stored in MongoDB.
-* The **frontend** consumes these APIs to display meetups and their details.
-* Both frontend and backend are deployed independently on Vercel.
+- The **backend** exposes REST APIs to manage meetup data stored in MongoDB.
+- The **frontend** consumes these APIs to display meetups and their details.
+- Both frontend and backend are deployed independently on Vercel.
 
 ---
 
@@ -76,37 +78,37 @@ Meetup_App/
 
 ### Tech Stack
 
-* Node.js
-* Express.js
-* MongoDB Atlas
-* Mongoose
-* dotenv
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- dotenv
 
 ### Features
 
-* Designed a **Meetup schema** using Mongoose
-* Supports event attributes like:
+- Designed a **Meetup schema** using Mongoose
+- Supports event attributes like:
+  - Event title
+  - Event type (online/offline)
+  - Hosted by
+  - Date & time
+  - Location
+  - Paid / free flag
+  - Event description
+  - Speakers
 
-  * Event title
-  * Event type (online/offline)
-  * Hosted by
-  * Date & time
-  * Location
-  * Paid / free flag
-  * Event description
-  * Speakers
-* REST APIs implemented:
+- REST APIs implemented:
+  - `GET /meetups` → Fetch all meetups
+  - `GET /meetups/:id` → Fetch details of a single meetup
 
-  * `GET /meetups` → Fetch all meetups
-  * `GET /meetups/:id` → Fetch details of a single meetup
-* Seeded initial data using JSON and a seed script
-* Environment variables used for sensitive credentials
+- Seeded initial data using JSON and a seed script
+- Environment variables used for sensitive credentials
 
 ### Backend Deployment
 
-* Deployed on **Vercel**
-* MongoDB hosted on **MongoDB Atlas (free tier)**
-* Environment variables configured in Vercel dashboard
+- Deployed on **Vercel**
+- MongoDB hosted on **MongoDB Atlas (free tier)**
+- Environment variables configured in Vercel dashboard
 
 ---
 
@@ -114,24 +116,24 @@ Meetup_App/
 
 ### Tech Stack
 
-* React
-* Vite
-* React Router DOM
-* CSS
+- React
+- Vite
+- React Router DOM
+- CSS
 
 ### Features
 
-* Meetup listing page showing all events
-* Meetup details page with full event information
-* Dynamic routing using `useParams()`
-* Custom reusable `useFetch` hook for API calls
-* Loading and error state handling
-* Environment-based API URL configuration
+- Meetup listing page showing all events
+- Meetup details page with full event information
+- Dynamic routing using `useParams()`
+- Custom reusable `useFetch` hook for API calls
+- Loading and error state handling
+- Environment-based API URL configuration
 
 ### Frontend Deployment
 
-* Deployed on **Vercel**
-* Backend API base URL managed via environment variables
+- Deployed on **Vercel**
+- Backend API base URL managed via environment variables
 
 ---
 
@@ -149,7 +151,7 @@ MONGODB_URI=your_mongodb_connection_string
 
 ```
 VITE_API_BASE_URL=your_backend_api_url
-deployed link: 
+deployed link:
 ```
 
 > Note: `.env` files are excluded from GitHub using `.gitignore`.
@@ -158,9 +160,9 @@ deployed link:
 
 ## 🌐 Deployment
 
-* **Frontend**: Vercel
-* **Backend**: Vercel
-* **Database**: MongoDB Atlas
+- **Frontend**: Vercel
+- **Backend**: Vercel
+- **Database**: MongoDB Atlas
 
 The frontend communicates with the backend using the deployed API URL.
 
@@ -168,23 +170,23 @@ The frontend communicates with the backend using the deployed API URL.
 
 ## 💡 Learnings & Highlights
 
-* Full-stack application architecture
-* REST API design with Express
-* MongoDB schema design using Mongoose
-* Custom React hooks
-* Environment variable management
-* Git & GitHub best practices
-* Real-world deployment and debugging on Vercel
+- Full-stack application architecture
+- REST API design with Express
+- MongoDB schema design using Mongoose
+- Custom React hooks
+- Environment variable management
+- Git & GitHub best practices
+- Real-world deployment and debugging on Vercel
 
 ---
 
 ## 🚀 Future Improvements
 
-* User authentication
-* RSVP / Join meetup feature
-* Admin panel for managing meetups
-* Pagination & search
-* UI enhancements
+- User authentication
+- RSVP / Join meetup feature
+- Admin panel for managing meetups
+- Pagination & search
+- UI enhancements
 
 ---
 
