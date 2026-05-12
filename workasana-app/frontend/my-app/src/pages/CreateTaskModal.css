@@ -1,0 +1,229 @@
+/* overlay */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 999;
+
+    padding: 16px;
+}
+
+/* modal */
+.task-modal {
+    width: 100%;
+    max-width: 460px;
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+
+    animation: modalPop 0.2s ease;
+}
+
+/* animation */
+@keyframes modalPop {
+    from {
+        transform: scale(0.96);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* top */
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+    color: #111827;
+}
+
+/* close */
+.close-btn {
+    border: none;
+    background: transparent;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    color: #6b7280;
+}
+
+/* form */
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* labels */
+.form-group label {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #374151;
+}
+
+/* fields */
+.form-group input,
+.form-group textarea,
+.form-group select {
+    padding: 10px 12px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+/* focus */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #4a90e2;
+
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+}
+
+/* multi select */
+.form-group select[multiple] {
+    min-height: 90px;
+}
+
+/* buttons */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+/* cancel */
+.cancel-btn {
+    padding: 10px 14px;
+
+    border: 1px solid #d1d5db;
+
+    background: white;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+/* submit */
+.submit-btn {
+    padding: 10px 16px;
+
+    border: none;
+
+    background: #4a90e2;
+    color: white;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #357bd8;
+}
+
+/* checkbox wrapper */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 8px;
+
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+/* single checkbox */
+.checkbox-item {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 14px;
+
+    background: #f3f4f6;
+
+    padding: 6px 10px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+}
+
+/* checkbox */
+.checkbox-item input {
+    cursor: pointer;
+}
+
+
+/* mobile */
+@media (max-width: 480px) {
+    .task-modal {
+        padding: 18px;
+        border-radius: 12px;
+    }
+
+    .modal-header h2 {
+        font-size: 18px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+        width: 100%;
+    }
+}

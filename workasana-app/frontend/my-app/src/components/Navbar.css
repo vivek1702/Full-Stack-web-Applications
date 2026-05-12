@@ -1,0 +1,94 @@
+/* Navbar container */
+.navbar {
+    height: 60px;
+    padding: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* 🔥 soft background instead of pure white */
+    background: #f9fafb;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* 🔥 Gradient logo */
+.navbar-logo {
+    font-size: 22px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #4a90e2, #6366f1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Right section */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Base user text */
+.navbar-user {
+    font-size: 14px;
+    color: #6b7280;
+}
+
+/* 👤 Name highlight */
+.user-name {
+    font-weight: 600;
+    color: #111827;
+    margin-left: 4px;
+}
+
+/* 🏷 Role badge */
+.user-role {
+    margin-left: 6px;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 100px;
+
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+/* Logout button */
+.logout-button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ef4444;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+    background-color: #dc2626;
+}
+
+.logout-button:active {
+    transform: scale(0.95);
+}
+
+/* 📱 Mobile */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0 15px;
+    }
+
+    .navbar-logo {
+        font-size: 18px;
+    }
+
+    .navbar-user {
+        display: none;
+        /* 👈 cleaner mobile */
+    }
+
+    .logout-button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+}

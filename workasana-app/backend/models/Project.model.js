@@ -8,7 +8,13 @@ const projectSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+
   team: { type: mongoose.Schema.Types.ObjectId, ref: "Team", required: true },
+  status: {
+    type: String,
+    enum: ["Active", "Completed", "Archived"],
+    default: "Active",
+  },
   createdAt: { type: Date, default: Date.now },
 });
 

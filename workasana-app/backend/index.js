@@ -58,9 +58,9 @@ app.post("/api/auth/signup", async (req, res) => {
 
 //middleware to verify user
 const verifyJWT = async (req, res, next) => {
-  //   const authHeader = req.headers["authorization"];
-  //   const token = authHeader && authHeader.split(" ")[1]; //expect this -> Authorization: Bearer <token>
-  const token = req.headers["authorization"];
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1]; //expect this -> Authorization: Bearer <token>
+  // const token = req.headers["authorization"];
   if (!token) {
     return res.status(401).json({ message: "no token provided" });
   }
@@ -81,7 +81,10 @@ app.post("/api/auth/login", async (req, res) => {
 
   // basic validation
   if (!email || !password) {
-    return res.status(400).json({ message: "Email and password required" });
+    return res.status(400).json({
+      type: "VALIDATION_ERROR",
+      message: "Email and password required",
+    });
   }
 
   try {
@@ -89,14 +92,20 @@ app.post("/api/auth/login", async (req, res) => {
     const existingUser = await User.findOne({ email });
 
     if (!existingUser) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(404).json({
+        type: "USER_NOT_FOUND",
+        message: "User does not exist",
+      });
     }
 
     // compare password
     const isMatch = await bcrypt.compare(password, existingUser.password);
 
     if (!isMatch) {
-      return res.status(401).json({ message: "Invalid email or password" });
+      return res.status(401).json({
+        type: "INVALID_PASSWORD",
+        message: "Incorrect password",
+      });
     }
 
     // generate token
@@ -104,17 +113,22 @@ app.post("/api/auth/login", async (req, res) => {
       {
         userId: existingUser._id,
         role: existingUser.role,
+        name: existingUser.name,
       },
       process.env.JWT_SECRET,
       { expiresIn: "24h" },
     );
 
     res.status(200).json({
+      type: "SUCCESS",
       message: "Access granted",
       token,
     });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({
+      type: "SERVER_ERROR",
+      message: "Something went wrong",
+    });
   }
 });
 
@@ -124,6 +138,48 @@ app.get("/api/auth/me", verifyJWT, async (req, res) => {
     message: "Protected route accessible",
     user: req.user,
   });
+});
+
+//get all users
+app.get("/api/users", verifyJWT, async (req, res) => {
+  try {
+    let filter = {};
+
+    //If NOT admin → restrict users to same teams
+    if (req.user.role !== "admin") {
+      const userTeams = await Team.find({
+        members: req.user.userId,
+      }).select("_id");
+
+      const teamIds = userTeams.map((team) => team._id);
+
+      // find users who belong to these teams
+      filter = {
+        _id: {
+          $in: await Team.distinct("members", { _id: { $in: teamIds } }),
+        },
+      };
+    }
+
+    //Admin → no filter (gets all users)
+
+    const users = await User.find(filter).select("name email role");
+
+    res.json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+//get admin
+app.get("/api/admins", verifyJWT, async (req, res) => {
+  try {
+    const admins = await User.find({ role: "admin" }).select("_id name");
+    res.json(admins);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
 //create task and protecting route
@@ -166,7 +222,9 @@ app.post("/api/task", verifyJWT, async (req, res) => {
     }
 
     //ensure owner belongs to the team
-    const isValid = owners.every((id) => teamData.members.includes(id));
+    const isValid = owners.every((id) =>
+      teamData.members.map((m) => m.toString().includes(id)),
+    );
     if (!isValid) {
       return res.status(400).json({
         message: "Owners must belong to selected team",
@@ -183,7 +241,7 @@ app.post("/api/task", verifyJWT, async (req, res) => {
       name,
       projectId,
       team,
-      owners: allMembers,
+      owners,
       tags,
       timeToComplete,
       status,
@@ -194,19 +252,20 @@ app.post("/api/task", verifyJWT, async (req, res) => {
 
     res.status(200).json({ message: "new task added", result });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 });
 
-//get task as per filters
+//get task as per filters or all task
 app.get("/api/task", verifyJWT, async (req, res) => {
   try {
-    const { name, project, team, owners, tags, timeToComplete, status } =
+    const { search, projectId, team, owners, tags, status, sortBy, order } =
       req.query;
 
     let filter = {};
 
-    //check is user is not admin
+    //check if user is not admin
     if (req.user.role !== "admin") {
       //apart from owner checking for other users involved in task
       const userTeams = await Team.find({ members: req.user.userId }).select(
@@ -216,16 +275,33 @@ app.get("/api/task", verifyJWT, async (req, res) => {
       filter.$or = [{ owners: req.user.userId }, { team: { $in: teamIds } }];
     }
 
+    //search filter
+    if (search) {
+      filter.name = { $regex: search, $options: "i" };
+    }
+
     // filtering
     if (team) filter.team = team;
     if (owners) filter.owners = owners;
-    if (project) filter.project = project;
-    if (status) filter.status = status;
-    if (timeToComplete) filter.timeToComplete = timeToComplete;
+    if (projectId) filter.project = project;
+    if (status) filter.status = { $in: [status] };
     if (tags) filter.tags = { $in: [tags] };
 
-    const task = await Task.find(filter);
-    res.json(task);
+    let sortOptions = {};
+    if (sortBy) {
+      sortOptions[sortBy] = order === "desc" ? -1 : 1;
+    }
+
+    const result = await Task.find(filter)
+      .populate("projectId", "name")
+      .populate("team", "name")
+      .populate("owners", "name")
+      .sort(sortOptions);
+
+    res.json({
+      success: true,
+      data: result,
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
@@ -342,6 +418,24 @@ app.post("/api/teams", verifyJWT, async (req, res) => {
   }
 });
 
+//get team
+app.get("/api/teams", verifyJWT, async (req, res) => {
+  try {
+    const filter = {};
+    if (req.user.role !== "admin") {
+      filter.members = req.user.userId;
+    }
+
+    const teams = await Team.find(filter)
+      .select("name description members")
+      .populate("members", "name");
+
+    res.json(teams);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 // add project
 app.post("/api/projects", verifyJWT, async (req, res) => {
   try {
@@ -369,19 +463,44 @@ app.post("/api/projects", verifyJWT, async (req, res) => {
 //get projects
 app.get("/api/projects", verifyJWT, async (req, res) => {
   try {
+    const { team, createdBy, status, search } = req.query;
     let filter = {};
+
+    //role-based filtering
     if (req.user.role !== "admin") {
+      //Find all teams where user is a member
       const userTeam = await Team.find({ members: req.user.userId }).select(
         "_id",
       );
+
+      //convert to array
       const teamId = userTeam.map((item) => item._id);
 
+      // User can see projects where:
+      // - they created it OR - project belongs to their team
       filter.$or = [{ createdBy: req.user.userId }, { team: { $in: teamId } }];
     }
-    const projects = await Project.find(filter);
-    res.json(projects);
+
+    //apply filters
+    if (team) filter.team = team;
+    if (createdBy) filter.createdBy = createdBy;
+    if (status) filter.status = status;
+    if (search) {
+      filter.name = { $regex: search, $options: "i" };
+    }
+
+    const projects = await Project.find(filter).populate({
+      path: "team",
+      populate: { path: "members", select: "name" },
+    });
+
+    res.json({
+      success: true,
+      data: projects,
+    });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    console.error(error);
+    res.status(500).json({ message: error.message });
   }
 });
 
