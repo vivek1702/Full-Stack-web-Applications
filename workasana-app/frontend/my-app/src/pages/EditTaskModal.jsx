@@ -2,6 +2,7 @@ import useFetch from "../hooks/useFetch";
 import { useState, useEffect } from "react";
 import UseProjects from "../hooks/UseProject";
 import "./CreateTaskModal.css";
+import toast from "react-hot-toast";
 
 export default function EditTaskModal({ taskId, onClose, onTaskUpdated }) {
   //task details by id
@@ -81,6 +82,7 @@ export default function EditTaskModal({ taskId, onClose, onTaskUpdated }) {
       return;
     }
 
+    toast.success("Task edited successfully");
     console.log("Success:", result);
 
     // reset

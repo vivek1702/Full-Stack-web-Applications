@@ -2,6 +2,7 @@ import { useState } from "react";
 import UseProjects from "../hooks/UseProject";
 import useFetch from "../hooks/useFetch";
 import "./CreateTaskModal.css";
+import toast from "react-hot-toast";
 
 export default function CreateTaskModal({ onClose, onTaskCreated }) {
   const [name, setName] = useState("");
@@ -56,6 +57,7 @@ export default function CreateTaskModal({ onClose, onTaskCreated }) {
       return;
     }
 
+    toast.success("Task created successfully");
     console.log("Success:", result);
 
     // reset

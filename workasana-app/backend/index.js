@@ -476,11 +476,96 @@ app.get("/api/teams", verifyJWT, async (req, res) => {
 
     const teams = await Team.find(filter)
       .select("name description members")
-      .populate("members", "name");
+      .populate("members", "name email");
 
-    res.json(teams);
+    res.status(201).json({
+      message: "Team data fetched successfully",
+      data: teams,
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
+  }
+});
+
+//get team by id
+app.get("/api/teams/:id", verifyJWT, async (req, res) => {
+  try {
+    const teamId = req.params.id;
+    const team = await Team.findById(teamId);
+
+    if (!team) {
+      return res.status(404).json({ message: "Team not found" });
+    }
+
+    // normal user access check
+    if (req.user.role !== "admin") {
+      return res.status(403).json({
+        message: "Not authorized",
+      });
+    }
+
+    res.json({
+      success: true,
+      data: team,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Server error",
+    });
+  }
+});
+
+// update team
+app.put("/api/teams/:id", verifyJWT, async (req, res) => {
+  try {
+    const teamId = req.params.id;
+
+    const { name, description, members } = req.body;
+
+    // admin only
+    if (req.user.role !== "admin") {
+      return res.status(403).json({
+        message: "Not authorized",
+      });
+    }
+
+    // find team
+    const existingTeam = await Team.findById(teamId);
+
+    if (!existingTeam) {
+      return res.status(404).json({
+        message: "Team not found",
+      });
+    }
+
+    // update
+    const updatedTeam = await Team.findByIdAndUpdate(
+      teamId,
+      {
+        name,
+        description,
+        members,
+      },
+      {
+        new: true,
+        runValidators: true,
+      },
+    ).populate("members", "name email");
+
+    res.status(200).json({
+      success: true,
+      message: "Team updated successfully",
+      data: updatedTeam,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+    });
   }
 });
 

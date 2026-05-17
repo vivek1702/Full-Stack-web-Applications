@@ -8,6 +8,8 @@ import { useState } from "react";
 import CreateProjectModal from "./CreateProjectModal";
 import CreateTaskModal from "./CreateTaskModal";
 import EditTaskModal from "./EditTaskModal";
+import Teams from "./Teams";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const [projectFilter, setProjectFilter] = useState({
@@ -89,7 +91,9 @@ export default function Dashboard() {
       <aside className="sidebar">
         <nav className="sidebar-nav">
           <p className="active">Dashboard</p>
-          <p>Teams</p>
+          <Link to="/teams" style={{ "text-decoration": "none" }}>
+            <p>Teams</p>
+          </Link>
           <p>Reports</p>
           <p>Settings</p>
         </nav>

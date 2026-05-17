@@ -7,6 +7,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import Layout from "./components/Layout";
 import { Toaster } from "react-hot-toast";
 import Signup from "./pages/Signup";
+import Teams from "./pages/Teams";
 
 function App() {
   return (
@@ -23,6 +24,17 @@ function App() {
               <ProtectedRoutes>
                 <Layout>
                   <Dashboard />
+                </Layout>
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/teams"
+            element={
+              <ProtectedRoutes>
+                <Layout>
+                  <Teams />
                 </Layout>
               </ProtectedRoutes>
             }

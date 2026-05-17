@@ -11,6 +11,7 @@
     background: #f1f5f9;
     padding: 20px;
     border-right: 1px solid #e5e7eb;
+    text-decoration: none;
 }
 
 .logo {
@@ -26,6 +27,7 @@
     border-radius: 6px;
     cursor: pointer;
     color: #374151;
+
 }
 
 .sidebar-nav p:hover {

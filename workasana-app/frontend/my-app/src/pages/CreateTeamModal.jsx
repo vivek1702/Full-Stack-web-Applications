@@ -3,17 +3,17 @@ import useFetch from "../hooks/useFetch";
 import "./CreateProjectModal.css";
 import toast from "react-hot-toast";
 
-export default function CreateProjectModal({ onClose, onProjectCreated }) {
+export default function CreateTeamModal({ onClose, onTeamCreated }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [team, setTeam] = useState("");
-  const [status, setStatus] = useState("Active");
+  const [members, setmembers] = useState([]);
 
+  //all users
   const {
-    data: teamData,
-    loading: teamLoading,
-    error: teamError,
-  } = useFetch(`http://localhost:3000/api/teams`);
+    data: users,
+    loading: userLoading,
+    error: userError,
+  } = useFetch("http://localhost:3000/api/users");
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -23,11 +23,10 @@ export default function CreateProjectModal({ onClose, onProjectCreated }) {
     const payload = {
       name,
       description,
-      team,
-      status,
+      members,
     };
 
-    const response = await fetch("http://localhost:3000/api/projects", {
+    const response = await fetch("http://localhost:3000/api/teams", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -43,15 +42,14 @@ export default function CreateProjectModal({ onClose, onProjectCreated }) {
       return;
     }
 
-    toast.success("Project created successfully");
+    toast.success("Team added successfully");
     console.log("Success:", result);
 
     setName("");
     setDescription("");
-    setTeam("");
-    setStatus("Active");
+    setmembers([]);
 
-    onProjectCreated();
+    onTeamCreated();
     onClose();
   };
 
@@ -60,7 +58,7 @@ export default function CreateProjectModal({ onClose, onProjectCreated }) {
       <div className="project-modal">
         {/* top */}
         <div className="modal-header">
-          <h2>Create Project</h2>
+          <h2>Create Team</h2>
 
           <button type="button" className="close-btn" onClick={onClose}>
             ✕
@@ -71,11 +69,11 @@ export default function CreateProjectModal({ onClose, onProjectCreated }) {
         <form className="project-form" onSubmit={handleForm}>
           {/* name */}
           <div className="form-group">
-            <label>Project Name</label>
+            <label>Team Name</label>
 
             <input
               type="text"
-              placeholder="Enter project name"
+              placeholder="Enter Team name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -88,43 +86,39 @@ export default function CreateProjectModal({ onClose, onProjectCreated }) {
 
             <textarea
               rows="4"
-              placeholder="Project description..."
+              placeholder="Team description..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
             />
           </div>
 
-          {/* team */}
+          {/* members */}
           <div className="form-group">
-            <label>Team</label>
+            <label>members</label>
+            {/* multiple select */}
+            <div className="checkbox-group">
+              {users?.map((item) => (
+                <label key={item._id} className="checkbox-item">
+                  <input
+                    type="checkbox"
+                    value={item._id}
+                    checked={members.includes(item._id)}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setmembers((prev) => [...prev, item._id]);
+                      } else {
+                        setmembers((prev) =>
+                          prev.filter((id) => id !== item._id),
+                        );
+                      }
+                    }}
+                  />
 
-            <select
-              value={team}
-              onChange={(e) => setTeam(e.target.value)}
-              required
-            >
-              <option value="">Select Team</option>
-
-              {teamData?.map((item) => (
-                <option key={item._id} value={item._id}>
                   {item.name}
-                </option>
+                </label>
               ))}
-            </select>
-          </div>
-
-          {/* status */}
-          <div className="form-group">
-            <label>Status</label>
-
-            <select value={status} onChange={(e) => setStatus(e.target.value)}>
-              <option value="Active">Active</option>
-
-              <option value="Completed">Completed</option>
-
-              <option value="Archived">Archived</option>
-            </select>
+            </div>
           </div>
 
           {/* buttons */}
