@@ -96,7 +96,9 @@ export default function Dashboard() {
           <Link to="/reports" style={{ textDecoration: "none" }}>
             <p>Reports</p>
           </Link>
-          <p>Settings</p>
+          <Link to="/settings" className="sidebar-link">
+            <p className="active">Settings</p>
+          </Link>
         </nav>
       </aside>
 

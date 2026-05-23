@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import Signup from "./pages/Signup";
 import Teams from "./pages/Teams";
 import Reports from "./pages/Reports";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -47,6 +48,17 @@ function App() {
               <ProtectedRoutes>
                 <Layout>
                   <Reports />
+                </Layout>
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoutes>
+                <Layout>
+                  <Settings />
                 </Layout>
               </ProtectedRoutes>
             }

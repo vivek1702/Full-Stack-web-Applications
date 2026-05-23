@@ -24,6 +24,12 @@ ChartJS.register(
 
 export default function Reports() {
   const {
+    data: lastWeek,
+    loading: lastWeekLoading,
+    error: lastWeekError,
+  } = useFetch("http://localhost:3000/api/report/last-week");
+
+  const {
     data: pendingTask,
     loading: pendingLoading,
     error: pendingError,
@@ -57,34 +63,53 @@ export default function Reports() {
 
   // chart data
   const teamChartData = {
-    labels: closedTeam?.map((item) => item._id || "Unknown") || [],
+    labels: closedTeam?.map((item) => item.teamName || "Unknown") || [],
 
     datasets: [
       {
         label: "Tasks Closed",
         data: closedTeam?.map((item) => item.totalClosed) || [],
+        backgroundColor: ["#2563eb", "#6c93e8", "#45567b"],
       },
     ],
   };
 
+  //closed by owners
   const ownerChartData = {
-    labels: closedOwners?.map((item) => item._id || "Unknown") || [],
+    labels: closedOwners?.map((item) => item.userName || "Unknown") || [],
 
     datasets: [
       {
         label: "Tasks Closed",
         data: closedOwners?.map((item) => item.totalClosed) || [],
+        backgroundColor: ["#2563eb", "#6c93e8", "#45567b"],
       },
     ],
   };
 
+  // closed projects
   const projectChartData = {
-    labels: closedProjects?.map((item) => item._id || "Unknown") || [],
+    labels: closedProjects?.map((item) => item.projectName || "Unknown") || [],
 
     datasets: [
       {
         label: "Tasks Closed",
         data: closedProjects?.map((item) => item.totalClosed) || [],
+        backgroundColor: ["#2563eb", "#6c93e8", "#45567b"],
+      },
+    ],
+  };
+
+  // reports last week completed
+  const lastWeekChartData = {
+    labels: lastWeek?.map((item) => item.name || "No Task") || [],
+
+    datasets: [
+      {
+        label: "Days Taken",
+        data: lastWeek?.map((item) => item.timeToComplete || 0) || [],
+
+        backgroundColor: "#2563eb",
       },
     ],
   };
@@ -93,6 +118,7 @@ export default function Reports() {
   console.log("closedTeam", closedTeam);
   console.log("closedOwners", closedOwners);
   console.log("closedProjects", closedProjects);
+  console.log("lastWeek", lastWeek);
 
   return (
     <div className="dashboard-container">
@@ -111,7 +137,9 @@ export default function Reports() {
             <p className="active">Reports</p>
           </Link>
 
-          <p>Settings</p>
+          <Link to="/settings" className="sidebar-link">
+            <p className="active">Settings</p>
+          </Link>
         </nav>
       </aside>
 
@@ -176,6 +204,17 @@ export default function Reports() {
 
               <div className="chart-container">
                 <Bar data={projectChartData} />
+              </div>
+            </div>
+
+            {/* last week completed */}
+            <div className="chart-card full-width">
+              <div className="chart-header">
+                <h3>Last week completed Task</h3>
+              </div>
+
+              <div className="chart-container">
+                <Bar data={lastWeekChartData} />
               </div>
             </div>
           </div>
