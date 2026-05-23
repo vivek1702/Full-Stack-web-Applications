@@ -694,7 +694,7 @@ app.get("/api/report/last-week", verifyJWT, async (req, res) => {
     }
 
     const recentTasks = await Task.find(filter).sort({ updatedAt: -1 });
-    res.status(200).json(recentTasks);
+    res.json(recentTasks);
 
     //filter as normal user
     //     {
@@ -792,7 +792,7 @@ app.get("/api/report/closed-by-team", verifyJWT, async (req, res) => {
         $unwind: "$teamData",
       },
       {
-        $projects: {
+        $project: {
           _id: 0,
           teamId: "$teamData._id",
           teamName: "$teamData.name",
@@ -831,6 +831,25 @@ app.get("/api/report/closed-by-owners", verifyJWT, async (req, res) => {
           totalClosed: { $sum: 1 },
         },
       },
+      {
+        $lookup: {
+          from: "users",
+          localField: "_id",
+          foreignField: "_id",
+          as: "userData",
+        },
+      },
+      {
+        $unwind: "$userData",
+      },
+      {
+        $project: {
+          _id: 0,
+          userId: "$userData._id",
+          userName: "$userData.name",
+          totalClosed: 1,
+        },
+      },
     ]);
 
     res.json(result);
@@ -860,6 +879,25 @@ app.get("/api/report/closed-by-project", verifyJWT, async (req, res) => {
         $group: {
           _id: "$projectId",
           totalClosed: { $sum: 1 },
+        },
+      },
+      {
+        $lookup: {
+          from: "projects",
+          localField: "_id",
+          foreignField: "_id",
+          as: "projectData",
+        },
+      },
+      {
+        $unwind: "$projectData",
+      },
+      {
+        $project: {
+          _id: 0,
+          projectId: "$projectData._id",
+          projectName: "$projectData.name",
+          totalClosed: 1,
         },
       },
     ]);
