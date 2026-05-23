@@ -59,7 +59,7 @@ export default function EditTeamModal({ onClose, onTeamEdit, teamId }) {
       return;
     }
 
-    toast.success("Team added successfully");
+    toast.success("Team updated successfully");
     console.log("Success:", result);
 
     setName("");

@@ -39,7 +39,9 @@ export default function Teams() {
             <p className="active">Teams</p>
           </Link>
 
-          <p>Reports</p>
+          <Link to="/reports" style={{ textDecoration: "none" }}>
+            <p>Reports</p>
+          </Link>
           <p>Settings</p>
         </nav>
       </aside>

@@ -8,6 +8,7 @@ import Layout from "./components/Layout";
 import { Toaster } from "react-hot-toast";
 import Signup from "./pages/Signup";
 import Teams from "./pages/Teams";
+import Reports from "./pages/Reports";
 
 function App() {
   return (
@@ -35,6 +36,17 @@ function App() {
               <ProtectedRoutes>
                 <Layout>
                   <Teams />
+                </Layout>
+              </ProtectedRoutes>
+            }
+          />
+
+          <Route
+            path="/reports"
+            element={
+              <ProtectedRoutes>
+                <Layout>
+                  <Reports />
                 </Layout>
               </ProtectedRoutes>
             }

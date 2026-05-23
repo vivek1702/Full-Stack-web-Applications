@@ -8,7 +8,6 @@ import { useState } from "react";
 import CreateProjectModal from "./CreateProjectModal";
 import CreateTaskModal from "./CreateTaskModal";
 import EditTaskModal from "./EditTaskModal";
-import Teams from "./Teams";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
@@ -91,10 +90,12 @@ export default function Dashboard() {
       <aside className="sidebar">
         <nav className="sidebar-nav">
           <p className="active">Dashboard</p>
-          <Link to="/teams" style={{ "text-decoration": "none" }}>
+          <Link to="/teams" style={{ textDecoration: "none" }}>
             <p>Teams</p>
           </Link>
-          <p>Reports</p>
+          <Link to="/reports" style={{ textDecoration: "none" }}>
+            <p>Reports</p>
+          </Link>
           <p>Settings</p>
         </nav>
       </aside>

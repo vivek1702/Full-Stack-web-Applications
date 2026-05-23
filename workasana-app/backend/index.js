@@ -712,14 +712,17 @@ app.get("/api/report/last-week", verifyJWT, async (req, res) => {
 
 app.get("/api/report/pending", verifyJWT, async (req, res) => {
   try {
-    //first lets match the status
-    const matchStage = { status: { $ne: "Completed" } };
+    const matchStage = {
+      status: { $ne: "Completed" },
+    };
 
     if (req.user.role !== "admin") {
-      const userTeams = await Team.find({ members: req.user.userId }).select(
-        "_id",
-      );
+      const userTeams = await Team.find({
+        members: req.user.userId,
+      }).select("_id");
+
       const teamIds = userTeams.map((t) => t._id);
+
       matchStage.$or = [
         { owners: req.user.userId },
         { team: { $in: teamIds } },
@@ -728,17 +731,29 @@ app.get("/api/report/pending", verifyJWT, async (req, res) => {
 
     const result = await Task.aggregate([
       { $match: matchStage },
+
       {
         $group: {
           _id: null,
-          totalDaysPending: { $sum: "$timeToComplete" },
+          totalDaysPending: {
+            $sum: "$timeToComplete",
+          },
+
           totalTask: { $sum: 1 },
         },
       },
     ]);
-    res.json(result[0] || { totalPendingDays: 0, totalTasks: 0 });
+
+    res.json({
+      data: result[0] || {
+        totalDaysPending: 0,
+        totalTask: 0,
+      },
+    });
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({
+      message: "Server error",
+    });
   }
 });
 
@@ -763,6 +778,25 @@ app.get("/api/report/closed-by-team", verifyJWT, async (req, res) => {
         $group: {
           _id: "$team",
           totalClosed: { $sum: 1 },
+        },
+      },
+      {
+        $lookup: {
+          from: "teams",
+          localField: "_id",
+          foreignField: "_id",
+          as: "teamData",
+        },
+      },
+      {
+        $unwind: "$teamData",
+      },
+      {
+        $projects: {
+          _id: 0,
+          teamId: "$teamData._id",
+          teamName: "$teamData.name",
+          totalClosed: 1,
         },
       },
     ]);
