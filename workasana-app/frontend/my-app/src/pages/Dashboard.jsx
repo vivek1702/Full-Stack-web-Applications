@@ -103,7 +103,7 @@ export default function Dashboard() {
             <p>Reports</p>
           </Link>
           <Link to="/settings" className="sidebar-link">
-            <p className="active">Settings</p>
+            <p>Settings</p>
           </Link>
         </nav>
       </aside>
