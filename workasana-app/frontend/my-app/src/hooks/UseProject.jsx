@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthorizationContext";
-import UseFetch from "./useFetch";
+import UseFetch from "./UseFetch";
 import { useMemo } from "react";
 
 export default function UseProjects(filters = {}, refreshProjects) {
@@ -22,7 +22,7 @@ export default function UseProjects(filters = {}, refreshProjects) {
     ? `https://full-stack-web-applications-fy35.onrender.com/api/projects?${queryString}`
     : `https://full-stack-web-applications-fy35.onrender.com/api/projects`;
 
-  const { data, loading, error } = useFetch(url);
+  const { data, loading, error } = UseFetch(url);
   return {
     projects: data || [],
     loading,
