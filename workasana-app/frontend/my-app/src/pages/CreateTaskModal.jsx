@@ -1,6 +1,6 @@
 import { useState } from "react";
 import UseProjects from "../hooks/UseProject";
-import useFetch from "../hooks/useFetch";
+import UseFetch from "../hooks/UseFetch";
 import "./CreateTaskModal.css";
 import toast from "react-hot-toast";
 
@@ -17,12 +17,12 @@ export default function CreateTaskModal({ onClose, onTaskCreated }) {
   const { projects } = UseProjects();
 
   // teams
-  const { data: teamData } = useFetch(
+  const { data: teamData } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/teams",
   );
 
   // tags
-  const { data: tagsData } = useFetch(
+  const { data: tagsData } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/tags",
   );
 

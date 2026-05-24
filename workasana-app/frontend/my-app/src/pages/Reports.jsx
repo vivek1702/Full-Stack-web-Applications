@@ -1,4 +1,4 @@
-import useFetch from "../hooks/useFetch";
+import UseFetch from "../hooks/UseFetch";
 import { Pie, Bar } from "react-chartjs-2";
 import { Link } from "react-router-dom";
 import "./Reports.css";
@@ -27,7 +27,7 @@ export default function Reports() {
     data: lastWeek,
     loading: lastWeekLoading,
     error: lastWeekError,
-  } = useFetch(
+  } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/report/last-week",
   );
 
@@ -35,7 +35,7 @@ export default function Reports() {
     data: pendingTask,
     loading: pendingLoading,
     error: pendingError,
-  } = useFetch(
+  } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/report/pending",
   );
 
@@ -43,7 +43,7 @@ export default function Reports() {
     data: closedTeam,
     loading: teamLoading,
     error: teamError,
-  } = useFetch(
+  } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/report/closed-by-team",
   );
 
@@ -51,7 +51,7 @@ export default function Reports() {
     data: closedOwners,
     loading: ownerLoading,
     error: ownerError,
-  } = useFetch(
+  } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/report/closed-by-owners",
   );
 
@@ -59,7 +59,7 @@ export default function Reports() {
     data: closedProjects,
     loading: projectLoading,
     error: projectError,
-  } = useFetch(
+  } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/report/closed-by-project",
   );
 

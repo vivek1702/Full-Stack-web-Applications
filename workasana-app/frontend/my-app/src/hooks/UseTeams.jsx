@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthorizationContext";
-import useFetch from "./useFetch";
+import UseFetch from "./UseFetch";
 import { useMemo } from "react";
 
 export default function UseTeams(filters = {}, refreshTeams) {
@@ -22,7 +22,7 @@ export default function UseTeams(filters = {}, refreshTeams) {
     ? `https://full-stack-web-applications-fy35.onrender.com/api/teams?${queryString}`
     : `https://full-stack-web-applications-fy35.onrender.com/api/teams`;
 
-  const { data, loading, error } = useFetch(url);
+  const { data, loading, error } = UseFetch(url);
   return {
     teams: data || [],
     loading,

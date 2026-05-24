@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useFetch from "../hooks/useFetch";
+import UseFetch from "../hooks/UseFetch";
 import "./CreateProjectModal.css";
 import toast from "react-hot-toast";
 
@@ -13,7 +13,7 @@ export default function CreateTeamModal({ onClose, onTeamCreated }) {
     data: users,
     loading: userLoading,
     error: userError,
-  } = useFetch(
+  } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/users",
   );
 

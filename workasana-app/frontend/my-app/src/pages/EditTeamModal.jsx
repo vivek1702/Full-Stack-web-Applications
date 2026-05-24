@@ -1,4 +1,4 @@
-import useFetch from "../hooks/useFetch";
+import UseFetch from "../hooks/UseFetch";
 import { useEffect, useState } from "react";
 import "./CreateProjectModal.css";
 import toast from "react-hot-toast";
@@ -8,7 +8,7 @@ export default function EditTeamModal({ onClose, onTeamEdit, teamId }) {
     data: prevTeamData,
     loading,
     error,
-  } = useFetch(
+  } = UseFetch(
     `https://full-stack-web-applications-fy35.onrender.com/api/teams/${teamId}`,
   );
   const [name, setName] = useState("");
@@ -31,7 +31,7 @@ export default function EditTeamModal({ onClose, onTeamEdit, teamId }) {
     data: users,
     loading: userLoading,
     error: userError,
-  } = useFetch(
+  } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/users",
   );
 

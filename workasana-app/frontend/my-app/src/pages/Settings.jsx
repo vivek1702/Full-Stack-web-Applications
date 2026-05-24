@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
+import UseFetch from "../hooks/UseFetch";
 import toast from "react-hot-toast";
 import "./Settings.css";
 
@@ -11,7 +11,7 @@ export default function Settings() {
     data: tasks,
     loading,
     error,
-  } = useFetch(
+  } = UseFetch(
     `https://full-stack-web-applications-fy35.onrender.com/api/task?refresh=${refreshTasks}`,
   );
 

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthorizationContext";
-import useFetch from "./useFetch";
+import UseFetch from "./useFetch";
 import { useMemo } from "react";
 
 export default function UseProjects(filters = {}, refreshProjects) {

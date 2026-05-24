@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/AuthorizationContext";
 import UseTasks from "../hooks/UseTasks";
 import UseProjects from "../hooks/UseProject";
-import useFetch from "../hooks/useFetch";
+import UseFetch from "../hooks/UseFetch";
 import "./Dashboard.css";
 import { useState } from "react";
 import CreateProjectModal from "./CreateProjectModal";
@@ -44,7 +44,7 @@ export default function Dashboard() {
     data: users,
     loading: userLoading,
     error: userError,
-  } = useFetch(
+  } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/users",
   );
 
@@ -53,7 +53,7 @@ export default function Dashboard() {
     data: admins,
     loading: adminLoading,
     error: adminError,
-  } = useFetch(
+  } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/admins",
   );
 
@@ -61,7 +61,7 @@ export default function Dashboard() {
     data: teamData,
     loading: teamLoading,
     error: teamError,
-  } = useFetch(
+  } = UseFetch(
     `https://full-stack-web-applications-fy35.onrender.com/api/teams`,
   );
 

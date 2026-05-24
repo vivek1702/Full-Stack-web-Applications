@@ -1,4 +1,4 @@
-import useFetch from "../hooks/useFetch";
+import UseFetch from "../hooks/UseFetch";
 import { useState, useEffect } from "react";
 import UseProjects from "../hooks/UseProject";
 import "./CreateTaskModal.css";
@@ -10,7 +10,7 @@ export default function EditTaskModal({ taskId, onClose, onTaskUpdated }) {
     data: taskDetails,
     loading,
     error,
-  } = useFetch(
+  } = UseFetch(
     `https://full-stack-web-applications-fy35.onrender.com/api/task/${taskId}`,
   );
 
@@ -44,12 +44,12 @@ export default function EditTaskModal({ taskId, onClose, onTaskUpdated }) {
   const { projects } = UseProjects();
 
   // teams
-  const { data: teamData } = useFetch(
+  const { data: teamData } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/teams",
   );
 
   // tags
-  const { data: tagsData } = useFetch(
+  const { data: tagsData } = UseFetch(
     "https://full-stack-web-applications-fy35.onrender.com/api/tags",
   );
 

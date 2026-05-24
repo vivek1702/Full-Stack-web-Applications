@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useFetch from "../hooks/useFetch";
+import UseFetch from "../hooks/UseFetch";
 import "./Teams.css";
 import { Link } from "react-router-dom";
 import CreateTeamModal from "./CreateTeamModal";
