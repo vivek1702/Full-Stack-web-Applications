@@ -19,8 +19,8 @@ export default function UseProjects(filters = {}, refreshProjects) {
   }, [filters, refreshProjects]);
 
   const url = queryString
-    ? `http://localhost:3000/api/projects?${queryString}`
-    : `http://localhost:3000/api/projects`;
+    ? `https://full-stack-web-applications-fy35.onrender.com/api/projects?${queryString}`
+    : `https://full-stack-web-applications-fy35.onrender.com/api/projects`;
 
   const { data, loading, error } = useFetch(url);
   return {

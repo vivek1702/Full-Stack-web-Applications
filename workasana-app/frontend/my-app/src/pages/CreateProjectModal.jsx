@@ -13,7 +13,9 @@ export default function CreateProjectModal({ onClose, onProjectCreated }) {
     data: teamData,
     loading: teamLoading,
     error: teamError,
-  } = useFetch(`http://localhost:3000/api/teams`);
+  } = useFetch(
+    `https://full-stack-web-applications-fy35.onrender.com/api/teams`,
+  );
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -27,14 +29,17 @@ export default function CreateProjectModal({ onClose, onProjectCreated }) {
       status,
     };
 
-    const response = await fetch("http://localhost:3000/api/projects", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      "https://full-stack-web-applications-fy35.onrender.com/api/projects",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
       },
-      body: JSON.stringify(payload),
-    });
+    );
 
     const result = await response.json();
 

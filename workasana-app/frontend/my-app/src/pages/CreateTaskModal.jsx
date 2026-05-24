@@ -17,10 +17,14 @@ export default function CreateTaskModal({ onClose, onTaskCreated }) {
   const { projects } = UseProjects();
 
   // teams
-  const { data: teamData } = useFetch("http://localhost:3000/api/teams");
+  const { data: teamData } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/teams",
+  );
 
   // tags
-  const { data: tagsData } = useFetch("http://localhost:3000/api/tags");
+  const { data: tagsData } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/tags",
+  );
 
   // selected team
   const selectedTeam = teamData?.find((item) => item._id === team);
@@ -41,14 +45,17 @@ export default function CreateTaskModal({ onClose, onTaskCreated }) {
       status,
     };
 
-    const response = await fetch("http://localhost:3000/api/task", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      "https://full-stack-web-applications-fy35.onrender.com/api/task",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
       },
-      body: JSON.stringify(payload),
-    });
+    );
 
     const result = await response.json();
 

@@ -13,7 +13,9 @@ export default function CreateTeamModal({ onClose, onTeamCreated }) {
     data: users,
     loading: userLoading,
     error: userError,
-  } = useFetch("http://localhost:3000/api/users");
+  } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/users",
+  );
 
   const handleForm = async (e) => {
     e.preventDefault();
@@ -26,14 +28,17 @@ export default function CreateTeamModal({ onClose, onTeamCreated }) {
       members,
     };
 
-    const response = await fetch("http://localhost:3000/api/teams", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      "https://full-stack-web-applications-fy35.onrender.com/api/teams",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
       },
-      body: JSON.stringify(payload),
-    });
+    );
 
     const result = await response.json();
 

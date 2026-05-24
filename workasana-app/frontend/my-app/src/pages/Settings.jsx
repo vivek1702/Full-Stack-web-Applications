@@ -11,7 +11,9 @@ export default function Settings() {
     data: tasks,
     loading,
     error,
-  } = useFetch(`http://localhost:3000/api/task?refresh=${refreshTasks}`);
+  } = useFetch(
+    `https://full-stack-web-applications-fy35.onrender.com/api/task?refresh=${refreshTasks}`,
+  );
 
   // delete task
   const handleDelete = async (taskId) => {
@@ -24,13 +26,16 @@ export default function Settings() {
     try {
       const token = localStorage.getItem("UserToken");
 
-      const response = await fetch(`http://localhost:3000/api/task/${taskId}`, {
-        method: "DELETE",
+      const response = await fetch(
+        `https://full-stack-web-applications-fy35.onrender.com/api/task/${taskId}`,
+        {
+          method: "DELETE",
 
-        headers: {
-          Authorization: `Bearer ${token}`,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       const result = await response.json();
 

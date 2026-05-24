@@ -19,8 +19,8 @@ export default function UseTeams(filters = {}, refreshTeams) {
   }, [filters, refreshTeams]);
 
   const url = queryString
-    ? `http://localhost:3000/api/teams?${queryString}`
-    : `http://localhost:3000/api/teams`;
+    ? `https://full-stack-web-applications-fy35.onrender.com/api/teams?${queryString}`
+    : `https://full-stack-web-applications-fy35.onrender.com/api/teams`;
 
   const { data, loading, error } = useFetch(url);
   return {

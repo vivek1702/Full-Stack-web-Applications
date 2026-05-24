@@ -19,8 +19,8 @@ export default function UseTasks(filters = {}) {
   }, [filters]);
 
   const url = queryString
-    ? `http://localhost:3000/api/task?${queryString}`
-    : `http://localhost:3000/api/task`;
+    ? `https://full-stack-web-applications-fy35.onrender.com/api/task?${queryString}`
+    : `https://full-stack-web-applications-fy35.onrender.com/api/task`;
 
   const { data, loading, error } = useFetch(url);
 

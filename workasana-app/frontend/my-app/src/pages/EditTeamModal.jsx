@@ -8,7 +8,9 @@ export default function EditTeamModal({ onClose, onTeamEdit, teamId }) {
     data: prevTeamData,
     loading,
     error,
-  } = useFetch(`http://localhost:3000/api/teams/${teamId}`);
+  } = useFetch(
+    `https://full-stack-web-applications-fy35.onrender.com/api/teams/${teamId}`,
+  );
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [members, setmembers] = useState([]);
@@ -29,7 +31,9 @@ export default function EditTeamModal({ onClose, onTeamEdit, teamId }) {
     data: users,
     loading: userLoading,
     error: userError,
-  } = useFetch("http://localhost:3000/api/users");
+  } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/users",
+  );
 
   //handle form
   const handleForm = async (e) => {
@@ -43,14 +47,17 @@ export default function EditTeamModal({ onClose, onTeamEdit, teamId }) {
       members,
     };
 
-    const response = await fetch(`http://localhost:3000/api/teams/${teamId}`, {
-      method: "PUT",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `https://full-stack-web-applications-fy35.onrender.com/api/teams/${teamId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
       },
-      body: JSON.stringify(payload),
-    });
+    );
 
     const result = await response.json();
 

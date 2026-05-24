@@ -27,31 +27,41 @@ export default function Reports() {
     data: lastWeek,
     loading: lastWeekLoading,
     error: lastWeekError,
-  } = useFetch("http://localhost:3000/api/report/last-week");
+  } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/report/last-week",
+  );
 
   const {
     data: pendingTask,
     loading: pendingLoading,
     error: pendingError,
-  } = useFetch("http://localhost:3000/api/report/pending");
+  } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/report/pending",
+  );
 
   const {
     data: closedTeam,
     loading: teamLoading,
     error: teamError,
-  } = useFetch("http://localhost:3000/api/report/closed-by-team");
+  } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/report/closed-by-team",
+  );
 
   const {
     data: closedOwners,
     loading: ownerLoading,
     error: ownerError,
-  } = useFetch("http://localhost:3000/api/report/closed-by-owners");
+  } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/report/closed-by-owners",
+  );
 
   const {
     data: closedProjects,
     loading: projectLoading,
     error: projectError,
-  } = useFetch("http://localhost:3000/api/report/closed-by-project");
+  } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/report/closed-by-project",
+  );
 
   if (pendingLoading || teamLoading || ownerLoading || projectLoading) {
     return <p className="loading">Loading reports...</p>;

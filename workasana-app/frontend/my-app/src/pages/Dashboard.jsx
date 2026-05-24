@@ -44,20 +44,26 @@ export default function Dashboard() {
     data: users,
     loading: userLoading,
     error: userError,
-  } = useFetch("http://localhost:3000/api/users");
+  } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/users",
+  );
 
   //all admins
   const {
     data: admins,
     loading: adminLoading,
     error: adminError,
-  } = useFetch("http://localhost:3000/api/admins");
+  } = useFetch(
+    "https://full-stack-web-applications-fy35.onrender.com/api/admins",
+  );
 
   const {
     data: teamData,
     loading: teamLoading,
     error: teamError,
-  } = useFetch(`http://localhost:3000/api/teams`);
+  } = useFetch(
+    `https://full-stack-web-applications-fy35.onrender.com/api/teams`,
+  );
 
   const {
     tasks,
