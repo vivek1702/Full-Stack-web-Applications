@@ -110,8 +110,7 @@ Full-Stack-web-Applications/
 ├── EcommerceApp/          # UrbanWear — Fashion E-Commerce
 ├── crm-app/               # Anvaya CRM — Lead Management
 ├── Meetup_App/            # Meetup — Community & Events
-└── workasana-app/
-    └── backend/           # Workasana — Project Management API
+└── workasana-app/         # Workasana — Project Management API
 ```
 
 ---
@@ -128,7 +127,7 @@ Full-Stack-web-Applications/
 
 ## 🌐 Live Demo
 
-🔗 [full-stack-web-applications-lemon.vercel.app](https://full-stack-web-applications-lemon.vercel.app/)
+🔗 For each app, you can find in their readme file
 
 ---
 
