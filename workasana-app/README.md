@@ -2,7 +2,7 @@
 
 A full-stack task and project management web application built for teams. Workasana lets organizations create teams, assign projects, manage tasks, and track performance through a reporting dashboard — all with role-based access control baked in at every layer.
 
-📄 **[Product Requirements Document (Notion)](https://claude.ai/chat/YOUR_NOTION_LINK_HERE)**
+📄[https://app.notion.com/p/PRD-for-Workasana-app-36c177e2738f80d0b4b3c73f8e9667a5?source=copy_link]()
 
 ---
 

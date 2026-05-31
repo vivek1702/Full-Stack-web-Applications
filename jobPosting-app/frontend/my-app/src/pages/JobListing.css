@@ -1,0 +1,265 @@
+/* =========================
+   PAGE
+========================= */
+
+.jobs-container {
+    min-height: 100vh;
+    padding: 32px;
+    background: #f8fafc;
+}
+
+.jobs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.header-left {
+    flex: 1;
+}
+
+.jobs-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+}
+
+.jobs-subtitle {
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+/* =========================
+   EMPLOYER ACTIONS
+========================= */
+
+.employer-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.create-job-btn,
+.delete-job-btn {
+    border: none;
+    height: 44px;
+    padding: 0 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.create-job-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.create-job-btn:hover {
+    background: #1d4ed8;
+}
+
+.delete-job-btn {
+    background: #dc2626;
+    color: white;
+}
+
+.delete-job-btn:hover {
+    background: #b91c1c;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-wrapper {
+    margin-bottom: 30px;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 14px 16px;
+    border: 1px solid #dbe2ea;
+    border-radius: 12px;
+    background: white;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: #2563eb;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.job-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 420px;
+    transition: 0.2s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-4px);
+}
+
+.job-card h2 {
+    font-size: 1.3rem;
+    color: #0f172a;
+    margin-bottom: 10px;
+}
+
+.company-name {
+    color: #2563eb;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+/* =========================
+   JOB META
+========================= */
+
+.job-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.job-details span {
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+}
+
+.salary {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #16a34a;
+    margin-bottom: 16px;
+}
+
+.description {
+    color: #475569;
+    line-height: 1.6;
+
+    flex: 1;
+    margin-bottom: 20px;
+}
+
+/* =========================
+   CARD BUTTONS
+========================= */
+
+.apply-btn-details,
+.manage-btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.apply-btn-details {
+    background: #608ef3;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.apply-btn-details:hover {
+    background: #1d4ed8;
+}
+
+.manage-btn {
+    background: #444546;
+    color: white;
+}
+
+.manage-btn:hover {
+    background: #1e293b;
+}
+
+/* =========================
+   STATES
+========================= */
+
+.loading-text {
+    text-align: center;
+    margin-top: 60px;
+    color: #64748b;
+}
+
+.empty-state {
+    background: white;
+    padding: 50px;
+    text-align: center;
+    border-radius: 18px;
+}
+
+.empty-state h3 {
+    color: #475569;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+    .jobs-container {
+        padding: 20px;
+    }
+
+    .jobs-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .employer-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .create-job-btn,
+    .delete-job-btn {
+        width: 100%;
+    }
+
+    .search-input {
+        max-width: 100%;
+    }
+
+    .jobs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .job-card {
+        min-height: auto;
+    }
+}

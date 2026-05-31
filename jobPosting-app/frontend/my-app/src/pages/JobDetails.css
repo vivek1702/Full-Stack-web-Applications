@@ -1,0 +1,80 @@
+.job-details-page {
+    min-height: 100vh;
+    background: #f8fafc;
+    padding: 40px;
+}
+
+.job-details-card {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.job-details-card h1 {
+    margin-bottom: 10px;
+    color: #0f172a;
+}
+
+.company-name {
+    color: #2563eb;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.job-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.job-meta span {
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 8px 12px;
+    border-radius: 999px;
+}
+
+.job-details-card section {
+    margin-bottom: 25px;
+}
+
+.job-details-card h3 {
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.job-details-card p {
+    line-height: 1.7;
+    color: #475569;
+}
+
+.loading-text {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.apply-btn-details {
+    margin-top: 20px;
+    border: none;
+    background: #2563eb;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.apply-btn-details:hover {
+    background: #1d4ed8;
+}
+
+.apply-btn-details.applied {
+    background: #16a34a;
+    cursor: default;
+}
