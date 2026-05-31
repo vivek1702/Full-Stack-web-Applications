@@ -14,7 +14,9 @@ export default function JobDetails() {
     data: job,
     loading,
     error,
-  } = UseFetch(`http://localhost:3000/api/auth/jobListing/${id}`);
+  } = UseFetch(
+    `https://full-stack-web-applications-1-8u5z.onrender.com/api/auth/jobListing/${id}`,
+  );
 
   console.log("____", job);
   console.log("ID:", id);

@@ -32,7 +32,7 @@ export default function CreateJobs() {
       const token = localStorage.getItem("UserToken");
 
       const response = await fetch(
-        "http://localhost:3000/api/auth/jobListing",
+        "https://full-stack-web-applications-1-8u5z.onrender.com/api/auth/jobListing",
         {
           method: "POST",
           headers: {

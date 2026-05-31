@@ -10,7 +10,9 @@ export default function DeleteJobs() {
     data: jobs,
     loading,
     error,
-  } = UseFetch("http://localhost:3000/api/auth/jobListing");
+  } = UseFetch(
+    "https://full-stack-web-applications-1-8u5z.onrender.com/api/auth/jobListing",
+  );
 
   async function handleDelete(id) {
     const confirmDelete = window.confirm(
@@ -23,7 +25,7 @@ export default function DeleteJobs() {
       const token = localStorage.getItem("UserToken");
 
       const response = await fetch(
-        `http://localhost:3000/api/auth/jobListing/${id}`,
+        `https://full-stack-web-applications-1-8u5z.onrender.com/api/auth/jobListing/${id}`,
         {
           method: "DELETE",
           headers: {

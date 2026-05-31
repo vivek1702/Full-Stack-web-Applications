@@ -18,14 +18,17 @@ export default function Login() {
     try {
       setError("");
 
-      const response = await fetch("http://localhost:3000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email,
-          password: secret,
-        }),
-      });
+      const response = await fetch(
+        "https://full-stack-web-applications-1-8u5z.onrender.com/api/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            password: secret,
+          }),
+        },
+      );
 
       const data = await response.json();
 

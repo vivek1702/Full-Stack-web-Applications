@@ -16,7 +16,9 @@ export default function JobListings() {
     data: jobs,
     loading,
     error,
-  } = UseFetch(`http://localhost:3000/api/auth/jobListing?search=${search}`);
+  } = UseFetch(
+    `https://full-stack-web-applications-1-8u5z.onrender.com/api/auth/jobListing?search=${search}`,
+  );
 
   return (
     <div className="jobs-container">
