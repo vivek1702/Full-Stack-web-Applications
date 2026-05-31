@@ -200,6 +200,11 @@
     }
 }
 
+select.login-input {
+    cursor: pointer;
+    appearance: none;
+}
+
 /* =====================
    MOBILE
 ===================== */
