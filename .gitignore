@@ -5,6 +5,7 @@ EcommerceApp/backend/.env
 crm-app/backend/.env
 workasana-app/backend/.env
 jobPosting-app/backend/.env
+chat-app/backend/.env
 
 # Node modules
 node_modules/
