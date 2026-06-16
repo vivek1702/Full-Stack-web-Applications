@@ -30,12 +30,19 @@ io.on("connection", (socket) => {
   console.log("User connected", socket.id);
 
   socket.on("send_message", async (data) => {
+    console.log("Received data:", data);
+
     const { sender, receiver, message } = data;
+
+    console.log(sender);
+    console.log(receiver);
+    console.log(message);
+
     const newMessage = new Messages({ sender, receiver, message });
     await newMessage.save();
-  });
 
-  socket.broadcast.emit("receive messages", data);
+    socket.broadcast.emit("receive_message", data);
+  });
 
   socket.on("disconnect", () => {
     console.log("user disconnected", socket.id);
@@ -45,8 +52,11 @@ io.on("connection", (socket) => {
 app.get("/messages", async (req, res) => {
   const { sender, receiver } = req.query;
   try {
-    const messages = Messages.find({
-      $or: [{ sender: receiver }, { sender: receiver, receiver: sender }],
+    const messages = await Messages.find({
+      $or: [
+        { sender, receiver },
+        { sender: receiver, receiver: sender },
+      ],
     }).sort({ createdAt: 1 });
     res.json(messages);
   } catch (error) {
@@ -66,6 +76,6 @@ app.get("/users", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`app is connected to port ${PORT}`);
 });

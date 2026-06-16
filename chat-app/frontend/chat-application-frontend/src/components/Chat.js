@@ -52,11 +52,16 @@ export const Chat = ({ user }) => {
   };
 
   const sendMessage = () => {
+    console.log("User Object:", user);
+
     const messageData = {
       sender: user.username,
       receiver: currentChat,
       message: currentMessage,
     };
+
+    console.log("Sending:", messageData);
+
     socket.emit("send_message", messageData);
     setMessages((prev) => [...prev, messageData]);
     setCurrentMessage("");
