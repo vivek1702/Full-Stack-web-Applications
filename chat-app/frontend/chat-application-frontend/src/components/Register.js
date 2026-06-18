@@ -8,19 +8,22 @@ const Register = ({ setUser }) => {
 
   const handleRegister = async () => {
     try {
-      const { data } = await axios.post("http://localhost:5001/auth/register", {
-        username,
-        password,
-      });
+      const { data } = await axios.post(
+        "https://full-stack-web-applications-2-nf6p.onrender.com/auth/register",
+        {
+          username,
+          password,
+        },
+      );
 
       setRegistrationSuccess(
-        "You are registered successfully. Proceed to login."
+        "You are registered successfully. Proceed to login.",
       );
       setUser(data);
     } catch (error) {
       console.error(error.response?.data?.message || "Error registering user");
       setRegistrationSuccess(
-        error.response?.data?.message || "Error registering user"
+        error.response?.data?.message || "Error registering user",
       );
     } finally {
       setTimeout(() => setRegistrationSuccess(null), 2000);
